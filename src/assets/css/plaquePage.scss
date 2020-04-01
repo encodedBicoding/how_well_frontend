@@ -1,0 +1,29 @@
+.overlay{
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  opacity: .89;
+  z-index: -99;
+}
+.border-black{
+  border-top: 51px solid #000
+}
+.pp-body-rm{
+  border: 1px solid red;
+}
+.ppqueContainer{
+  overflow: scroll;
+  height: 350px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+  padding: .8rem;
+}
+.noQueP{
+  color: grey;
+  font-size: .8rem;
+}

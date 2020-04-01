@@ -1,0 +1,142 @@
+.landingPage{
+  background-image: url('../images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  backdrop-filter: grey;
+  z-index: 99;
+}
+.overlay{
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  opacity: .89;
+  z-index: -99;
+}
+.start{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  z-index: 100;
+  padding: 1rem;
+}
+.intro{
+  width: 40%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+.form-input input, 
+.form-submit button{
+  width: 100%;
+  padding: .9rem;
+  margin: .4rem;
+  outline: none;
+  border-radius: 4px;
+  border: none
+}
+.form-submit button{
+  cursor: pointer;
+  color: #000;
+  background-color: rgba(174, 247, 2, 0.651);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.intro-text{
+  max-width: 30%;
+  margin-top: 2rem;
+  text-align: justify;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 2.5rem;
+}
+.intro-text p,
+.licence p{
+  color: rgba(255, 255, 255, 0.555);
+  line-height: 1.7;
+}
+.rw-text{
+  font-size: small;
+  font-weight: 700;
+}
+.logo{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  left: .4rem;
+  justify-content: space-between;
+  width: 40%
+}
+.logo span{
+  font-size: 2.8rem;
+  font-weight: 750;
+  color: rgba(174, 247, 2, 0.651);
+  margin: 0;
+  padding: 0;
+}
+.logo .sub_log{
+  display: inline;
+  font-size: .8rem;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: -10px
+}
+.licence{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.licence p{
+  font-size: .3rem;
+  position: relative;
+  text-align: center;
+  top: 0;
+}
+.turbo p{
+  color: silver;
+  font-size: 1rem;
+}
+.turbo a{
+  color: rgba(174, 247, 2, 0.651);
+  cursor: pointer;
+}
+.turbo{
+  margin-bottom: .4rem;
+}
+.password-icon{
+  position: relative;
+  top: -40px;
+  float: right;
+  cursor: pointer;
+}
+@media(max-width: 768px) {
+  .intro,
+  .logo{
+    width: 60%;
+  }
+  .intro-text{
+    max-width: 50% !important;
+  }
+}
+@media(max-width: 425px) {
+  .intro,
+  .logo{
+    width: 100%;
+  }
+  .intro-text{
+    max-width: 70% !important;
+  }
+}
