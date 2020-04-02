@@ -100,7 +100,7 @@
   align-items: center;
 }
 .licence p{
-  font-size: .3rem;
+  font-size: .9rem;
   position: relative;
   text-align: center;
   top: 0;
@@ -135,13 +135,41 @@
   .intro,
   .logo{
     width: 100%;
+    padding: 0;
+    margin: 0;
+    width: 90%;
   }
   .intro-text{
     max-width: 70% !important;
     margin-bottom: 1rem;
   }
+  .start {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
   .licence p{
     font-size: .7rem;
+  }
+  .form-input input, 
+  .form-submit button{
+    width: 100%;
+    padding: .9rem;
+    margin: .4rem 0 .4rem 0;
+    outline: none;
+    border-radius: 4px;
+    border: none
+  }
+  .password-icon{
+    position: relative;
+    top: -40px;
+    float: right;
+    margin-right: .4rem;
+    cursor: pointer;
   }
 }
 @media(max-width: 375px) {

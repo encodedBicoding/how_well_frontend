@@ -31,14 +31,25 @@
             v-on:submit="(e) => register(e)"
           >
             <div class="form-input">
-              <input type='text' name='userName' placeholder="Username">
-            </div>
-            <div class="form-input">
-              <input type='email' name='email' placeholder="Email">
+              <input
+                type='text'
+                name='userName'
+                v-model="RegUsernameData"
+                placeholder="Username">
             </div>
             <div class="form-input">
               <input
-              :type="this.showPass ? 'text' :'password'" name='password' placeholder="******">
+              type='email'
+              name='email'
+              v-model="RegEmailData"
+              placeholder="Email">
+            </div>
+            <div class="form-input">
+              <input
+              :type="this.showPass ? 'text' :'password'"
+              name='password'
+              v-model="RegPasswordData"
+              placeholder="******">
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
@@ -62,11 +73,18 @@
           v-on:submit="(e) => login(e)"
           >
             <div class="form-input">
-              <input type='text' name='userName' placeholder="Username">
+              <input
+              type='text'
+              name='userName'
+              v-model='LogUsernameData'
+              placeholder="Username">
             </div>
             <div class="form-input">
               <input
-              :type="this.showPass ? 'text' :'password'" name='password' placeholder="******">
+                :type="this.showPass ? 'text' :'password'"
+                name='password'
+                v-model="LogPasswordData"
+                placeholder="******">
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
@@ -110,6 +128,11 @@ export default {
       haveAccount: false,
       showPass: false,
       isRequesting: false,
+      RegUsernameData: '',
+      RegPasswordData: '',
+      RegEmailData: '',
+      LogUsernameData: '',
+      LogPasswordData: '',
     };
   },
   beforeMount() {
@@ -123,8 +146,15 @@ export default {
       this.showPass = !this.showPass;
     },
     register(e) {
-      this.isRequesting = true;
       e.preventDefault();
+      if (
+        !this.RegUsernameData
+        || !this.RegPasswordData
+        || !!this.RegEmailData
+      ) {
+        return;
+      }
+      this.isRequesting = true;
       let formData = $('#register').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value;
