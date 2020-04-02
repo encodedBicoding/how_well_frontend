@@ -220,7 +220,7 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
-      }).then((res) => {
+      }).then(() => {
         if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
           setTimeout(() => {
             this.currentQuestion = null;
@@ -237,7 +237,6 @@ export default {
         setTimeout(() => {
           this.showAnswer = false;
           this.currentQuestion = prevCount + 1;
-          console.log(res.data);
         }, 1500);
       });
     },

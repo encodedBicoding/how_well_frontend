@@ -137,7 +137,6 @@ export default {
         headers: { 'Content-Type': 'application/json' },
       }).then((res) => res.json())
         .then((data) => {
-          console.log(data);
           this.isRequesting = false;
           localStorage.setItem('__hwdykm_inkR',
             data.token.split('').splice(10, 34).reverse().join(''));
