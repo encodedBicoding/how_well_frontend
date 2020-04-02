@@ -86,7 +86,7 @@
               </div>
             </div>
         </div>
-        <div class="page-body-remix">
+        <div class="page-body-remix" v-if="!fetchingPlaqueData">
           <div :class="!hasPlaque ? 'flex-center' : 'no-flex'">
             <p v-if="!hasPlaque" class="noPlaque">
               You currently do not have any plaques, click
@@ -112,6 +112,11 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   ></plaque>
                 </div>
             </div>
+          </div>
+        </div>
+        <div v-if="fetchingPlaqueData" class="fetching page-body-remix">
+          <div class="ft-text">
+            <p>Loading plaque data...</p>
           </div>
         </div>
     </div>
@@ -175,6 +180,7 @@ export default {
     },
 
     setPlaqueData() {
+      this.fetchingPlaqueData = true;
       $.ajax({
         type: 'GET',
         url: `${BASE_URL}/all/plaque`,
@@ -183,6 +189,7 @@ export default {
         },
         contentType: 'application/json',
       }).then((res) => {
+        this.fetchingPlaqueData = false;
         if (res.status === 200 || res.status === 201) {
           this.plaqueData = [...res.data];
           return true;
@@ -305,6 +312,7 @@ export default {
       addQuestionId: null,
       plaqueOwnerName: '',
       plaqueData: [],
+      fetchingPlaqueData: false,
     };
   },
 };
