@@ -235,6 +235,7 @@ export default {
           }, 1200);
         }
         setTimeout(() => {
+          this.showAnswer = false;
           this.currentQuestion = prevCount + 1;
           console.log(res.data);
         }, 1500);

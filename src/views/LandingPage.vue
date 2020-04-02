@@ -101,6 +101,8 @@
 </style>
 <script>
 import $ from 'jquery';
+import fetch from 'node-fetch';
+import BASE_URL from '../helper/ajax';
 
 export default {
   name: 'LandingPage',
@@ -123,50 +125,53 @@ export default {
     },
     register(e) {
       this.isRequesting = true;
-      const BASE_URL = 'http://localhost:4000/api/v1';
       e.preventDefault();
       let formData = $('#register').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value;
         return acc;
       }, {});
-      $.ajax({
-        type: 'POST',
-        url: `${BASE_URL}/register`,
-        data: JSON.stringify(formData),
-        dataType: 'json',
-        contentType: 'application/json',
-      }).then((data) => {
-        this.isRequesting = false;
-        localStorage.setItem('__hwdykm_inkR',
-          data.token.split('').splice(10, 34).reverse().join(''));
-        localStorage.setItem('api__hwdykm_inkR',
-          data.token.split('').splice(0, 34).reverse().join(''));
-        localStorage.setItem('__api__token__howzy',
-          data.token.split('').splice(2, 34).reverse().join(''));
-        localStorage.setItem('api__hwdykm_inkR',
-          data.token.split('').splice(4, data.token.length).reverse().join(''));
-        sessionStorage.setItem('__hwdykm_inkR',
-          data.token.split('').splice(10, 34).reverse().join(''));
-        sessionStorage.setItem('api__hwdykm_inkR',
-          data.token.split('').splice(0, 34).reverse().join(''));
-        sessionStorage.setItem('__api__token__howzy',
-          data.token.split('').splice(2, 34).reverse().join(''));
-        sessionStorage.setItem('api__hwdykm_inkR',
-          data.token.split('').splice(4, data.token.length).reverse().join(''));
-        localStorage.setItem('__token__HWDYKM__user__', data.token);
-        this.$router.push({ name: 'Dashboard' });
-      });
+      fetch(`${BASE_URL}/register`, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+      }).then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          this.isRequesting = false;
+          localStorage.setItem('__hwdykm_inkR',
+            data.token.split('').splice(10, 34).reverse().join(''));
+          localStorage.setItem('api__hwdykm_inkR',
+            data.token.split('').splice(0, 34).reverse().join(''));
+          localStorage.setItem('__api__token__howzy',
+            data.token.split('').splice(2, 34).reverse().join(''));
+          localStorage.setItem('api__hwdykm_inkR',
+            data.token.split('').splice(4, data.token.length).reverse().join(''));
+          sessionStorage.setItem('__hwdykm_inkR',
+            data.token.split('').splice(10, 34).reverse().join(''));
+          sessionStorage.setItem('api__hwdykm_inkR',
+            data.token.split('').splice(0, 34).reverse().join(''));
+          sessionStorage.setItem('__api__token__howzy',
+            data.token.split('').splice(2, 34).reverse().join(''));
+          sessionStorage.setItem('api__hwdykm_inkR',
+            data.token.split('').splice(4, data.token.length).reverse().join(''));
+          localStorage.setItem('__token__HWDYKM__user__', data.token);
+          this.$router.push({ name: 'Dashboard' });
+        });
     },
     login(e) {
       this.isRequesting = true;
-      const BASE_URL = 'http://localhost:4000/api/v1';
       e.preventDefault();
       let formData = $('#login').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value;
         return acc;
       }, {});
+      // fetch(`${BASE_URL}/login`, {
+      //   method: 'POST',
+      //   body: JSON.stringify(formData),
+      //   headers: { 'Content-Type': 'application/json' },
+      // })
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/login`,

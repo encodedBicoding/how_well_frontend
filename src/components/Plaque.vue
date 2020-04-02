@@ -31,7 +31,7 @@
       <div class="delQ">
         <div>
           <font-awesome-icon :icon="['fas', 'trash']"
-          class="red" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
+          class="red link-hover" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
         </div>
       </div>
       <div class="showQ" v-on:click="() => toggleQuestions(plaqueId)">
