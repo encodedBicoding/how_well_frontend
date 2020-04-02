@@ -4,12 +4,12 @@
 .plaque-header{
   text-transform: uppercase;
   padding: .8rem;
-  background-color: rgba(174, 247, 2, 0.651);
+  background-color: rgba(174, 247, 2, 0.342);
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
 }
 .ph{
-  width: 60%;
+  width: 55%;
 }
 .plaque-header h3{
   color: #fff !important;
@@ -40,8 +40,9 @@
   font-size: .3rem;
 }
 .queCount{
-  color: #000;
+  color: #fff;
   font-size: .3rem;
+  font-weight: 800;
 }
 .qr{
   width: 70%
@@ -131,5 +132,15 @@
 @media(max-width: 375px) {
   .qr{
     width: 85%;
+  }
+}
+@media(max-width: 425px) {
+  .queCount{
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 800;
+  }
+  .ph{
+    width: 60%;
   }
 }

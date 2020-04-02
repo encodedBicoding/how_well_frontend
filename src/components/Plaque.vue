@@ -14,7 +14,7 @@
       </div>
       <div class="addQue" v-on:click="() => this.showPlaque(plaqueId, questions.length)">
         <font-awesome-icon :icon="['fas', 'plus']"
-        :class="questions.length >= 5 ? 'greyDisabled':'black'" size="xs"/>
+        :class="questions.length >= 5 ? 'greyDisabled':'white'" size="xs"/>
       </div>
     </div>
     <div class="plaque-flex">
