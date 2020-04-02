@@ -4,12 +4,18 @@
     <div :class="showModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => toggleModal()">X</div>
       <div class="modal-content">
-        <form class="modal-form" method="POST" type='multipart/form-data'>
+        <form
+          class="modal-form"
+          method="POST"
+          id='new_plaque'
+          name='new_plaque'
+          v-on:submit="(e) => createPlaque(e)"
+          >
           <div class="form-item">
-             <input type="text" name='plaqueName' placeholder="Plaque Name"/>
+             <input type="text" name='name' placeholder="Plaque Name"/>
           </div>
            <div class="form-item">
-             <button>CREATE PLAQUE</button>
+             <button>{{isRequesting ? 'LOADING...':'CREATE PLAQUE'}}</button>
            </div>
         </form>
       </div>
@@ -17,12 +23,18 @@
      <div :class="showPlaqueModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => hidePlaque()">X</div>
       <div class="modal-content">
-        <form class="modal-form" method="POST" type='multipart/form-data'>
+        <form
+          class="modal-form"
+          method="POST"
+          name='new_question'
+          id='new_question'
+          v-on:submit="(e) => addQuestionToPlaque(e, plaqueModalId)"
+          >
           <div class="form-item">
              <input type="text" name='question' placeholder="How well do you know me?"/>
           </div>
            <div class="form-item">
-             <button>ADD QUESTION</button>
+             <button>{{isRequesting ? 'LOADING...' : 'ADD QUESTION'}}</button>
            </div>
         </form>
       </div>
@@ -62,11 +74,11 @@
             <div v-if="hasPlaque">
                 <div v-for="(plaque, idx) in reversedPlaqueData" v-bind:key="idx">
                   <plaque
-                  :plaqueName="plaque.plaqueName"
-                  :questions="plaque.questions"
-                  :plaqueId="plaque.plaqueId"
-                  :plaqueUrl="`http://localhost:8080/plaque/${plaque.plaqueOwnerName}/${plaque.plaqueId}/hwdykm`"
-                  :showPlaque="() => showPlaque(plaque.plaqueId, plaque.questions.length)"
+                  :plaqueName="plaque.name"
+                  :questions="plaque.Questions"
+                  :plaqueId="plaque.id"
+                  :plaqueUrl="`http://localhost:8080/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm`"
+                  :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
                   ></plaque>
                 </div>
             </div>
@@ -81,12 +93,17 @@
 @import url('../assets/css/dashboard.scss');
 </style>
 <script>
+import $ from 'jquery';
 import plaque from '../components/Plaque.vue';
 import Footer from '../components/Footer.vue';
+import BASE_URL from '../helper/ajax';
 
 export default {
   name: 'Dashboard',
   components: { plaque, Footer },
+  beforeMount() {
+    document.title = 'HWDYKM - Dashboard';
+  },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal;
@@ -96,11 +113,85 @@ export default {
         return;
       }
       this.showPlaqueModal = true;
+      this.plaqueModalId = id;
       this.addQuestionId = id;
     },
     hidePlaque() {
       this.showPlaqueModal = false;
       this.addQuestionId = null;
+    },
+    setUserName() {
+      $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/user/profile`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+      }).then((res) => {
+        this.plaqueOwnerName = res.data.userName;
+      });
+    },
+
+    setPlaqueData() {
+      $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/all/plaque`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+      }).then((res) => {
+        this.plaqueData = [...res.data];
+      });
+    },
+    createPlaque(e) {
+      e.preventDefault();
+      this.isRequesting = true;
+      let formData = $('#new_plaque').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value;
+        return acc;
+      }, {});
+      $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/new/plaque`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+      }).then((res) => {
+        this.isRequesting = false;
+        this.showModal = false;
+        this.plaqueData.push(res.data);
+      });
+    },
+    addQuestionToPlaque(event, plaqueId) {
+      event.preventDefault();
+      this.isRequesting = true;
+      let formData = $('#new_question').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value;
+        return acc;
+      }, {});
+      $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/new/question/${plaqueId}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+      }).then((res) => {
+        this.isRequesting = false;
+        this.showPlaqueModal = false;
+        // find plaque and update question list;
+        const plaqueIndex = this.plaqueData.findIndex((pl) => pl.id === plaqueId);
+        this.plaqueData[plaqueIndex].Questions.push(res.data);
+      });
     },
   },
   computed: {
@@ -115,178 +206,19 @@ export default {
       return reversed.reverse();
     },
   },
+  mounted() {
+    this.setUserName();
+    this.setPlaqueData();
+  },
   data() {
     return {
       showModal: false,
+      isRequesting: false,
       showPlaqueModal: false,
+      plaqueModalId: null,
       addQuestionId: null,
-      plaqueData: [
-        {
-          plaqueName: 'no name',
-          plaqueId: 1,
-          plaqueOwnerName: 'encodedBicoding',
-          questions: [
-            {
-              id: 1,
-              question: 'what do I do for a living',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy wo love to soak garri in the morning an suuse toothpcik',
-                },
-                {
-                  id: 2,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 3,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 4,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-              ],
-            },
-            {
-              id: 2,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-            {
-              id: 3,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-            {
-              id: 4,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-            {
-              id: 5,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          plaqueName: 'no name',
-          plaqueId: 2,
-          plaqueUrl: 'http://localhost:8000',
-          questions: [
-            {
-              id: 1,
-              question: 'what do I do for a living',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 2,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 3,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 4,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-              ],
-            },
-            {
-              id: 2,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          plaqueName: 'Last plaque',
-          plaqueId: 3,
-          plaqueUrl: 'http://localhost:8000',
-          questions: [
-            {
-              id: 1,
-              question: 'what do I do for a living',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 2,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 3,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-                {
-                  id: 4,
-                  author: 'Annonymous user',
-                  comment: 'you are a yahoo boy',
-                },
-              ],
-            },
-            {
-              id: 2,
-              question: 'what is my birthday?',
-              responses: [
-                {
-                  id: 1,
-                  author: 'Annonymous user',
-                  comment: '1st june 2019',
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      plaqueOwnerName: '',
+      plaqueData: [],
     };
   },
 };

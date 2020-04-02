@@ -29,7 +29,7 @@
 }
 .queContainer{
   overflow: scroll;
-  height: 120px;
+  height: 160px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: #fff;
@@ -102,6 +102,12 @@
 .greyDisabled{
   color: grey;
   cursor: not-allowed;
+}
+.noQue{
+  margin: 2rem;
+}
+.noQue p{
+  font-size: .8rem;
 }
 @media(max-width: 375px) {
   .qr{

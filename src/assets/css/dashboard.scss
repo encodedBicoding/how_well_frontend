@@ -150,12 +150,20 @@
   .page-body-remix{
     width: 80%;
   }
+  .modal-form {
+    width: 70%;
+    margin: 5rem;
+  }
 }
 @media(max-width: 425px) {
   .page-content,
   .page-body,
   .page-body-remix{
     width: 100%;
+  }
+  .modal-form{
+    margin: 5rem;
+    width: 90%
   }
 }
 @media(width: 2560px) {

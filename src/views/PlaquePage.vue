@@ -19,71 +19,145 @@
        </div>
        <div v-if="this.$route.params.username === currentUsername"
         class="page-body-remix border-black">
-          <div class="plaque-header flex-row justify-space-between">
-            <div class="flex-row justify-space-between ph">
-              <h3 class="plaqueName">{{plaqueData.plaqueName}}</h3>
-                <p class="queCount">{{plaqueData.questions.length}}
-                  <span class="queCount">
-                    {{plaqueData.questions.length > 1 ? 'questions' : 'question'}}
-                    <span>
-                      {{plaqueData.questions.length >= 5 ? '(completed)' : ''}}
-                    </span>
-                  </span>
-                </p>
-            </div>
-         </div>
-         <div v-if="plaqueData.questions.length <= 0">
-           <div class="ppqueContainer">
-             <p class="noQueP">
-               This Plaque ({{plaqueData.plaqueName}}) currently doesn't have any questions.
-               Go to your dashboard to add some questions to the plaque
-             </p>
-           </div>
-         </div>
-         <div v-if="plaqueData.questions.length > 0">
-           <div class="ppqueContainer">
-             <div class="queHolder" v-for="question in plaqueData.questions"
-             v-bind:key="question.id">
-              <div class="queListing">
-                <div class="queTitle flex-row justify-space-between">
-                  <div class="flex-row justify-space-between qr">
-                  <p id='questionT'>{{question.question}}</p>
-                  <p class="resCount">{{question.responses.length}}
-                    <span class="resCount">
-                      {{question.responses.length > 1 ? 'responses' : 'response'}}
+          <div v-if="plaqueData.hasOwnProperty('name')">
+            <div class="plaque-header flex-row justify-space-between">
+              <div class="flex-row justify-space-between ph">
+                <h3 class="plaqueName">{{plaqueData.name}}</h3>
+                  <p class="queCount">{{plaqueData.Questions.length}}
+                    <span class="queCount">
+                      {{plaqueData.Questions.length > 1 ? 'questions' : 'question'}}
+                      <span>
+                        {{plaqueData.Questions.length >= 5 ? '(completed)' : ''}}
+                      </span>
                     </span>
                   </p>
-                  </div>
-                  <div  class="showQ" v-on:click="() => toggleResponse(question.id)">
-                    <div>
-                      <div v-if="showResponse !== question.id">
-                        <font-awesome-icon
-                        :icon="['fas', 'eye']" class="black" size="xs"/>
-                      </div>
-                      <div v-if="showResponse === question.id">
-                        <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+              </div>
+          </div>
+          <div v-if="plaqueData.Questions.length <= 0">
+            <div class="ppqueContainer">
+              <p class="noQueP">
+                This Plaque ({{plaqueData.name}}) currently doesn't have any questions.
+                Go to your dashboard to add some questions to the plaque
+              </p>
+            </div>
+          </div>
+          <div v-if="plaqueData.Questions.length > 0">
+            <div class="ppqueContainer">
+              <div class="queHolder" v-for="question in plaqueData.Questions"
+              v-bind:key="question.id">
+                <div class="queListing">
+                  <div class="queTitle flex-row justify-space-between">
+                    <div class="flex-row justify-space-between qr">
+                    <p id='questionT'>{{question.question}}</p>
+                    <p class="resCount">{{question.Responses.length}}
+                      <span class="resCount">
+                        {{question.Responses.length > 1 ? 'responses' : 'response'}}
+                      </span>
+                    </p>
+                    </div>
+                    <div  class="showQ" v-on:click="() => toggleResponse(question.id)">
+                      <div>
+                        <div v-if="showResponse !== question.id">
+                          <font-awesome-icon
+                          :icon="['fas', 'eye']" class="black" size="xs"/>
+                        </div>
+                        <div v-if="showResponse === question.id">
+                          <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
-                  v-for="response in question.responses" v-bind:key="response.id"
-                >
-                  <div class="resAuthor" >
-                    <p>{{response.author}}</p>
-                  </div>
-                  <div class="resComment">
-                    <p>{{response.comment}}</p>
+                  <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
+                    v-for="response in question.Responses" v-bind:key="response.id"
+                  >
+                    <div class="resAuthor" >
+                      <p>{{response.author}}</p>
+                    </div>
+                    <div class="resComment">
+                      <p>{{response.response}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-           </div>
-         </div>
+          </div>
+          </div>
+          <div v-if="!plaqueData.hasOwnProperty('name')">
+            <div class="no-p-fl">
+              <div class="np-content">
+                <p>NO PLAQUE HERE</p>
+              </div>
+            </div>
+          </div>
        </div>
         <div v-if="this.$route.params.username !== currentUsername"
         class="page-body-remix border-black">
-         say nope
+        <div v-if="plaqueData.hasOwnProperty('name')">
+          <div class="annoymous-intro">
+           <p>
+             Hello friend!,
+             Please feel free to express yourself on your answers, because you are
+             <span class="white shadow-white">Anonymous!.</span>
+           </p>
+         </div>
+         <div class="queToAnswer">
+            <div :class="!currentQuestion ? 'queToAnswerBody' : 'queToAnswerBody slideIn'">
+              <div class="queToAnswerContent" v-if="typeof currentQuestion === 'number'">
+                <p class="bold-text">Question {{currentQuestion + 1}}</p>
+                <div class="qta">
+                  <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
+                  <div class="yreply-container">
+                    <form
+                      method='post'
+                      class="yreplyForm"
+                      id='response_form'
+                      name='response_form'
+                      v-on:submit="(e) =>
+                        submitResponse(e, plaqueData.Questions[currentQuestion].id)"
+                      >
+                       <input
+                       type='text'
+                       name='response'
+                       placeholder="Your answer?"
+                       class="txtarea"/>
+                       <div class="yreplybtn">
+                         <button>SUBMIT</button>
+                       </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div v-if="typeof currentQuestion === 'string'">
+                <div>
+                  <p class="thankyou">
+                    Thank you for your response!
+                  </p>
+                  <div class="margin-top-1rem">
+                    <p>
+                      Be like
+                      <span class="bold-text">
+                        {{ this.$route.params.username.toUpperCase()}},
+                      </span>
+                      click <a href='http://localhost:8080' class="bold-text here">HERE</a> to create an account!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div v-if="currentQuestion === null" class="flex-center">
+                <div class="loader">
+                  <img src='../assets/images/loader.gif' alt='Loader'/>
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+        <div v-if="!plaqueData.hasOwnProperty('name')">
+          <div class="no-p-fl">
+            <div class="np-content">
+              <p>NO PLAQUE HERE</p>
+            </div>
+          </div>
+        </div>
        </div>
     </div>
     <Footer/>
@@ -93,7 +167,9 @@
 @import url('../assets/css/plaquePage.scss');
 </style>
 <script>
+import $ from 'jquery';
 import Footer from '../components/Footer.vue';
+import BASE_URL from '../helper/ajax';
 
 export default {
   name: 'Plaque',
@@ -102,88 +178,74 @@ export default {
     toggleResponse(id) {
       this.showResponse = this.showResponse === id ? 0 : id;
     },
+    getCurrentUser() {
+      $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/user/profile`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+      }).then((res) => {
+        this.currentUsername = res.data.userName;
+      });
+    },
+    getSinglePlaque() {
+      $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/plaque/${this.$route.params.plaqueId}`,
+        contentType: 'application/json',
+      }).then((res) => {
+        this.plaqueData = { ...res.data };
+      });
+    },
+    submitResponse(e, id) {
+      e.preventDefault();
+      let formData = $('#response_form').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value;
+        return acc;
+      }, {});
+      let prevCount = '';
+      $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/new/response/${id}`,
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+      }).then((res) => {
+        if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
+          this.currentQuestion = null;
+          setTimeout(() => {
+            this.currentQuestion = 'finished';
+          }, 1500);
+        } else {
+          prevCount = this.currentQuestion;
+          this.currentQuestion = null;
+        }
+        setTimeout(() => {
+          this.currentQuestion = prevCount + 1;
+          console.log(res.data);
+        }, 1500);
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem('__token__HWDYKM__user__')) {
+      this.getCurrentUser();
+    }
+    this.getSinglePlaque();
   },
   data() {
     return {
-      currentUsername: 'encodedbcidoing',
+      currentUsername: '',
       showResponse: 0,
-      plaqueData: {
-        plaqueName: 'New Plaque',
-        plaqueId: this.$route.params.plaqueId,
-        questions: [
-          {
-            id: 1,
-            question: 'what do I do for a living',
-            responses: [
-              {
-                id: 1,
-                author: 'Annonymous user',
-                comment: 'you are a yahoo boy wo love to soak garri in the morning an suuse toothpcik',
-              },
-              {
-                id: 2,
-                author: 'Annonymous user',
-                comment: 'you are a yahoo boy',
-              },
-              {
-                id: 3,
-                author: 'Annonymous user',
-                comment: 'you are a yahoo boy',
-              },
-              {
-                id: 4,
-                author: 'Annonymous user',
-                comment: 'you are a yahoo boy',
-              },
-            ],
-          },
-          {
-            id: 2,
-            question: 'what is my birthday?',
-            responses: [
-              {
-                id: 1,
-                author: 'Annonymous user',
-                comment: '1st june 2019',
-              },
-            ],
-          },
-          {
-            id: 3,
-            question: 'what is my birthday?',
-            responses: [
-              {
-                id: 1,
-                author: 'Annonymous user',
-                comment: '1st june 2019',
-              },
-            ],
-          },
-          {
-            id: 4,
-            question: 'what is my birthday?',
-            responses: [
-              {
-                id: 1,
-                author: 'Annonymous user',
-                comment: '1st june 2019',
-              },
-            ],
-          },
-          {
-            id: 5,
-            question: 'what is my birthday?',
-            responses: [
-              {
-                id: 1,
-                author: 'Annonymous user',
-                comment: '1st june 2019',
-              },
-            ],
-          },
-        ],
-      },
+      currentQuestion: 0,
+      plaqueData: {},
     };
+  },
+  beforeMount() {
+    document.title = 'HWDYKM - Plaques';
   },
 };
 </script>

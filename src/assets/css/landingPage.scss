@@ -138,5 +138,11 @@
   }
   .intro-text{
     max-width: 70% !important;
+    margin-bottom: 1rem;
+  }
+}
+@media(max-width: 375px) {
+  .intro{
+    margin-bottom: .6rem;
   }
 }

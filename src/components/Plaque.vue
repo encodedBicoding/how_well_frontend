@@ -20,7 +20,9 @@
     <div class="plaque-flex">
       <div class="linkQ">
         <div>
-          <font-awesome-icon :icon="['fas', 'link']" class="lime" size="xs"/>
+          <font-awesome-icon
+          :icon="['fas', 'link']" class="lime" size="xs"
+          v-on:click="() => copyLink(plaqueUrl)"/>
         </div>
       </div>
       <div class="delQ">
@@ -43,15 +45,16 @@
     <div v-if="showQuestion !== plaqueId"></div>
     <div v-if="showQuestion === plaqueId"
     :class="showQuestion === plaqueId ? 'queContainer':'hideQue'">
-      <div class="queHolder" v-for="question in questions" v-bind:key="question.id"
+      <div class="queHolder"
       >
-        <div class="queListing">
+      <div v-if="questions.length > 0">
+        <div class="queListing" v-for="question in questions" v-bind:key="question.id">
           <div class="queTitle flex-row justify-space-between">
             <div class="flex-row justify-space-between qr">
             <p id='questionT'>{{question.question}}</p>
-            <p class="resCount">{{question.responses.length}}
+            <p class="resCount">{{question.Responses.length}}
               <span class="resCount">
-                {{question.responses.length > 1 ? 'responses' : 'response'}}
+                {{question.Responses.length > 1 ? 'responses' : 'response'}}
               </span>
             </p>
             </div>
@@ -68,16 +71,23 @@
             </div>
           </div>
           <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
-            v-for="response in question.responses" v-bind:key="response.id"
+            v-for="response in question.Responses" v-bind:key="response.id"
           >
             <div class="resAuthor" >
               <p>{{response.author}}</p>
             </div>
             <div class="resComment">
-              <p>{{response.comment}}</p>
+              <p>{{response.response}}</p>
             </div>
           </div>
         </div>
+      </div>
+      <div v-if="questions.length <= 0" class="flex-center">
+        <div class="noQue">
+          <p>This plaque currently has no questions</p>
+          <p>Click + to add questions to plaque</p>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -108,6 +118,25 @@ export default {
     },
     toggleResponse(id) {
       this.showResponse = this.showResponse === id ? 0 : id;
+    },
+    copyLink(link) {
+      const el = document.createElement('textarea');
+      el.value = link;
+      el.style.position = 'absolute';
+      el.style.left = '-9999px';
+      document.body.appendChild(el);
+      el.setAttribute('readonly', '');
+      const selected = document.getSelection().rangeCount > 0
+        ? document.getSelection().getRangeAt(0) : false;
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      if (selected) {
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
+      }
+      console.log('copied');
     },
   },
 };

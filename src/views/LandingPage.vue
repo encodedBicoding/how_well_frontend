@@ -22,7 +22,14 @@
           <span>M</span>
         </div>
         <div class="intro">
-          <form v-if="!haveAccount" class="register" method="POST" type='multipart/form-data'>
+          <form
+            v-if="!haveAccount"
+            class="register"
+            method="POST"
+            name='register'
+            id='register'
+            v-on:submit="(e) => register(e)"
+          >
             <div class="form-input">
               <input type='text' name='userName' placeholder="Username">
             </div>
@@ -43,10 +50,17 @@
               </div>
             </div>
              <div class="form-submit">
-              <button>REGISTER</button>
+              <button>{{isRequesting ? 'LOADING...' : 'REGISTER'}}</button>
             </div>
         </form>
-        <form v-if="haveAccount" class="login">
+        <form
+          v-if="haveAccount"
+          class="login"
+          name='login'
+          id='login'
+          method="POST"
+          v-on:submit="(e) => login(e)"
+          >
             <div class="form-input">
               <input type='text' name='userName' placeholder="Username">
             </div>
@@ -86,13 +100,19 @@
   @import url('../assets/css/landingPage.scss');
 </style>
 <script>
+import $ from 'jquery';
+
 export default {
   name: 'LandingPage',
   data() {
     return {
       haveAccount: false,
       showPass: false,
+      isRequesting: false,
     };
+  },
+  beforeMount() {
+    document.title = 'Welcome - HWDYKM || Anonymous responses to your desired questions';
   },
   methods: {
     turbo() {
@@ -100,6 +120,80 @@ export default {
     },
     togglePassword() {
       this.showPass = !this.showPass;
+    },
+    register(e) {
+      this.isRequesting = true;
+      const BASE_URL = 'http://localhost:4000/api/v1';
+      e.preventDefault();
+      let formData = $('#register').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value;
+        return acc;
+      }, {});
+      $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/register`,
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+      }).then((data) => {
+        this.isRequesting = false;
+        localStorage.setItem('__hwdykm_inkR',
+          data.token.split('').splice(10, 34).reverse().join(''));
+        localStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(0, 34).reverse().join(''));
+        localStorage.setItem('__api__token__howzy',
+          data.token.split('').splice(2, 34).reverse().join(''));
+        localStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(4, data.token.length).reverse().join(''));
+        sessionStorage.setItem('__hwdykm_inkR',
+          data.token.split('').splice(10, 34).reverse().join(''));
+        sessionStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(0, 34).reverse().join(''));
+        sessionStorage.setItem('__api__token__howzy',
+          data.token.split('').splice(2, 34).reverse().join(''));
+        sessionStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(4, data.token.length).reverse().join(''));
+        localStorage.setItem('__token__HWDYKM__user__', data.token);
+        this.$router.push({ name: 'Dashboard' });
+      });
+    },
+    login(e) {
+      this.isRequesting = true;
+      const BASE_URL = 'http://localhost:4000/api/v1';
+      e.preventDefault();
+      let formData = $('#login').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value;
+        return acc;
+      }, {});
+      $.ajax({
+        type: 'POST',
+        url: `${BASE_URL}/login`,
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+      }).then((data) => {
+        this.isRequesting = false;
+        localStorage.setItem('__hwdykm_inkR',
+          data.token.split('').splice(10, 34).reverse().join(''));
+        localStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(0, 34).reverse().join(''));
+        localStorage.setItem('__api__token__howzy',
+          data.token.split('').splice(2, 34).reverse().join(''));
+        localStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(4, data.token.length).reverse().join(''));
+        sessionStorage.setItem('__hwdykm_inkR',
+          data.token.split('').splice(10, 34).reverse().join(''));
+        sessionStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(0, 34).reverse().join(''));
+        sessionStorage.setItem('__api__token__howzy',
+          data.token.split('').splice(2, 34).reverse().join(''));
+        sessionStorage.setItem('api__hwdykm_inkR',
+          data.token.split('').splice(4, data.token.length).reverse().join(''));
+        localStorage.setItem('__token__HWDYKM__user__', data.token);
+        this.$router.push({ name: 'Dashboard' });
+      });
     },
   },
 };

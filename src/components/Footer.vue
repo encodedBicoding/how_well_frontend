@@ -4,16 +4,16 @@
         <nav class="footer-nav">
           <ul class="footer-nav-list">
             <li class="fnl-item">
-              <a href='#' target='_blank'>About</a>
+              <a href='/about'>About</a>
             </li>
             <li class="fnl-item">
-              <a href='#' target='_blank'>Contact</a>
+              <a href='/contact'>Contact</a>
             </li>
             <li class="fnl-item">
-              <a href='#' target='_blank'>Terms of Use</a>
+              <a href='/terms'>Terms of Use</a>
             </li>
             <li class="fnl-item">
-              <a href='#' target='_blank'>Privacy Policy</a>
+              <a href='/privacy'>Privacy Policy</a>
             </li>
           </ul>
         </nav>
