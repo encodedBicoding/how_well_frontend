@@ -102,10 +102,10 @@
                   :questions="plaque.Questions"
                   :plaqueId="plaque.id"
                   :plaqueUrl="`
-                    Hi friend, I have some questions for you to answer!
-                    this will help me understand how well people know me.
-                    PS: Be free to give your best answers, you are Anonymous!.
-                    http://localhost:8080/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
+                      Hi friend, I have some questions for you to answer!
+this will help me understand how well people know me.
+PS: Be free to give your best answers, you are Anonymous!.
+'${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm'
                   `"
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
                   :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
@@ -127,6 +127,7 @@ import $ from 'jquery';
 import plaque from '../components/Plaque.vue';
 import Footer from '../components/Footer.vue';
 import BASE_URL from '../helper/ajax';
+import FE_URL from '../helper/feUrl';
 
 export default {
   name: 'Dashboard',
@@ -165,7 +166,11 @@ export default {
         },
         contentType: 'application/json',
       }).then((res) => {
-        this.plaqueOwnerName = res.data.userName;
+        if (res.status === 200) {
+          this.plaqueOwnerName = res.data.userName;
+          return true;
+        }
+        return false;
       });
     },
 
@@ -178,7 +183,11 @@ export default {
         },
         contentType: 'application/json',
       }).then((res) => {
-        this.plaqueData = [...res.data];
+        if (res.status === 200 || res.status === 201) {
+          this.plaqueData = [...res.data];
+          return true;
+        }
+        return false;
       });
     },
     createPlaque(e) {
@@ -199,9 +208,15 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
       }).then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          this.isRequesting = false;
+          this.showModal = false;
+          this.plaqueData.push(res.data);
+          return true;
+        }
         this.isRequesting = false;
         this.showModal = false;
-        this.plaqueData.push(res.data);
+        return false;
       });
     },
     deletePlaqueById(id) {
@@ -213,9 +228,15 @@ export default {
         },
         contentType: 'application/json',
       }).then((res) => {
-        this.plaqueData = res.data;
+        if (res.status === 200 || res.status === 201) {
+          this.plaqueData = res.data;
+          this.deletePlaqueid = '';
+          this.deletePlaqueModal = false;
+          return true;
+        }
         this.deletePlaqueid = '';
         this.deletePlaqueModal = false;
+        return false;
       });
     },
     addQuestionToPlaque(event, plaqueId) {
@@ -236,13 +257,21 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
       }).then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          this.isRequesting = false;
+          this.showPlaqueModal = false;
+          this.questionData = '';
+          this.answerData = '';
+          // find plaque and update question list;
+          const plaqueIndex = this.plaqueData.findIndex((pl) => pl.id === plaqueId);
+          this.plaqueData[plaqueIndex].Questions.push(res.data);
+          return true;
+        }
         this.isRequesting = false;
         this.showPlaqueModal = false;
         this.questionData = '';
         this.answerData = '';
-        // find plaque and update question list;
-        const plaqueIndex = this.plaqueData.findIndex((pl) => pl.id === plaqueId);
-        this.plaqueData[plaqueIndex].Questions.push(res.data);
+        return false;
       });
     },
   },
@@ -265,6 +294,7 @@ export default {
   data() {
     return {
       showModal: false,
+      frontendURL: FE_URL,
       deletePlaqueModal: false,
       deletePlaqueid: '',
       questionData: '',
