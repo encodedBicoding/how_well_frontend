@@ -24,7 +24,7 @@
         <div :class="showRegError && formPage === 'register' ? 'error-container' : 'error-none'">
           <div class="bg-white">
             <div v-if="typeof errorData === 'string'">
-                <p>{{errorData}}</p>
+                <p class="error-list">{{errorData}}</p>
             </div>
             <div v-if="typeof errorData !== 'string'">
               <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
