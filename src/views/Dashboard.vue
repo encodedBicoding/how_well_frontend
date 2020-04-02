@@ -31,14 +31,38 @@
           v-on:submit="(e) => addQuestionToPlaque(e, plaqueModalId)"
           >
           <div class="form-item">
-             <input type="text" name='question' placeholder="How well do you know me?"/>
+             <input type="text" name='question'
+             placeholder="How well do you know me?" v-bind="questionData"/>
+          </div>
+          <div class="form-item">
+             <input type="text" name='answer' placeholder="Your answer" v-bind="answerData"/>
           </div>
            <div class="form-item">
              <button>{{isRequesting ? 'LOADING...' : 'ADD QUESTION'}}</button>
            </div>
         </form>
+        </div>
       </div>
-    </div>
+      <div :class="deletePlaqueModal ? 'modal' : 'hideModal'">
+      <div class="f-right" v-on:click="() => hidePlaque()">X</div>
+      <div class="modal-content">
+        <div
+          class="modal-form"
+          >
+          <div class="ays">
+             <p>Are you sure you?</p>
+          </div>
+          <div class="flex-ays flex-row">
+            <div class="bg-lime" v-on:click="() => hidePlaque()">
+              <p>NO</p>
+            </div>
+            <div class="bg-red" v-on:click="() => deletePlaqueById(deletePlaqueid)">
+              <p>YES</p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
     <div class="container page-flex">
         <div class="page-content">
           <div class="header flex-row justify-space-between">
@@ -77,8 +101,14 @@
                   :plaqueName="plaque.name"
                   :questions="plaque.Questions"
                   :plaqueId="plaque.id"
-                  :plaqueUrl="`http://localhost:8080/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm`"
+                  :plaqueUrl="`
+                    Hi friend, I have some questions for you to answer!
+                    this will help me understand how well people know me.
+                    PS: Be free to give your best answers, you are Anonymous!.
+                    http://localhost:8080/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
+                  `"
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
+                  :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
                   ></plaque>
                 </div>
             </div>
@@ -116,7 +146,13 @@ export default {
       this.plaqueModalId = id;
       this.addQuestionId = id;
     },
+    showDeletePlaque(id) {
+      this.deletePlaqueid = id;
+      this.deletePlaqueModal = true;
+    },
     hidePlaque() {
+      this.deletePlaqueid = '';
+      this.deletePlaqueModal = false;
       this.showPlaqueModal = false;
       this.addQuestionId = null;
     },
@@ -168,6 +204,20 @@ export default {
         this.plaqueData.push(res.data);
       });
     },
+    deletePlaqueById(id) {
+      $.ajax({
+        type: 'DELETE',
+        url: `${BASE_URL}/delete/plaque/${id}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+      }).then((res) => {
+        this.plaqueData = res.data;
+        this.deletePlaqueid = '';
+        this.deletePlaqueModal = false;
+      });
+    },
     addQuestionToPlaque(event, plaqueId) {
       event.preventDefault();
       this.isRequesting = true;
@@ -188,6 +238,8 @@ export default {
       }).then((res) => {
         this.isRequesting = false;
         this.showPlaqueModal = false;
+        this.questionData = '';
+        this.answerData = '';
         // find plaque and update question list;
         const plaqueIndex = this.plaqueData.findIndex((pl) => pl.id === plaqueId);
         this.plaqueData[plaqueIndex].Questions.push(res.data);
@@ -213,6 +265,10 @@ export default {
   data() {
     return {
       showModal: false,
+      deletePlaqueModal: false,
+      deletePlaqueid: '',
+      questionData: '',
+      answerData: '',
       isRequesting: false,
       showPlaqueModal: false,
       plaqueModalId: null,

@@ -19,15 +19,19 @@
     </div>
     <div class="plaque-flex">
       <div class="linkQ">
-        <div>
+        <div title="copy plaque link" class="link-flex">
           <font-awesome-icon
-          :icon="['fas', 'link']" class="lime" size="xs"
+          :icon="['fas', 'link']" class="lime link-hover" size="xs"
           v-on:click="() => copyLink(plaqueUrl)"/>
+          <div :class="copy ? 'copied' : 'copied display-none'">
+            <p>copied</p>
+          </div>
         </div>
       </div>
       <div class="delQ">
         <div>
-          <font-awesome-icon :icon="['fas', 'trash']" class="red" size="xs"/>
+          <font-awesome-icon :icon="['fas', 'trash']"
+          class="red" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
         </div>
       </div>
       <div class="showQ" v-on:click="() => toggleQuestions(plaqueId)">
@@ -105,11 +109,13 @@ export default {
     plaqueId: Number,
     plaqueUrl: String,
     showPlaque: Function,
+    showDeletePlaqueModal: Function,
   },
   data() {
     return {
       showQuestion: 0,
       showResponse: 0,
+      copy: false,
     };
   },
   methods: {
@@ -136,7 +142,10 @@ export default {
         document.getSelection().removeAllRanges();
         document.getSelection().addRange(selected);
       }
-      console.log('copied');
+      this.copy = true;
+      setTimeout(() => {
+        this.copy = false;
+      }, 100);
     },
   },
 };

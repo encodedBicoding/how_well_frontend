@@ -144,6 +144,50 @@
 .share{
   cursor: pointer;
 }
+.ays{
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.flex-ays{
+  width: 40%;
+  justify-content: space-between;
+  margin: .9rem;
+}
+.bg-red p,
+.bg-lime p{
+  color: white;
+  font-weight: 800;
+}
+.bg-red {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  width: 3rem;
+  height: 2rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.bg-red:hover {
+  background-color: rgba(255, 0, 0, 0.61);
+}
+.bg-lime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(174, 247, 2, 0.555);
+  width: 3rem;
+  height: 2rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.bg-lime:hover{
+  background-color: rgb(174, 247, 2);
+}
+.bg-lime:hover p{
+  color: #000;
+}
 @media(max-width: 768px) {
   .page-content,
   .page-body,

@@ -109,6 +109,25 @@
 .noQue p{
   font-size: .8rem;
 }
+.link-hover:hover{
+  color: #fff;
+}
+.link-flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.copied{
+  position: absolute;
+  margin-left: 15px;
+}
+.copied p{
+  font-size: .3rem;
+}
+.display-none{
+  display: none;
+}
 @media(max-width: 375px) {
   .qr{
     width: 85%;

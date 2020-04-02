@@ -121,6 +121,21 @@
   color: rgba(174, 247, 2, 0.651);
   font-size: 3rem;
 }
+.display-none {
+  display: none;
+}
+.answer::before{
+  content: 'Answer: ';
+  color: green
+}
+.answer::after {
+  content: '😊';
+}
+.answer{
+  font-size: 1.4rem;
+  font-weight: 700;
+
+}
 @keyframes slideIn{
   from { right: -999px }
   to { right: 0px }

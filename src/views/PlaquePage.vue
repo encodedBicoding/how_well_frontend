@@ -92,7 +92,7 @@
        </div>
         <div v-if="this.$route.params.username !== currentUsername"
         class="page-body-remix border-black">
-        <div v-if="plaqueData.hasOwnProperty('name')">
+        <div v-if="plaqueData.hasOwnProperty('name') && hasQuestions">
           <div class="annoymous-intro">
            <p>
              Hello friend!,
@@ -106,6 +106,9 @@
                 <p class="bold-text">Question {{currentQuestion + 1}}</p>
                 <div class="qta">
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
+                  <p :class="showAnswer ? 'answer' : 'display-none'">
+                    {{ plaqueData.Questions[currentQuestion].answer }}
+                  </p>
                   <div class="yreply-container">
                     <form
                       method='post'
@@ -151,7 +154,7 @@
             </div>
          </div>
         </div>
-        <div v-if="!plaqueData.hasOwnProperty('name')">
+        <div v-if="!plaqueData.hasOwnProperty('name') || !hasQuestions">
           <div class="no-p-fl">
             <div class="np-content">
               <p>NO PLAQUE HERE</p>
@@ -197,6 +200,9 @@ export default {
         contentType: 'application/json',
       }).then((res) => {
         this.plaqueData = { ...res.data };
+        if (this.plaqueData.Questions.length > 0) {
+          this.hasQuestions = true;
+        }
       });
     },
     submitResponse(e, id) {
@@ -207,6 +213,7 @@ export default {
         return acc;
       }, {});
       let prevCount = '';
+      this.showAnswer = true;
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/new/response/${id}`,
@@ -215,13 +222,17 @@ export default {
         contentType: 'application/json',
       }).then((res) => {
         if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
-          this.currentQuestion = null;
+          setTimeout(() => {
+            this.currentQuestion = null;
+          }, 1200);
           setTimeout(() => {
             this.currentQuestion = 'finished';
           }, 1500);
         } else {
           prevCount = this.currentQuestion;
-          this.currentQuestion = null;
+          setTimeout(() => {
+            this.currentQuestion = null;
+          }, 1200);
         }
         setTimeout(() => {
           this.currentQuestion = prevCount + 1;
@@ -240,7 +251,10 @@ export default {
     return {
       currentUsername: '',
       showResponse: 0,
+      showAnswer: false,
+      repliedData: [],
       currentQuestion: 0,
+      hasQuestions: false,
       plaqueData: {},
     };
   },
