@@ -167,11 +167,6 @@ export default {
         acc[curr.name] = curr.value;
         return acc;
       }, {});
-      // fetch(`${BASE_URL}/login`, {
-      //   method: 'POST',
-      //   body: JSON.stringify(formData),
-      //   headers: { 'Content-Type': 'application/json' },
-      // })
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/login`,
