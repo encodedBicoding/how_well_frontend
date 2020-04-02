@@ -1,0 +1,142 @@
+.overlay{
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  opacity: .89;
+  z-index: -99;
+}
+.border-black{
+  border-top: 51px solid #000
+}
+.pp-body-rm{
+  border: 1px solid red;
+}
+.ppqueContainer{
+  overflow: scroll;
+  height: 350px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+  padding: .8rem;
+}
+.queToAnswerBody{
+  transition: all 1.25 ease-in 1s;
+  position: relative;
+}
+.shadow-white{
+  text-shadow: 2px 0px 18px #fff;
+  font-weight: 700;
+  font-size: 1.7rem;
+  margin: 4px;
+}
+.queToAnswer{
+  padding: 1.2rem;
+  background-color: #fff;
+  margin-top: 2.4rem;
+  border-radius: 2px;
+  height: 280px;
+}
+.noQueP{
+  color: grey;
+  font-size: .8rem;
+}
+.annoymous-intro p{
+  color: grey;
+  text-align: center;
+  line-height: 2;
+}
+.bold-text{
+  font-weight: 700;
+}
+.qta{
+  margin-top: .7rem;
+}
+.plaqueQ{
+  text-transform: uppercase;
+}
+.yreply-container{
+  margin-top: .8rem;
+  width: 100%;
+}
+.txtarea{
+  padding: 2rem;
+  width: 100%;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.466);
+  border-radius: 4px;
+}
+.yreplybtn {
+  margin-top: .4rem;
+}
+.yreplybtn button{
+  cursor: pointer;
+  color: #000;
+  border-radius: 4px;
+  background-color: rgba(174, 247, 2, 0.651);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 100%;
+  padding: 1.3rem;
+  outline: none;
+}
+.thankyou{
+  font-weight: 700;
+  font-size: 2rem;;
+}
+.margin-top-1rem{
+  margin-top: 1rem;;
+}
+.here{
+  text-decoration: none;
+}
+.loader{
+  margin: 7rem;
+  width: 5%;
+}
+.loader img{
+  width: 100%;
+  height: 100%;
+}
+.slideIn{
+  position: relative;
+  right: 0px;
+  animation-name: slideIn;
+  animation-duration: 1.0s;
+}
+.no-p-fl{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 1rem 1rem 1rem
+}
+.np-content p{
+  letter-spacing: 2;
+  font-weight: 900;
+  color: rgba(174, 247, 2, 0.651);
+  font-size: 3rem;
+}
+.display-none {
+  display: none;
+}
+.answer::before{
+  content: 'Answer: ';
+  color: green
+}
+.answer::after {
+  content: '😊';
+}
+.answer{
+  font-size: 1.4rem;
+  font-weight: 700;
+
+}
+@keyframes slideIn{
+  from { right: -999px }
+  to { right: 0px }
+}

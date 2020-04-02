@@ -1,0 +1,42 @@
+.footer{
+  position: relative;
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.479);
+  font-size: .7rem;
+  width: 100%;
+}
+.footer-body{
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ebc, 
+.fnl-item a{
+  color: rgba(174, 247, 2, 0.651);
+  text-decoration: none;
+  cursor: pointer;
+}
+.copyrights{
+  margin-top: .4rem;
+}
+.fnl-item{
+  padding: .3rem;
+}
+.fnl-item a{
+  color: grey;
+}
+.fnl-item a:hover{
+  color: rgba(174, 247, 2, 0.651);
+}
+.footer-nav-list{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+@media(max-width: 768px) {
+  .footer{
+    font-size: .4rem;
+  }
+}

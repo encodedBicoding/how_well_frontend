@@ -1,0 +1,135 @@
+.plaque{
+  padding: 1rem;
+}
+.plaque-header{
+  text-transform: uppercase;
+  padding: .8rem;
+  background-color: rgba(174, 247, 2, 0.651);
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+}
+.ph{
+  width: 60%;
+}
+.plaque-header h3{
+  color: #fff !important;
+  font-size: .7rem;
+}
+.plaque-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
+  background-color: #000000;
+  opacity: .8;
+}
+.plaque-flex p{
+  color:#fff
+}
+.queContainer{
+  overflow: scroll;
+  height: 160px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+  padding: .8rem;
+}
+.resCount{
+  color: rgba(29, 29, 29, 0.945);
+  font-size: .3rem;
+}
+.queCount{
+  color: #000;
+  font-size: .3rem;
+}
+.qr{
+  width: 70%
+}
+.qr #questionT{
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+.queTitle{
+  margin: .7rem 0 .7rem 0;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+}
+
+.resAuthor{
+  padding-bottom: .4rem;
+  border-bottom: 1px solid grey;
+}
+.resComment{
+  text-align: center;
+  padding: .5rem;
+}
+.resComment p{
+  font-size: .8rem;
+}
+.resAuthor p{
+  font-size: .5rem;
+  font-weight: 700;
+}
+.responseHolder {
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  margin: .4rem;
+  padding: .2rem;
+  border-radius: 4px;
+}
+.queListing{
+  margin-bottom: 2rem;;
+}
+.showQ,
+.delQ,
+.linkQ,
+.addQue{
+  cursor: pointer;
+}
+.hideQue{
+  display: none;
+}
+.hideRes{
+  display: none;
+}
+.red{
+  color: rgba(255, 0, 0, 0.753);
+}
+.lime{
+  color: rgba(174, 247, 2, 0.651);
+}
+.greyDisabled{
+  color: grey;
+  cursor: not-allowed;
+}
+.noQue{
+  margin: 2rem;
+}
+.noQue p{
+  font-size: .8rem;
+}
+.link-hover:hover{
+  color: #fff;
+}
+.link-flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.copied{
+  position: absolute;
+  margin-left: 15px;
+}
+.copied p{
+  font-size: .3rem;
+}
+.display-none{
+  display: none;
+}
+@media(max-width: 375px) {
+  .qr{
+    width: 85%;
+  }
+}
