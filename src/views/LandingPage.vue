@@ -138,8 +138,6 @@ export default {
         contentType: 'application/json',
       }).then((data) => {
         this.isRequesting = false;
-        localStorage.setItem('__hwdykm_inkR',
-          data.token.split('').splice(10, 34).reverse().join(''));
         localStorage.setItem('api__hwdykm_inkR',
           data.token.split('').splice(0, 34).reverse().join(''));
         localStorage.setItem('__api__token__howzy',
