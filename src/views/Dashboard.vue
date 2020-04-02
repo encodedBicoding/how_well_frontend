@@ -103,9 +103,9 @@
                   :plaqueId="plaque.id"
                   :plaqueUrl="`
                       Hi friend, I have some questions for you to answer!
-this will help me understand how well people know me.
+This will help me understand how well people (You) know me.
 PS: Be free to give your best answers, you are Anonymous!.
-'${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm'
+${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   `"
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
                   :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
@@ -162,7 +162,7 @@ export default {
         type: 'GET',
         url: `${BASE_URL}/user/profile`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
       }).then((res) => {
@@ -179,7 +179,7 @@ export default {
         type: 'GET',
         url: `${BASE_URL}/all/plaque`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
       }).then((res) => {
@@ -202,7 +202,7 @@ export default {
         type: 'POST',
         url: `${BASE_URL}/new/plaque`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         data: JSON.stringify(formData),
         dataType: 'json',
@@ -224,7 +224,7 @@ export default {
         type: 'DELETE',
         url: `${BASE_URL}/delete/plaque/${id}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
       }).then((res) => {
@@ -251,7 +251,7 @@ export default {
         type: 'POST',
         url: `${BASE_URL}/new/question/${plaqueId}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         data: JSON.stringify(formData),
         dataType: 'json',
