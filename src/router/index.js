@@ -17,7 +17,7 @@ const routes = [
     name: 'LandingPage',
     component: LandingPage,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('__token__HWDYKM__user__')) {
+      if (sessionStorage.getItem('__token__HWDYKM__user__')) {
         next({ name: 'Dashboard' });
       } else {
         next();
@@ -29,7 +29,7 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      if (!localStorage.getItem('__token__HWDYKM__user__')) {
+      if (!sessionStorage.getItem('__token__HWDYKM__user__')) {
         next({ name: 'LandingPage' });
       } else {
         next();

@@ -122,6 +122,29 @@
   float: right;
   cursor: pointer;
 }
+.error-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  width: 50%;
+  padding: 2rem;
+}
+.bg-white{
+  background-color: #fff;
+  position: relative;
+  width: inherit;
+  border-radius: 3px;
+  padding: inherit;
+}
+.error-list {
+  color: red;
+  font-size: .9rem;
+  margin-top: 5px;
+}
+.error-none{
+  display: none;
+}
 @media(max-width: 768px) {
   .intro,
   .logo{
@@ -129,6 +152,9 @@
   }
   .intro-text{
     max-width: 50% !important;
+  }
+  .error-container{
+    width: 65%;
   }
 }
 @media(max-width: 425px) {
@@ -171,9 +197,15 @@
     margin-right: .4rem;
     cursor: pointer;
   }
+  .error-container{
+    width: 90%;
+  }
 }
 @media(max-width: 375px) {
   .intro{
     margin-bottom: .6rem;
+  }
+  .error-container{
+    width: 100%;
   }
 }

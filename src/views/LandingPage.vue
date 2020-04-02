@@ -21,6 +21,30 @@
           <span>K</span>
           <span>M</span>
         </div>
+        <div :class="showRegError && formPage === 'register' ? 'error-container' : 'error-none'">
+          <div class="bg-white">
+            <div v-if="typeof errorData === 'string'">
+                <p>{{errorData}}</p>
+            </div>
+            <div v-if="typeof errorData !== 'string'">
+              <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
+                <li>{{error.msg}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div :class="showLogError && formPage === 'login' ? 'error-container' : 'error-none'">
+          <div class="bg-white">
+            <div v-if="typeof errorData === 'string'">
+                <p class="error-list">{{errorData}}</p>
+            </div>
+            <div v-if="typeof errorData !== 'string'">
+              <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
+                <li>{{error.msg}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
         <div class="intro">
           <form
             v-if="!haveAccount"
@@ -53,10 +77,10 @@
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
-                  :icon="['fas', 'eye']" class="black" size="xs"/>
+                  :icon="['fas', 'eye']" class="black" size="lg"/>
                 </div>
                 <div v-if="this.showPass">
-                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="lg"/>
                 </div>
               </div>
             </div>
@@ -88,10 +112,10 @@
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
-                  :icon="['fas', 'eye']" class="black" size="xs"/>
+                  :icon="['fas', 'eye']" class="black" size="lg"/>
                 </div>
                 <div v-if="this.showPass">
-                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="lg"/>
                 </div>
               </div>
             </div>
@@ -102,10 +126,10 @@
         </div>
         <div class="turbo">
           <p v-if="!haveAccount">Already have an account?
-            <a v-on:click="() => this.turbo()">Log In</a>
+            <a v-on:click="() => this.turbo('login')">Log In</a>
           </p>
           <p v-if="haveAccount">Don't have an account?
-            <a v-on:click="() => this.turbo()">Register</a>
+            <a v-on:click="() => this.turbo('register')">Register</a>
           </p>
         </div>
         <div class="licence">
@@ -126,6 +150,7 @@ export default {
   data() {
     return {
       haveAccount: false,
+      formPage: 'register',
       showPass: false,
       isRequesting: false,
       RegUsernameData: '',
@@ -133,13 +158,17 @@ export default {
       RegEmailData: '',
       LogUsernameData: '',
       LogPasswordData: '',
+      errorData: '',
+      showRegError: false,
+      showLogError: false,
     };
   },
   beforeMount() {
     document.title = 'Welcome - HWDYKM || Anonymous responses to your desired questions';
   },
   methods: {
-    turbo() {
+    turbo(page) {
+      this.formPage = page;
       this.haveAccount = !this.haveAccount;
     },
     togglePassword() {
@@ -150,7 +179,7 @@ export default {
       if (
         !this.RegUsernameData
         || !this.RegPasswordData
-        || !!this.RegEmailData
+        || !this.RegEmailData
       ) {
         return;
       }
@@ -166,6 +195,20 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: (req) => {
+          const errorResponse = req.responseText;
+          this.isRequesting = false;
+          this.showRegError = true;
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+          }
+          setTimeout(() => {
+            this.showRegError = false;
+            this.errorData = '';
+          }, 4000);
+        },
       }).then((data) => {
         this.isRequesting = false;
         localStorage.setItem('api__hwdykm_inkR',
@@ -182,13 +225,20 @@ export default {
           data.token.split('').splice(2, 34).reverse().join(''));
         sessionStorage.setItem('api__hwdykm_inkR',
           data.token.split('').splice(4, data.token.length).reverse().join(''));
-        localStorage.setItem('__token__HWDYKM__user__', data.token);
+        sessionStorage.setItem('__token__HWDYKM__user__', data.token);
         this.$router.push({ name: 'Dashboard' });
       });
     },
     login(e) {
-      this.isRequesting = true;
       e.preventDefault();
+      if (
+        !this.LogUsernameData
+        || !this.LogPasswordData
+        || !!this.LogEmailData
+      ) {
+        return;
+      }
+      this.isRequesting = true;
       let formData = $('#login').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value;
@@ -200,6 +250,21 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: (req) => {
+          const errorResponse = req.responseText;
+          this.isRequesting = false;
+          this.showLogError = true;
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+          }
+
+          setTimeout(() => {
+            this.showLogError = false;
+            this.errorData = '';
+          }, 4000);
+        },
       }).then((data) => {
         this.isRequesting = false;
         localStorage.setItem('__hwdykm_inkR',
@@ -218,7 +283,7 @@ export default {
           data.token.split('').splice(2, 34).reverse().join(''));
         sessionStorage.setItem('api__hwdykm_inkR',
           data.token.split('').splice(4, data.token.length).reverse().join(''));
-        localStorage.setItem('__token__HWDYKM__user__', data.token);
+        sessionStorage.setItem('__token__HWDYKM__user__', data.token);
         this.$router.push({ name: 'Dashboard' });
       });
     },

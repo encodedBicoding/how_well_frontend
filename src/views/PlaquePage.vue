@@ -141,7 +141,8 @@
                       <span class="bold-text">
                         {{ this.$route.params.username.toUpperCase()}},
                       </span>
-                      click <a href='http://localhost:8080' class="bold-text here">HERE</a> to create an account!
+                      click <a :href="frontendUrl"
+                      class="bold-text here">HERE</a> to create an account!
                     </p>
                   </div>
                 </div>
@@ -157,7 +158,7 @@
         <div v-if="!plaqueData.hasOwnProperty('name') || !hasQuestions">
           <div class="no-p-fl">
             <div class="np-content">
-              <p>NO PLAQUE HERE</p>
+              <p>NO QUESTIONS IN PLAQUE</p>
             </div>
           </div>
         </div>
@@ -173,6 +174,7 @@
 import $ from 'jquery';
 import Footer from '../components/Footer.vue';
 import BASE_URL from '../helper/ajax';
+import FE_URL from '../helper/feUrl';
 
 export default {
   name: 'Plaque',
@@ -186,7 +188,7 @@ export default {
         type: 'GET',
         url: `${BASE_URL}/user/profile`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__HWDYKM__user__')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
       }).then((res) => {
@@ -242,7 +244,7 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.getItem('__token__HWDYKM__user__')) {
+    if (sessionStorage.getItem('__token__HWDYKM__user__')) {
       this.getCurrentUser();
     }
     this.getSinglePlaque();
@@ -251,6 +253,7 @@ export default {
     return {
       currentUsername: '',
       showResponse: 0,
+      frontendUrl: FE_URL,
       showAnswer: false,
       repliedData: [],
       currentQuestion: 0,
