@@ -1,5 +1,5 @@
 .plaque{
-  padding: 1rem;
+  padding: 1rem 0 1rem 0;
 }
 .plaque-header{
   text-transform: uppercase;
@@ -9,7 +9,7 @@
   border-top-right-radius: 9px;
 }
 .ph{
-  width: 55%;
+  width: 53%;
 }
 .plaque-header h3{
   color: #fff !important;
@@ -126,12 +126,20 @@
 .display-none{
   display: none;
 }
+@media(max-width: 1024px) {
+  .ph{
+    width: 58%;
+  }
+}
 @media(max-width: 768px) {
   .qr #questionT{
     font-size: .9rem;
   }
   .resCount{
     font-size: .9rem;
+  }
+  .ph{
+    width: 55%;
   }
 }
 @media(max-width: 375px) {

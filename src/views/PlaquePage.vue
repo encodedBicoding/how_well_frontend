@@ -244,6 +244,12 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: () => {
+          this.responseAnswer = '';
+        },
+        success: () => {
+          this.responseAnswer = '';
+        },
       }).then(() => {
         if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
           setTimeout(() => {
