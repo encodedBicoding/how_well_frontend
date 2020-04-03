@@ -17,46 +17,7 @@
       <div class="content-body">
         <div class="content-paragraph">
           <p>
-            knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
-             knncnajdnjadadakacdcnncjkcnjdajskjvkdhjdkajkjldladnacnkjlca
-            jajnkoacidpaokakaonckdccnkadcdanchaapdhdsacnjdnapacdahjhuahqa
-            bcnbscacsdchouajjdscbdsciaihcuapdscdsuchuiacicajcj
-            cjancacjbdsjcagccaskp
+            Feel free to contact us on <b>hwdykm2me@gmail.com</b>
           </p>
         </div>
       </div>

@@ -133,7 +133,8 @@
           </p>
         </div>
         <div class="licence">
-          <p>By creating an account, you agree to our terms of use</p>
+          <p>By creating an account,
+            you agree to our <a href='/terms' class="Lterms">Terms of use</a></p>
         </div>
       </div>
     </div>
