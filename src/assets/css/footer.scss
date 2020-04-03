@@ -1,9 +1,11 @@
 .footer{
-  position: relative;
+  position: absolute;
   bottom: 0;
   color: rgba(255, 255, 255, 0.479);
   font-size: .7rem;
   width: 100%;
+  background-color: #000;
+  opacity: .7;
 }
 .footer-body{
   padding: 1rem;

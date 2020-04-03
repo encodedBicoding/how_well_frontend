@@ -77,10 +77,10 @@
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
-                  :icon="['fas', 'eye']" class="black" size="lg"/>
+                  :icon="['fas', 'eye-slash']" class="black" size="lg"/>
                 </div>
                 <div v-if="this.showPass">
-                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="lg"/>
+                  <font-awesome-icon :icon="['fas', 'eye']" class="black" size="lg"/>
                 </div>
               </div>
             </div>
@@ -112,10 +112,10 @@
                <div class="password-icon" v-on:click="() => this.togglePassword()">
                 <div v-if="!this.showPass">
                   <font-awesome-icon
-                  :icon="['fas', 'eye']" class="black" size="lg"/>
+                  :icon="['fas', 'eye-slash']" class="black" size="lg"/>
                 </div>
                 <div v-if="this.showPass">
-                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="lg"/>
+                  <font-awesome-icon :icon="['fas', 'eye']" class="black" size="lg"/>
                 </div>
               </div>
             </div>

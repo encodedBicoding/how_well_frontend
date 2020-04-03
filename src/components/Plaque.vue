@@ -6,18 +6,29 @@
           <p class="queCount">{{questions.length}}
             <span class="queCount">
               {{questions.length > 1 ? 'questions' : 'question'}}
-              <span>
-                {{questions.length >= 5 ? '(completed)' : ''}}
-              </span>
             </span>
           </p>
       </div>
+      <p class="completed queCount">
+        {{questions.length >= 5 ? 'completed' : ''}}
+      </p>
       <div class="addQue" v-on:click="() => this.showPlaque(plaqueId, questions.length)">
         <font-awesome-icon :icon="['fas', 'plus']"
         :class="questions.length >= 5 ? 'greyDisabled':'white'" size="xs"/>
       </div>
     </div>
+    <a class="plaque-flex directPlaque" :href="singlePlaqueLink">
+      <p class="vpt">
+        view plaque
+      </p>
+    </a>
     <div class="plaque-flex">
+      <div class="delQ">
+        <div>
+          <font-awesome-icon :icon="['fas', 'trash']"
+          class="red link-hover" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
+        </div>
+      </div>
       <div class="linkQ">
         <div title="copy plaque link" class="link-flex">
           <font-awesome-icon
@@ -28,20 +39,14 @@
           </div>
         </div>
       </div>
-      <div class="delQ">
-        <div>
-          <font-awesome-icon :icon="['fas', 'trash']"
-          class="red link-hover" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
-        </div>
-      </div>
       <div class="showQ" v-on:click="() => toggleQuestions(plaqueId)">
         <div>
           <div v-if="showQuestion !== plaqueId">
             <font-awesome-icon
-            :icon="['fas', 'caret-up']" class="white" size="lg"/>
+            :icon="['fas', 'caret-down']" class="white" size="lg"/>
           </div>
            <div v-if="showQuestion === plaqueId">
-            <font-awesome-icon :icon="['fas', 'caret-down']" class="white" size="lg"/>
+            <font-awesome-icon :icon="['fas', 'caret-up']" class="white" size="lg"/>
           </div>
         </div>
       </div>
@@ -102,6 +107,8 @@
 @import url('../assets/css/plaque.scss');
 </style>
 <script>
+import FE_URL from '../helper/feUrl';
+
 export default {
   name: 'Plaque',
   props: {
@@ -111,13 +118,18 @@ export default {
     plaqueUrl: String,
     showPlaque: Function,
     showDeletePlaqueModal: Function,
+    username: String,
   },
   data() {
     return {
       showQuestion: 0,
       showResponse: 0,
       copy: false,
+      singlePlaqueLink: '',
     };
+  },
+  mounted() {
+    this.singlePlaqueLink = `${FE_URL}/plaque/${this.username}/${this.plaqueId}/hwdykm`;
   },
   methods: {
     toggleQuestions(id) {
@@ -147,7 +159,7 @@ export default {
       this.copy = true;
       setTimeout(() => {
         this.copy = false;
-      }, 100);
+      }, 700);
     },
   },
 };

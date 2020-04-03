@@ -78,8 +78,25 @@
               <div>
                 <font-awesome-icon :icon="['fas', 'paper-plane']" class="white" size="xs"/>
               </div>
-              <div style="display: none">
-
+              <div class="shareC">
+                <div class="share_container">
+                  <p class="shareT">Share</p>
+                  <div class="socialIcon">
+                      <a href='https://www.facebook.com/sharer/sharer.php?u=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'facebook-f']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                   <div class="socialIcon">
+                      <a href='https://twitter.com/share?url=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'twitter']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                   <div class="socialIcon">
+                      <a href='https://www.linkedin.com/shareArticle?mini=true&url=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'linkedin-in']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -106,6 +123,7 @@
                   :plaqueName="plaque.name"
                   :questions="plaque.Questions"
                   :plaqueId="plaque.id"
+                  :username="plaqueOwnerName"
                   :plaqueUrl="`
 Hi friend 😊, I have some questions for you to answer!
 This will help me understand how well people (You) know me 🤔 😱.
@@ -209,7 +227,7 @@ export default {
       this.isRequesting = true;
       let formData = $('#new_plaque').serializeArray();
       formData = formData.reduce((acc, curr) => {
-        acc[curr.name] = curr.value;
+        acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
       $.ajax({
@@ -265,7 +283,7 @@ export default {
       this.isRequesting = true;
       let formData = $('#new_question').serializeArray();
       formData = formData.reduce((acc, curr) => {
-        acc[curr.name] = curr.value;
+        acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
       $.ajax({
