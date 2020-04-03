@@ -12,7 +12,12 @@
           v-on:submit="(e) => createPlaque(e)"
           >
           <div class="form-item">
-             <input type="text" name='name' placeholder="Plaque Name"/>
+             <input
+              type="text"
+              name='name'
+              placeholder="Plaque Name"
+              v-model="plaqueNameData"
+              />
           </div>
            <div class="form-item">
              <button>{{isRequesting ? 'LOADING...':'CREATE PLAQUE'}}</button>
@@ -32,10 +37,10 @@
           >
           <div class="form-item">
              <input type="text" name='question'
-             placeholder="How well do you know me?" v-bind="questionData"/>
+             placeholder="How well do you know me?" v-model="questionData"/>
           </div>
           <div class="form-item">
-             <input type="text" name='answer' placeholder="Your answer" v-bind="answerData"/>
+             <input type="text" name='answer' placeholder="Your answer" v-model="answerData"/>
           </div>
            <div class="form-item">
              <button>{{isRequesting ? 'LOADING...' : 'ADD QUESTION'}}</button>
@@ -215,6 +220,7 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
       }).then((res) => {
+        this.plaqueNameData = '';
         if (res.status === 200 || res.status === 201) {
           this.isRequesting = false;
           this.showModal = false;
@@ -313,6 +319,7 @@ export default {
       plaqueOwnerName: '',
       plaqueData: [],
       fetchingPlaqueData: false,
+      plaqueNameData: '',
     };
   },
 };
