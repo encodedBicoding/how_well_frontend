@@ -107,9 +107,11 @@
                   :questions="plaque.Questions"
                   :plaqueId="plaque.id"
                   :plaqueUrl="`
-Hi friend, I have some questions for you to answer!
-This will help me understand how well people (You) know me.
-PS: Be free to give your best answers, you are Anonymous!.
+Hi friend 😊, I have some questions for you to answer!
+This will help me understand how well people (You) know me 🤔 😱.
+PS: Be free to give your best answers, you are Anonymous! 😏.
+
+👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   `"
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
