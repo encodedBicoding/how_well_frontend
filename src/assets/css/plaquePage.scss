@@ -71,8 +71,12 @@
 }
 .yreplybtn {
   margin-top: .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.yreplybtn button{
+.yreplybtn button,
+.yreplybtn p{
   cursor: pointer;
   color: #000;
   border-radius: 4px;
@@ -84,6 +88,9 @@
   padding: 1.3rem;
   outline: none;
 }
+.text-center{
+  text-align: center;
+}
 .thankyou{
   font-weight: 700;
   font-size: 2rem;;
@@ -93,7 +100,7 @@
 }
 .here{
   text-decoration: none;
-  color:rgba(174, 247, 2, 0.356);
+  color: blue
 }
 .loader{
   margin: 7rem;
@@ -125,17 +132,28 @@
 .display-none {
   display: none;
 }
-.answer::before{
-  content: 'Answer: ';
-  color: green
+.fail::before{
+  content: 'Wrong: ';
+  color: red;
+  font-weight: 600 !important;
 }
-.answer::after {
+.fail::after {
+  content: '😢';
+}
+.correct::before{
+  content: 'Correct: ';
+  color: green;
+  font-weight: 500 !important; 
+}
+.correct::after {
   content: '😊';
 }
 .answer{
   font-size: 1.4rem;
   font-weight: 700;
-
+}
+.disabled{
+  display: none;
 }
 @keyframes slideIn{
   from { right: -999px }

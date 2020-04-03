@@ -102,7 +102,7 @@
                   :questions="plaque.Questions"
                   :plaqueId="plaque.id"
                   :plaqueUrl="`
-                      Hi friend, I have some questions for you to answer!
+Hi friend, I have some questions for you to answer!
 This will help me understand how well people (You) know me.
 PS: Be free to give your best answers, you are Anonymous!.
 ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
@@ -264,6 +264,7 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
       }).then((res) => {
+        console.log(res);
         if (res.status === 200 || res.status === 201) {
           this.isRequesting = false;
           this.showPlaqueModal = false;

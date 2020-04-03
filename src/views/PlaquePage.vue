@@ -106,9 +106,14 @@
                 <p class="bold-text">Question {{currentQuestion + 1}}</p>
                 <div class="qta">
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
-                  <p :class="showAnswer ? 'answer' : 'display-none'">
-                    {{ plaqueData.Questions[currentQuestion].answer }}
-                  </p>
+                  <div v-if="showAnswer">
+                    <p
+                      :class="responseAnswer.toLowerCase()
+                        === plaqueData.Questions[currentQuestion].answer.toLowerCase()
+                        ? 'correct answer' : 'fail answer'">
+                      {{ plaqueData.Questions[currentQuestion].answer }}
+                    </p>
+                  </div>
                   <div class="yreply-container">
                     <form
                       method='post'
@@ -122,9 +127,11 @@
                        type='text'
                        name='response'
                        placeholder="Your answer?"
+                       v-model='responseAnswer'
                        class="txtarea"/>
                        <div class="yreplybtn">
-                         <button>SUBMIT</button>
+                         <p class="text-center" v-if="submittingResponse">SUBMIT</p>
+                         <button v-if="!submittingResponse">SUBMIT</button>
                        </div>
                     </form>
                   </div>
@@ -209,6 +216,10 @@ export default {
     },
     submitResponse(e, id) {
       e.preventDefault();
+      if (!this.responseAnswer) {
+        return;
+      }
+      this.submittingResponse = true;
       let formData = $('#response_form').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value;
@@ -226,19 +237,23 @@ export default {
         if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
           setTimeout(() => {
             this.currentQuestion = null;
-          }, 1200);
+            this.submittingResponse = false;
+          }, 1300);
           setTimeout(() => {
             this.currentQuestion = 'finished';
+            this.submittingResponse = false;
           }, 1500);
         } else {
           prevCount = this.currentQuestion;
           setTimeout(() => {
             this.currentQuestion = null;
+            this.submittingResponse = false;
           }, 1200);
         }
         setTimeout(() => {
           this.showAnswer = false;
           this.currentQuestion = prevCount + 1;
+          this.submittingResponse = false;
         }, 1500);
       });
     },
@@ -259,6 +274,8 @@ export default {
       currentQuestion: 0,
       hasQuestions: false,
       plaqueData: {},
+      responseAnswer: '',
+      submittingResponse: false,
     };
   },
   beforeMount() {
