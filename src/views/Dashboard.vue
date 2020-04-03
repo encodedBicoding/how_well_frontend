@@ -264,7 +264,6 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
       }).then((res) => {
-        console.log(res);
         if (res.status === 200 || res.status === 201) {
           this.isRequesting = false;
           this.showPlaqueModal = false;
