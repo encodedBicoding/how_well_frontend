@@ -36,62 +36,63 @@
       </div>
       <div class="showQ" v-on:click="() => toggleQuestions(plaqueId)">
         <div>
-          <div v-if="this.showQuestion !== plaqueId">
+          <div v-if="showQuestion !== plaqueId">
             <font-awesome-icon
-            :icon="['fas', 'eye']" class="white" size="xs"/>
+            :icon="['fas', 'caret-up']" class="white" size="lg"/>
           </div>
-           <div v-if="this.showQuestion === plaqueId">
-            <font-awesome-icon :icon="['fas', 'eye-slash']" class="white" size="xs"/>
+           <div v-if="showQuestion === plaqueId">
+            <font-awesome-icon :icon="['fas', 'caret-down']" class="white" size="lg"/>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="showQuestion !== plaqueId"></div>
-    <div v-if="showQuestion === plaqueId"
-    :class="showQuestion === plaqueId ? 'queContainer':'hideQue'">
-      <div class="queHolder"
-      >
-      <div v-if="questions.length > 0">
-        <div class="queListing" v-for="question in questions" v-bind:key="question.id">
-          <div class="queTitle flex-row justify-space-between">
-            <div class="flex-row justify-space-between qr">
-            <p id='questionT'>{{question.question}}</p>
-            <p class="resCount">{{question.Responses.length}}
-              <span class="resCount">
-                {{question.Responses.length > 1 ? 'responses' : 'response'}}
-              </span>
-            </p>
-            </div>
-            <div  class="showQ" v-on:click="() => toggleResponse(question.id)">
-              <div>
-                <div v-if="showResponse !== question.id">
-                  <font-awesome-icon
-                  :icon="['fas', 'eye']" class="black" size="xs"/>
-                </div>
-                <div v-if="showResponse === question.id">
-                  <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+    <div>
+      <div
+        :class="showQuestion === this.plaqueId ? 'queContainer ':'hideQue'">
+        <div class="queHolder"
+        >
+        <div v-if="questions.length > 0">
+          <div class="queListing" v-for="question in questions" v-bind:key="question.id">
+            <div class="queTitle flex-row justify-space-between">
+              <div class="flex-row justify-space-between qr">
+              <p id='questionT'>{{question.question}}</p>
+              <p class="resCount">{{question.Responses.length}}
+                <span class="resCount">
+                  {{question.Responses.length > 1 ? 'responses' : 'response'}}
+                </span>
+              </p>
+              </div>
+              <div  class="showQ" v-on:click="() => toggleResponse(question.id)">
+                <div>
+                  <div v-if="showResponse !== question.id">
+                    <font-awesome-icon
+                    :icon="['fas', 'caret-up']" class="black" size="lg"/>
+                  </div>
+                  <div v-if="showResponse === question.id">
+                    <font-awesome-icon :icon="['fas', 'caret-down']" class="black" size="lg"/>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
-            v-for="response in question.Responses" v-bind:key="response.id"
-          >
-            <div class="resAuthor" >
-              <p>{{response.author}}</p>
-            </div>
-            <div class="resComment">
-              <p>{{response.response}}</p>
+            <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
+              v-for="response in question.Responses" v-bind:key="response.id"
+            >
+              <div class="resAuthor" >
+                <p>{{response.author}}</p>
+              </div>
+              <div class="resComment">
+                <p>{{response.response}}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div v-if="questions.length <= 0" class="flex-center">
-        <div class="noQue">
-          <p>This plaque currently has no questions</p>
-          <p>Click + to add questions to plaque</p>
+        <div v-if="questions.length <= 0" class="flex-center">
+          <div class="noQue">
+            <p>This plaque currently has no questions</p>
+            <p>Click + to add questions to plaque</p>
+          </div>
         </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>
@@ -120,6 +121,7 @@ export default {
   },
   methods: {
     toggleQuestions(id) {
+      this.sq = id;
       this.showQuestion = this.showQuestion === id ? 0 : id;
     },
     toggleResponse(id) {

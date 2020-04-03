@@ -8,6 +8,8 @@ import {
   faPlusCircle,
   faPaperPlane,
   faPlus,
+  faCaretDown,
+  faCaretUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
@@ -23,6 +25,8 @@ library.add(
   faPlusCircle,
   faPaperPlane,
   faPlus,
+  faCaretUp,
+  faCaretDown,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
