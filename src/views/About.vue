@@ -56,7 +56,7 @@
             <li style="margin-bottom: .6rem;">
               Create Questions in a plaque
             </li>
-            <li style="margin-bottom: .6rem;">Get shareable link and share with your friend</li>
+            <li style="margin-bottom: .6rem;">Get shareable link and share with your friends</li>
           </ol>
         </div>
       </div>

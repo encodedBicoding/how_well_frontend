@@ -21,7 +21,7 @@
         class="page-body-remix border-black">
           <div v-if="plaqueData.hasOwnProperty('name')">
             <div class="plaque-header flex-row justify-space-between">
-              <div class="flex-row justify-space-between ph">
+              <div class="flex-row justify-space-between pph">
                 <h3 class="plaqueName">{{plaqueData.name}}</h3>
                   <p class="queCount">{{plaqueData.Questions.length}}
                     <span class="queCount">
@@ -59,10 +59,10 @@
                       <div>
                         <div v-if="showResponse !== question.id">
                           <font-awesome-icon
-                          :icon="['fas', 'eye']" class="black" size="xs"/>
+                          :icon="['fas', 'caret-down']" class="black" size="xs"/>
                         </div>
                         <div v-if="showResponse === question.id">
-                          <font-awesome-icon :icon="['fas', 'eye-slash']" class="black" size="xs"/>
+                          <font-awesome-icon :icon="['fas', 'caret-up']" class="black" size="xs"/>
                         </div>
                       </div>
                     </div>
@@ -84,9 +84,12 @@
           </div>
           <div v-if="!plaqueData.hasOwnProperty('name')">
             <div class="no-p-fl">
-              <div class="np-content">
+              <div class="np-content" v-if='!loadingSinglePlaque'>
                 <p>NO PLAQUE HERE</p>
               </div>
+              <div class="plaqueLoading">
+                <p v-if='loadingSinglePlaque'>Loading plaque data. Please wait...</p>
+            </div>
             </div>
           </div>
        </div>
@@ -95,7 +98,8 @@
         <div v-if="plaqueData.hasOwnProperty('name') && hasQuestions">
           <div class="annoymous-intro">
            <p>
-             Hello friend!,
+             Hello friend of
+             <span class="white">{{this.$route.params.username.toUpperCase()}}</span>,
              Please feel free to express yourself on your answers, because you are
              <span class="white shadow-white">Anonymous!.</span>
            </p>
@@ -108,8 +112,9 @@
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
                   <div v-if="showAnswer">
                     <p
-                      :class="responseAnswer.toLowerCase()
-                        === plaqueData.Questions[currentQuestion].answer.toLowerCase()
+                      :class="isResponseCorrect(
+                        responseAnswer,
+                        plaqueData.Questions[currentQuestion].answer)
                         ? 'correct answer' : 'fail answer'">
                       {{ plaqueData.Questions[currentQuestion].answer }}
                     </p>
@@ -190,6 +195,28 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
+    isResponseCorrect(friendR, quesA) {
+      const friendResponse = friendR.toLowerCase().trim();
+      const questionAnswer = quesA.toLowerCase();
+      if (questionAnswer.match(friendResponse) !== null) {
+        return true;
+      }
+      return false;
+    },
+    validateUserRoute() {
+      const userParam = this.$route.params.username;
+      $.ajax({
+        type: 'GET',
+        url: `${BASE_URL}/user/check/${userParam}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+        error() {
+          window.location.href = `http://localhost:8080/user/${userParam}/NotFound`;
+        },
+      }).then();
+    },
     toggleResponse(id) {
       this.showResponse = this.showResponse === id ? 0 : id;
     },
@@ -233,7 +260,7 @@ export default {
       this.submittingResponse = true;
       let formData = $('#response_form').serializeArray();
       formData = formData.reduce((acc, curr) => {
-        acc[curr.name] = curr.value;
+        acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
       let prevCount = '';
@@ -274,6 +301,7 @@ export default {
     },
   },
   mounted() {
+    this.validateUserRoute();
     if (sessionStorage.getItem('__token__HWDYKM__user__')) {
       this.getCurrentUser();
     }

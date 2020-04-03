@@ -9,7 +9,7 @@
   border-top-right-radius: 9px;
 }
 .ph{
-  width: 53%;
+  width: 58%;
 }
 .plaque-header h3{
   color: #fff !important;
@@ -24,12 +24,27 @@
   background-color: #000000;
   opacity: .8;
 }
+.directPlaque{
+  background-color: #fff !important;
+  cursor: pointer;
+  opacity: .7;
+  display: flex;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none;
+}
 .plaque-flex p{
   color:#fff
 }
+.vpt{
+  color: #000 !important;
+  font-weight: 700;
+}
+
 .queContainer{
   overflow: scroll;
-  height: 160px;
+  height: 220px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: #fff;
@@ -43,6 +58,10 @@
   color: #fff;
   font-size: .8rem;
   font-weight: 800;
+}
+.completed{
+  font-size: .5rem !important;
+  color: silver !important;
 }
 .qr{
   width: 70%
@@ -84,6 +103,7 @@
 .linkQ,
 .addQue{
   cursor: pointer;
+  outline: none;
 }
 .hideQue{
   display: none;

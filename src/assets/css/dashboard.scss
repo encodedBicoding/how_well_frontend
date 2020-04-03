@@ -86,7 +86,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.514);
+  background-color: rgba(0, 0, 0, 0.952);
+  z-index: 99;
 }
 .modal-content{
   position: relative;
@@ -122,11 +123,11 @@
 }
 .f-right{
   float: right;
-  padding: 2rem;
+  padding: 1.4rem;
   color: rgba(174, 247, 2, 0.651);
   cursor: pointer;
-  font-weight: 900;
-  font-size: 1.3rem;
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 .f-right:hover{
   color: red;
@@ -197,6 +198,33 @@
 }
 .ft-text p{
   color: #fff;
+}
+.socialIcon{
+  margin: .9rem 0 0 0;
+}
+.shareT {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(174, 247, 2, 0.651);
+  border-bottom: .5px solid #fff;
+}
+.share_container{
+  background-color: rgb(0, 0, 0);
+  padding: .3rem .6rem 1rem .6rem;
+  border-radius: 2px;
+  margin-left: -50px;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.share:hover > .shareC {
+  display: block;
+}
+.shareC{
+  position: absolute;
+  display: none;
 }
 @media(max-width: 768px) {
   .page-content,

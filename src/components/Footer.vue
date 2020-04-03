@@ -18,7 +18,7 @@
           </ul>
         </nav>
         <div class="copyrights">
-          <p>Copyright &copy; {{getYear()}}. Brought to you by
+          <p>Copyright &copy; {{getYear()}} All Rights Reserved. Brought to you by
             <a href='https://encodedbicoding.com' target="_blank" class="ebc">encodedBicoding</a></p>
         </div>
       </div>
