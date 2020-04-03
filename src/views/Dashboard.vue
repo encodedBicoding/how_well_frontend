@@ -37,7 +37,7 @@
           >
           <div class="form-item">
              <input type="text" name='question'
-             placeholder="How well do you know me?" v-model="questionData"/>
+             placeholder="What is my nickname?" v-model="questionData"/>
           </div>
           <div class="form-item">
              <input type="text" name='answer' placeholder="Your answer" v-model="answerData"/>
@@ -219,6 +219,12 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: () => {
+          this.isRequesting = false;
+        },
+        success: () => {
+          this.isRequesting = false;
+        },
       }).then((res) => {
         this.plaqueNameData = '';
         if (res.status === 200 || res.status === 201) {

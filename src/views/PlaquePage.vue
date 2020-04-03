@@ -244,6 +244,9 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: () => {
+          this.responseAnswer = '';
+        },
       }).then(() => {
         if (this.currentQuestion + 1 === this.plaqueData.Questions.length) {
           setTimeout(() => {
@@ -263,6 +266,7 @@ export default {
         }
         setTimeout(() => {
           this.showAnswer = false;
+          this.responseAnswer = '';
           this.currentQuestion = prevCount + 1;
           this.submittingResponse = false;
         }, 1500);
