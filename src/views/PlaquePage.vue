@@ -164,8 +164,11 @@
         </div>
         <div v-if="!plaqueData.hasOwnProperty('name') || !hasQuestions">
           <div class="no-p-fl">
-            <div class="np-content">
+            <div class="np-content" v-if="!loadingSinglePlaque">
               <p>NO QUESTIONS IN PLAQUE</p>
+            </div>
+            <div class="plaqueLoading">
+              <p v-if='loadingSinglePlaque'>Loading plaque data. Please wait...</p>
             </div>
           </div>
         </div>
@@ -203,11 +206,19 @@ export default {
       });
     },
     getSinglePlaque() {
+      this.loadingSinglePlaque = true;
       $.ajax({
         type: 'GET',
         url: `${BASE_URL}/plaque/${this.$route.params.plaqueId}`,
         contentType: 'application/json',
+        error: () => {
+          this.loadingSinglePlaque = false;
+        },
+        success: () => {
+          this.loadingSinglePlaque = false;
+        },
       }).then((res) => {
+        this.loadingSinglePlaque = false;
         this.plaqueData = { ...res.data };
         if (this.plaqueData.Questions.length > 0) {
           this.hasQuestions = true;
@@ -276,6 +287,7 @@ export default {
       plaqueData: {},
       responseAnswer: '',
       submittingResponse: false,
+      loadingSinglePlaque: false,
     };
   },
   beforeMount() {
