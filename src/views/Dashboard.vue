@@ -243,7 +243,7 @@ export default {
         contentType: 'application/json',
         error: () => {
           this.$router.push({ name: 'LandingPage' });
-        }
+        },
       }).then((res) => {
         this.fetchingPlaqueData = false;
         if (res.status === 200 || res.status === 201) {
