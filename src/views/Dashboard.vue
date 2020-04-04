@@ -150,8 +150,8 @@
                   :plaqueId="plaque.id"
                   :username="plaqueOwnerName"
                   :plaqueUrl="`
-Hi friend 😊, I have some questions for you to answer!
-This will help me understand how well people (You) know me 🤔 😱.
+Hi friend 😊, I have some questions for you to answer in my ${plaque.name.toUpperCase()} Plaque
+created on HWDYKM (How Well Do You Know Me).
 PS: Be free to give your best answers, you are Anonymous! 😏.
 
 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
