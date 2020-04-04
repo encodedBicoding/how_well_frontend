@@ -286,7 +286,7 @@ export default {
         sessionStorage.setItem('api__hwdykm_inkR',
           data.token.split('').splice(4, data.token.length).reverse().join(''));
         sessionStorage.setItem('__token__HWDYKM__user__', data.token);
-        localStorage.setItem('__user__', data.user.userName);
+        localStorage.setItem('__user__', data.data.userName);
         this.$router.push({ name: 'Dashboard' });
       });
     },
