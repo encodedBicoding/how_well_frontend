@@ -147,10 +147,13 @@ export default {
         const el = document.querySelector('.plaqueLink');
         const range = document.createRange();
         range.selectNode(el);
-        window.getSelection().addRange(range);
         try {
           document.execCommand('copy');
+          document.getSelection().removeAllRanges();
+          document.getSelection().addRange(range);
+          window.getSelection().addRange(range);
         } catch (err) {
+          window.getSelection().removeAllRanges();
           return false;
         }
         window.getSelection().removeAllRanges();
