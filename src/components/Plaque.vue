@@ -32,10 +32,10 @@
       <div class="linkQ">
         <div title="copy plaque link" class="link-flex">
           <font-awesome-icon
-          :icon="['fas', 'link']" class="lime link-hover" size="xs"
+          :icon="['fas', 'link']" class="lime link-hover" size="lg"
           v-on:click="() => copyLink(plaqueUrl)"/>
           <div :class="copy ? 'copied' : 'copied display-none'">
-            <p>copied</p>
+            <p>plaque link copied</p>
           </div>
         </div>
       </div>
