@@ -35,6 +35,7 @@
           :icon="['fas', 'link']" class="lime link-hover" size="lg"
           v-on:click="() => copyLink(plaqueUrl)"/>
           <div :class="copy ? 'copied' : 'copied display-none'">
+            <input class='plaqueLink' style="display: none" v-bind:value="plaqueUrl"/>
             <p>plaque link copied</p>
           </div>
         </div>
@@ -140,23 +141,39 @@ export default {
       this.showResponse = this.showResponse === id ? 0 : id;
     },
     copyLink(link) {
-      const el = document.createElement('textarea');
-      el.value = link;
-      el.style.position = 'absolute';
-      el.style.left = '-9999px';
-      document.body.appendChild(el);
-      el.setAttribute('readonly', '');
-      const selected = document.getSelection().rangeCount > 0
-        ? document.getSelection().getRangeAt(0) : false;
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-
-      if (selected) {
-        document.getSelection().removeAllRanges();
-        document.getSelection().addRange(selected);
+      if (navigator.userAgent.match(/ipad|iphone/i)) {
+        const el = document.querySelector('.plaqueLink');
+        const range = document.createRange();
+        range.selectNode(el);
+        console.log(el.nodeValue);
+        window.getSelection().addRange(range);
+        try {
+          const successful = document.execCommand('copy');
+          const msg = successful ? 'successful' : 'unsuccessful';
+          console.log(msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+        window.getSelection().removeAllRanges();
+        this.copy = true;
+      } else {
+        const el = document.createElement('textarea');
+        el.value = link;
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.setAttribute('readonly', '');
+        const selected = document.getSelection().rangeCount > 0
+          ? document.getSelection().getRangeAt(0) : false;
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        if (selected) {
+          document.getSelection().removeAllRanges();
+          document.getSelection().addRange(selected);
+        }
+        this.copy = true;
       }
-      this.copy = true;
       setTimeout(() => {
         this.copy = false;
       }, 700);
