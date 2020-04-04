@@ -64,8 +64,12 @@
     height: 450px;
   }
 }
-@media(max-width: 1024px) {
+@media(width: 1024px) {
   .content-body{
-    height: 340px;
+    height: 940px;
+    width: 90%;
+  }
+  .content-paragraph p {
+    font-size: 2rem;
   }
 }
