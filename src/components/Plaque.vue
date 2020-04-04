@@ -83,7 +83,7 @@
               </div>
             </div>
             <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
-              v-for="response in question.Responses" v-bind:key="response.id"
+              v-for="response in reverseResponse(question.Responses)" v-bind:key="response.id"
             >
               <div class="resAuthor" >
                 <p>{{response.author}}</p>
@@ -135,6 +135,9 @@ export default {
     this.singlePlaqueLink = `${FE_URL}/plaque/${this.username || localStorage.getItem('__user__')}/${this.plaqueId}/hwdykm`;
   },
   methods: {
+    reverseResponse(responseData) {
+      return responseData.reverse();
+    },
     toggleQuestions(id) {
       this.sq = id;
       this.showQuestion = this.showQuestion === id ? 0 : id;
