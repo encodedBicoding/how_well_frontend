@@ -89,7 +89,7 @@
                      <span>{{ question.answer }}</span>
                   </div>
                   <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
-                    v-for="response in reversResponse(question.Responses)" v-bind:key="response.id"
+                    v-for="response in question.Responses" v-bind:key="response.id"
                   >
                     <div class="resAuthor" >
                       <p>{{response.author}}</p>
@@ -216,9 +216,6 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
-    reverseResponse(responseData) {
-      return responseData.reverse();
-    },
     isResponseCorrect(friendR, quesA) {
       let friendResponse = friendR.toLowerCase().trim();
       const questionAnswer = quesA.toLowerCase();
