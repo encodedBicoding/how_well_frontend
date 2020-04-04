@@ -4,6 +4,16 @@
     <div :class="showModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => toggleModal()">X</div>
       <div class="modal-content">
+       <div class="bg-white" style="display: none">
+          <div v-if="typeof errorData === 'string'">
+              <p class="error-list">{{errorData}}</p>
+          </div>
+          <div v-if="typeof errorData !== 'string'">
+            <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
+              <li>{{error.msg}}</li>
+            </ul>
+          </div>
+        </div>
         <form
           class="modal-form"
           method="POST"
@@ -20,7 +30,8 @@
               />
           </div>
            <div class="form-item">
-             <button>{{isRequesting ? 'LOADING...':'CREATE PLAQUE'}}</button>
+             <p class="text-center" v-if="isRequesting">LOADING...</p>
+             <button v-if="!isRequesting">CREATE PLAQUE</button>
            </div>
         </form>
       </div>
@@ -28,6 +39,16 @@
      <div :class="showPlaqueModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => hidePlaque()">X</div>
       <div class="modal-content">
+        <div class="bg-white" style="display: none">
+          <div v-if="typeof errorData === 'string'">
+              <p class="error-list">{{errorData}}</p>
+          </div>
+          <div v-if="typeof errorData !== 'string'">
+            <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
+              <li>{{error.msg}}</li>
+            </ul>
+          </div>
+        </div>
         <form
           class="modal-form"
           method="POST"
@@ -42,9 +63,10 @@
           <div class="form-item">
              <input type="text" name='answer' placeholder="Your answer" v-model="answerData"/>
           </div>
-           <div class="form-item">
-             <button>{{isRequesting ? 'LOADING...' : 'ADD QUESTION'}}</button>
-           </div>
+          <div class="form-item">
+            <p class="text-center" v-if="isRequesting">LOADING...</p>
+             <button v-if="!isRequesting">ADD QUESTION</button>
+          </div>
         </form>
         </div>
       </div>
@@ -113,7 +135,10 @@
             <p v-if="!hasPlaque" class="noPlaque">
               You currently do not have any plaques, click
               <span class="plus">
-                <font-awesome-icon :icon="['fas', 'plus-circle']" class="white" size="xs"/>
+                <font-awesome-icon
+                 :icon="['fas', 'plus-circle']"
+                  class="white" size="xs"
+                  />
                 </span> to create a plaque, so you can create
               your first set of questions.
             </p>
@@ -224,6 +249,9 @@ export default {
     },
     createPlaque(e) {
       e.preventDefault();
+      if (!this.plaqueNameData) {
+        return;
+      }
       this.isRequesting = true;
       let formData = $('#new_plaque').serializeArray();
       formData = formData.reduce((acc, curr) => {
@@ -239,8 +267,14 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
-        error: () => {
+        error: (res) => {
           this.isRequesting = false;
+          this.errorData = JSON.parse(res.responseText).error;
+          $('.bg-white').css('display', 'block');
+          setTimeout(() => {
+            $('.bg-white').css('display', 'none');
+          }, 2000);
+          return false;
         },
         success: () => {
           this.isRequesting = false;
@@ -280,6 +314,9 @@ export default {
     },
     addQuestionToPlaque(event, plaqueId) {
       event.preventDefault();
+      if (!this.questionData || !this.answerData) {
+        return;
+      }
       this.isRequesting = true;
       let formData = $('#new_question').serializeArray();
       formData = formData.reduce((acc, curr) => {
@@ -295,6 +332,18 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
+        error: (res) => {
+          this.isRequesting = false;
+          this.errorData = JSON.parse(res.responseText).error;
+          $('.bg-white').css('display', 'block');
+          setTimeout(() => {
+            $('.bg-white').css('display', 'none');
+          }, 2000);
+          return false;
+        },
+        success: () => {
+          this.isRequesting = false;
+        },
       }).then((res) => {
         if (res.status === 200 || res.status === 201) {
           this.isRequesting = false;
@@ -346,6 +395,7 @@ export default {
       plaqueData: [],
       fetchingPlaqueData: false,
       plaqueNameData: '',
+      errorData: null,
     };
   },
 };

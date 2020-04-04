@@ -1,11 +1,10 @@
 .footer{
-  position: absolute;
+  position: relative;
   bottom: 0;
   color: rgba(255, 255, 255, 0.479);
   font-size: .7rem;
   width: 100%;
-  background-color: #000;
-  opacity: .7;
+  opacity: 1;
 }
 .footer-body{
   padding: 1rem;
@@ -22,6 +21,10 @@
 }
 .copyrights{
   margin-top: .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .fnl-item{
   padding: .3rem;
@@ -40,5 +43,10 @@
 @media(max-width: 768px) {
   .footer{
     font-size: .7rem;
+  }
+}
+@media(max-width: 375px) {
+  .copyrights p{
+    text-align: center;
   }
 }
