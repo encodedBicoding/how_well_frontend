@@ -4,8 +4,8 @@
     <div class="container">
         <div class="page-content">
           <div class="header flex-row justify-space-between">
-            <div class="page-logo">
-              <a  href="/dashboard">HWDYKM</a>
+           <div class="page-logo">
+              <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
             </div>
             <div class="share">
               <div>

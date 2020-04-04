@@ -11,6 +11,13 @@
   align-items: center;
   justify-content: center;
 }
+.beta{
+  font-size: .5rem;
+  color: #fff;
+  letter-spacing: 0;
+  position: relative;
+  left: -10px;
+}
 .overlay{
   background-color: #000;
   position: absolute;
@@ -39,7 +46,7 @@
 .page-body{
   background-color: #000;
   width: 60%;
-  padding: 1.4rem;
+  padding: 0;
 }
 .page-body-remix{
   background-color: rgba(7, 7, 7, 0.26);
@@ -255,12 +262,18 @@
   .page-body-remix{
     width: 100%;
   }
+  .page-body{
+    padding: 0;
+  }
   .modal-form{
     margin: 5rem;
     width: 90%
   }
   .page-body-remix{
-    height: 340px;
+    height: 395px;
+  }
+  .container{
+    padding: 0;
   }
 }
 @media(width: 2560px) {

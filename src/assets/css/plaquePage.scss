@@ -173,7 +173,24 @@
   color: #fff;
   font-size: .9rem;
 }
+.dash {
+  padding: .8rem !important;
+}
 @keyframes slideIn{
   from { right: -999px }
   to { right: 0px }
+}
+
+@media(width: 2560px) {
+  .ppqueContainer{
+    height: 800px;
+  }
+  *{
+    font-size: 1.33rem;
+  }
+}
+@media(max-width: 425px) {
+  .ppqueContainer{
+    height: 414px;
+  }
 }
