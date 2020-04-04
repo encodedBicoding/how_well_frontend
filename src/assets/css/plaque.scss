@@ -1,5 +1,5 @@
 .plaque{
-  padding: 1rem 0 1rem 0;
+  padding: 1.3rem 0 1.6rem 0;
 }
 .plaque-header{
   text-transform: uppercase;
@@ -15,12 +15,20 @@
   color: #fff !important;
   font-size: .8rem;
 }
+.cpTxt{
+  margin-right: .9rem;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .plaque-flex{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem;
+  padding: 1rem;
   background-color: #000000;
   opacity: .8;
 }
@@ -33,6 +41,7 @@
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none;
+  padding: 1.3rem;
 }
 .plaque-flex p{
   color:#fff
@@ -41,6 +50,9 @@
   color: #000 !important;
   font-weight: 700;
 }
+.borderBTM{
+  border-bottom: 4px solid #000;
+}
 
 .queContainer{
   overflow: scroll;
@@ -48,7 +60,7 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: #fff;
-  padding: .8rem;
+  padding: .8rem .8rem 1.2rem .8rem;
 }
 .resCount{
   color: rgba(29, 29, 29, 0.945);
@@ -157,6 +169,15 @@
   }
   .queContainer{
     height: 320px;
+  }
+  .queCount{
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .plaque-header h3{
+    color: #fff !important;
+    font-size: 1.2rem;
   }
 }
 @media(max-width: 768px) {

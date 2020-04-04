@@ -98,7 +98,7 @@
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'paper-plane']" class="white" size="xs"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
               </div>
               <div class="shareC">
                 <div class="share_container">
@@ -133,7 +133,7 @@
         <div class="page-body-remix" v-if="!fetchingPlaqueData">
           <div :class="!hasPlaque ? 'flex-center' : 'no-flex'">
             <p v-if="!hasPlaque" class="noPlaque">
-              You currently do not have any plaques, click
+              You currently do not have any plaque ( question board ), click
               <span class="plus">
                 <font-awesome-icon
                  :icon="['fas', 'plus-circle']"
@@ -384,10 +384,10 @@ export default {
       return reversed.reverse();
     },
   },
-  mounted() {
+  async mounted() {
     if (sessionStorage.getItem('__token__HWDYKM__user__')) {
-      this.setUserName();
-      this.setPlaqueData();
+      await this.setUserName();
+      await this.setPlaqueData();
     } else {
       this.$router.push({ name: 'LandingPage' });
     }

@@ -5,7 +5,7 @@
 }
 .content-body{
   background-color: #000;
-  width: 40%;
+  width: 60%;
   padding: 1rem 1.5rem 3.4rem 1.5rem;
   overflow: scroll;
   height: 500px;
@@ -39,6 +39,7 @@
 @media(max-width: 768px) {
   .content-body{
     width: 80%;
+    height: 400px;
   }
   .modal-form {
     width: 70%;
@@ -48,6 +49,7 @@
 @media(max-width: 425px) {
   .content-body{
     width: 100%;
+    height: 450px;
   }
   .modal-form{
     margin: 5rem;
@@ -61,15 +63,17 @@
 }
 @media(width: 1440px) {
   .content-body{
-    height: 450px;
+    height: 500px;
   }
 }
 @media(width: 1024px) {
   .content-body{
     height: 940px;
-    width: 90%;
+    width: 60%;
+    height: 450px;
   }
   .content-paragraph p {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
+  
 }
