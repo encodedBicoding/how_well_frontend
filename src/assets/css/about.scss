@@ -6,9 +6,12 @@
 .content-body{
   background-color: #000;
   width: 40%;
-  padding: 1rem;
+  padding: 1rem 0 3.4rem 0;
   overflow: scroll;
-  height: 490px;
+  height: 500px;
+}
+.border-black {
+  border-top: 51px solid #000;
 }
 .content-paragraph{
   color: #fff;

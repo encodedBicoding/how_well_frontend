@@ -129,7 +129,7 @@ export default {
     };
   },
   mounted() {
-    this.singlePlaqueLink = `${FE_URL}/plaque/${this.username}/${this.plaqueId}/hwdykm`;
+    this.singlePlaqueLink = `${FE_URL}/plaque/${this.username || localStorage.getItem('__user__')}/${this.plaqueId}/hwdykm`;
   },
   methods: {
     toggleQuestions(id) {

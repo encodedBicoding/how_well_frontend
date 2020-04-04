@@ -11,8 +11,25 @@
               <div>
                 <font-awesome-icon :icon="['fas', 'paper-plane']" class="white" size="xs"/>
               </div>
-              <div style="display: none">
-
+                <div class="shareC">
+                <div class="share_container">
+                  <p class="shareT">Share</p>
+                  <div class="socialIcon">
+                      <a href='https://www.facebook.com/sharer/sharer.php?u=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'facebook-f']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                   <div class="socialIcon">
+                      <a href='https://twitter.com/share?url=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'twitter']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                   <div class="socialIcon">
+                      <a href='https://www.linkedin.com/shareArticle?mini=true&url=https://hwdykm.xyz' target="_blank">
+                        <font-awesome-icon :icon="['fab', 'linkedin-in']" class="white" size="lg"/>
+                      </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -66,6 +83,10 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div v-if="showResponse === question.id " class="ownerAnswer">
+                     <span class="bold-text">Your Answer: </span>
+                     <span>{{ question.answer }}</span>
                   </div>
                   <div :class="showResponse === question.id ? 'responseHolder' : 'hideRes'"
                     v-for="response in question.Responses" v-bind:key="response.id"
@@ -135,7 +156,7 @@
                        v-model='responseAnswer'
                        class="txtarea"/>
                        <div class="yreplybtn">
-                         <p class="text-center" v-if="submittingResponse">SUBMIT</p>
+                         <p class="text-center" v-if="submittingResponse">RESPONDING...</p>
                          <button v-if="!submittingResponse">SUBMIT</button>
                        </div>
                     </form>
