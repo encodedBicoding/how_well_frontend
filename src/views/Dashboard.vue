@@ -274,6 +274,7 @@ export default {
           setTimeout(() => {
             $('.bg-white').css('display', 'none');
           }, 2000);
+          this.plaqueNameData = '';
           return false;
         },
         success: () => {
@@ -339,6 +340,8 @@ export default {
           setTimeout(() => {
             $('.bg-white').css('display', 'none');
           }, 2000);
+          this.questionData = '';
+          this.answerData = '';
           return false;
         },
         success: () => {
