@@ -46,10 +46,10 @@
         <div>
           <div v-if="showQuestion !== plaqueId">
             <font-awesome-icon
-            :icon="['fas', 'caret-down']" class="white" size="lg"/>
+            :icon="['fas', 'caret-up']" class="white" size="lg"/>
           </div>
            <div v-if="showQuestion === plaqueId">
-            <font-awesome-icon :icon="['fas', 'caret-up']" class="white" size="lg"/>
+            <font-awesome-icon :icon="['fas', 'caret-down']" class="white" size="lg"/>
           </div>
         </div>
       </div>

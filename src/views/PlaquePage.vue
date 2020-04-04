@@ -76,10 +76,10 @@
                       <div>
                         <div v-if="showResponse !== question.id">
                           <font-awesome-icon
-                          :icon="['fas', 'caret-down']" class="black" size="xs"/>
+                          :icon="['fas', 'caret-up']" class="black" size="lg"/>
                         </div>
                         <div v-if="showResponse === question.id">
-                          <font-awesome-icon :icon="['fas', 'caret-up']" class="black" size="xs"/>
+                          <font-awesome-icon :icon="['fas', 'caret-down']" class="black" size="xs"/>
                         </div>
                       </div>
                     </div>
