@@ -220,6 +220,9 @@ export default {
           Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
+        error: () => {
+          this.$router.push({ name: 'LandingPage' });
+        },
       }).then((res) => {
         if (res.status === 200) {
           this.plaqueOwnerName = res.data.userName;
@@ -238,6 +241,9 @@ export default {
           Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
+        error: () => {
+          this.$router.push({ name: 'LandingPage' });
+        }
       }).then((res) => {
         this.fetchingPlaqueData = false;
         if (res.status === 200 || res.status === 201) {
@@ -379,8 +385,12 @@ export default {
     },
   },
   mounted() {
-    this.setUserName();
-    this.setPlaqueData();
+    if (sessionStorage.getItem('__token__HWDYKM__user__')) {
+      this.setUserName();
+      this.setPlaqueData();
+    } else {
+      this.$router.push({ name: 'LandingPage' });
+    }
   },
   data() {
     return {
