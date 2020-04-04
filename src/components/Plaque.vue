@@ -14,12 +14,12 @@
       </p>
       <div class="addQue" v-on:click="() => this.showPlaque(plaqueId, questions.length)">
         <font-awesome-icon :icon="['fas', 'plus']"
-        :class="questions.length >= 5 ? 'greyDisabled':'white'" size="xs"/>
+        :class="questions.length >= 5 ? 'greyDisabled':'white'" size="lg"/>
       </div>
     </div>
-    <a class="plaque-flex directPlaque" :href="singlePlaqueLink">
+    <a class="plaque-flex directPlaque borderBTM" :href="singlePlaqueLink">
       <p class="vpt">
-        view plaque
+        View plaque details
       </p>
     </a>
     <div class="plaque-flex">
@@ -31,6 +31,7 @@
       </div>
       <div class="linkQ">
         <div title="copy plaque link" class="link-flex">
+          <button class='cpTxt' v-on:click="() => copyLink(plaqueUrl)">Copy link</button>
           <font-awesome-icon
           :icon="['fas', 'link']" class="lime link-hover" size="lg"
           v-on:click="() => copyLink(plaqueUrl)"/>
@@ -46,10 +47,10 @@
         <div>
           <div v-if="showQuestion !== plaqueId">
             <font-awesome-icon
-            :icon="['fas', 'caret-up']" class="white" size="lg"/>
+            :icon="['fas', 'caret-down']" class="white" size="lg"/>
           </div>
            <div v-if="showQuestion === plaqueId">
-            <font-awesome-icon :icon="['fas', 'caret-down']" class="white" size="lg"/>
+            <font-awesome-icon :icon="['fas', 'caret-up']" class="white" size="lg"/>
           </div>
         </div>
       </div>

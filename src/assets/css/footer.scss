@@ -1,11 +1,12 @@
 .footer{
-  position: relative;
+  position: absolute;
   bottom: 0;
   color: rgba(255, 255, 255, 0.479);
   font-size: .7rem;
   width: 100%;
   opacity: 1;
   padding: .3rem;
+  background-color: #000
 }
 .footer-body{
   display: flex;
@@ -30,7 +31,7 @@
   padding: .3rem;
 }
 .fnl-item a{
-  color: grey;
+  color: #fff;
 }
 .fnl-item a:hover{
   color: rgba(174, 247, 2, 0.651);

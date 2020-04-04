@@ -1,3 +1,16 @@
+.dashboard{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  z-index: -99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .overlay{
   background-color: #000;
   position: absolute;
@@ -13,26 +26,24 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   align-items: center;
-  z-index: 100;
   padding: 1rem;
 }
 .page-content{
   background-color: rgba(7, 7, 7, 0.26);
-  width: 40%;
+  width: 60%;
   border-top-left-radius: 13px;
   border-top-right-radius: 13px;
   padding: 1.4rem
 }
 .page-body{
   background-color: #000;
-  width: 40%;
-  padding: .2rem;
+  width: 60%;
+  padding: 1.4rem;
 }
 .page-body-remix{
   background-color: rgba(7, 7, 7, 0.26);
-  width: 40%;
+  width: 60%;
   padding: 1rem;
   overflow: scroll;
   height: 490px;
@@ -42,6 +53,7 @@
   letter-spacing: 4px;
   font-weight: 800;
   text-decoration: none;
+  font-size: 1.2rem;
 }
 .white{
   color: #fff;
@@ -87,7 +99,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.952);
-  z-index: 99;
+  z-index: 100;
 }
 .modal-content{
   position: relative;
@@ -95,12 +107,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 18% 0 20% 0;
   width: 100%;
+  height: 70%;
   z-index: 100;
 }
 .modal-form{
-  width: 30%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,7 +127,7 @@
 }
 .form-item input,
 .form-item button{
-  padding: .5rem;
+  padding: 1.1rem;
   width: 100%;
   outline: none;
   border-radius: 4px;
@@ -257,6 +269,9 @@
   }
   *{
     font-size: 1.3rem;
+  }
+  .page-logo a{
+    font-size: 2rem;
   }
 }
 @media(width: 1440px) {

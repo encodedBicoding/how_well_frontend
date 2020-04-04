@@ -9,7 +9,7 @@
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'paper-plane']" class="white" size="xs"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
               </div>
                 <div class="shareC">
                 <div class="share_container">
@@ -34,8 +34,12 @@
             </div>
           </div>
        </div>
+        <a class="page-body body-flex dash " href="https://hwdykm.xyz/dashboard"
+         v-if="this.$route.params.username === currentUsername">
+          DASHBOARD
+        </a>
        <div v-if="this.$route.params.username === currentUsername"
-        class="page-body-remix border-black">
+        class="page-body-remix">
           <div v-if="plaqueData.hasOwnProperty('name')">
             <div class="plaque-header flex-row justify-space-between">
               <div class="flex-row justify-space-between pph">
@@ -76,10 +80,10 @@
                       <div>
                         <div v-if="showResponse !== question.id">
                           <font-awesome-icon
-                          :icon="['fas', 'caret-up']" class="black" size="lg"/>
+                          :icon="['fas', 'caret-down']" class="black" size="lg"/>
                         </div>
                         <div v-if="showResponse === question.id">
-                          <font-awesome-icon :icon="['fas', 'caret-down']" class="black" size="xs"/>
+                          <font-awesome-icon :icon="['fas', 'caret-up']" class="black" size="lg"/>
                         </div>
                       </div>
                     </div>
@@ -338,12 +342,12 @@ export default {
       });
     },
   },
-  mounted() {
+  async mounted() {
     this.validateUserRoute();
     if (sessionStorage.getItem('__token__HWDYKM__user__')) {
-      this.getCurrentUser();
+      await this.getCurrentUser();
     }
-    this.getSinglePlaque();
+    await this.getSinglePlaque();
   },
   data() {
     return {
