@@ -35,8 +35,10 @@
           :icon="['fas', 'link']" class="lime link-hover" size="lg"
           v-on:click="() => copyLink(plaqueUrl)"/>
           <div :class="copy ? 'copied' : 'copied display-none'">
-            <input class='plaqueLink' style="display: none" v-bind:value="plaqueUrl"/>
             <p>plaque link copied</p>
+            <input class='plaqueLink'
+             style="display: none; position: absolute; left: -9999px"
+             v-bind:value="plaqueUrl"/>
           </div>
         </div>
       </div>

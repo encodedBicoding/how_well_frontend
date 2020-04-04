@@ -217,12 +217,29 @@ export default {
   components: { Footer },
   methods: {
     isResponseCorrect(friendR, quesA) {
-      const friendResponse = friendR.toLowerCase().trim();
+      let friendResponse = friendR.toLowerCase().trim();
       const questionAnswer = quesA.toLowerCase();
-      if (questionAnswer.match(friendResponse) !== null) {
-        return true;
+      for (let i = 0; i <= friendResponse.length; i += 1) {
+        if (friendResponse[i] === ' ') {
+          friendResponse = friendResponse.split(' ');
+          break;
+        }
       }
-      return false;
+      let correct = false;
+      if (typeof friendResponse === 'string') {
+        if (questionAnswer.match(friendResponse) !== null) {
+          correct = true;
+          return correct;
+        }
+        return correct;
+      }
+      for (let i = 0; i < friendResponse.length; i += 1) {
+        if (questionAnswer.match(friendResponse[i]) !== null) {
+          correct = true;
+          break;
+        }
+      }
+      return correct;
     },
     validateUserRoute() {
       const userParam = this.$route.params.username;

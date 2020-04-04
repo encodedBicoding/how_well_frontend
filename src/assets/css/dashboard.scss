@@ -284,8 +284,13 @@
     height: 450px;
   }
 }
-@media(max-width: 1024px) {
+@media(width: 1024px) {
   .page-body-remix{
-    height: 340px;
+    height: 940px;
+  }
+  .page-content,
+  .page-body,
+  .page-body-remix{
+    width: 90%;
   }
 }
