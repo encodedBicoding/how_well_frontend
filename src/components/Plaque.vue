@@ -145,14 +145,11 @@ export default {
         const el = document.querySelector('.plaqueLink');
         const range = document.createRange();
         range.selectNode(el);
-        console.log(el.nodeValue);
         window.getSelection().addRange(range);
         try {
-          const successful = document.execCommand('copy');
-          const msg = successful ? 'successful' : 'unsuccessful';
-          console.log(msg);
+          document.execCommand('copy');
         } catch (err) {
-          console.log('Oops, unable to copy');
+          return false;
         }
         window.getSelection().removeAllRanges();
         this.copy = true;
@@ -177,6 +174,7 @@ export default {
       setTimeout(() => {
         this.copy = false;
       }, 700);
+      return true;
     },
   },
 };
