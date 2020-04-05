@@ -145,20 +145,21 @@ export default {
     },
     copyLink(link) {
       if (navigator.userAgent.match(/ipad|iphone/i)) {
-        const el = document.querySelector('.plaqueLink');
-        const range = document.createRange();
-        range.selectNode(el);
-        try {
-          document.execCommand('copy');
-          document.getSelection().removeAllRanges();
-          document.getSelection().addRange(range);
-          window.getSelection().addRange(range);
-        } catch (err) {
-          window.getSelection().removeAllRanges();
-          return false;
-        }
-        window.getSelection().removeAllRanges();
+        const ta = document.createElement('textarea');
+        ta.readOnly = true;
+        ta.contentEditable = true;
+        ta.value = link;
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
         this.copy = true;
+        document.body.appendChild(ta);
+        const range = document.createRange();
+        range.selectNodeContents(ta);
+        const selection = window.getSelection();
+        selection.addRange(range);
+        ta.setSelectionRange(0, 999999);
+        document.execCommand('copy');
+        document.body.removeChild(ta);
       } else {
         const el = document.createElement('textarea');
         el.value = link;
