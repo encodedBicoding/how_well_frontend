@@ -151,7 +151,6 @@ export default {
         ta.value = link;
         ta.style.position = 'absolute';
         ta.style.left = '-9999px';
-        this.copy = true;
         document.body.appendChild(ta);
         const range = document.createRange();
         range.selectNodeContents(ta);
@@ -161,6 +160,7 @@ export default {
         ta.setSelectionRange(0, 999999);
         document.execCommand('copy');
         document.body.removeChild(ta);
+        this.copy = true;
       } else {
         const el = document.createElement('textarea');
         el.value = link;
