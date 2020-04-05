@@ -36,7 +36,7 @@
        </div>
         <a class="page-body body-flex dash " href="https://hwdykm.xyz/dashboard"
          v-if="this.$route.params.username === currentUsername">
-          DASHBOARD
+          VIEW DASHBOARD
         </a>
        <div v-if="this.$route.params.username === currentUsername"
         class="page-body-remix">
@@ -60,8 +60,24 @@
                 This Plaque ({{plaqueData.name}}) currently doesn't have any questions.
                 Go to your dashboard to add some questions to the plaque
               </p>
+              <!-- hwdykm -->
+              <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-6604666533289792"
+                data-ad-slot="5781116894"
+                data-ad-format="auto"
+                data-full-width-responsive="true">
+              </ins>
             </div>
           </div>
+          <!-- hwdykm -->
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6604666533289792"
+            data-ad-slot="5781116894"
+            data-ad-format="auto"
+            data-full-width-responsive="true">
+          </ins>
           <div v-if="plaqueData.Questions.length > 0">
             <div class="ppqueContainer">
               <div class="queHolder" v-for="question in plaqueData.Questions"
@@ -129,6 +145,14 @@
              <span class="white shadow-white">Anonymous!.</span>
            </p>
          </div>
+          <!-- hwdykm -->
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6604666533289792"
+            data-ad-slot="5781116894"
+            data-ad-format="auto"
+            data-full-width-responsive="true">
+          </ins>
          <div class="queToAnswer">
             <div :class="!currentQuestion ? 'queToAnswerBody' : 'queToAnswerBody slideIn'">
               <div class="queToAnswerContent" v-if="typeof currentQuestion === 'number'">
@@ -181,6 +205,14 @@
                       click <a :href="frontendUrl"
                       class="bold-text here">HERE</a> to create an account!
                     </p>
+                      <!-- hwdykm -->
+                    <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-6604666533289792"
+                      data-ad-slot="5781116894"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true">
+                    </ins>
                     <br />
                     <p>Already have an account?
                       <button v-on:click="() => login()" class="lgn">Login</button>
@@ -214,6 +246,10 @@
 <style lang="scss">
 @import url('../assets/css/plaquePage.scss');
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <script>
 import $ from 'jquery';
 import Footer from '../components/Footer.vue';
