@@ -156,7 +156,12 @@
          <div class="queToAnswer">
             <div :class="!currentQuestion ? 'queToAnswerBody' : 'queToAnswerBody slideIn'">
               <div class="queToAnswerContent" v-if="typeof currentQuestion === 'number'">
-                <p class="bold-text">Question {{currentQuestion + 1}}</p>
+                <p class="bold-text">Question {{currentQuestion + 1}}
+                  <span class="thin-text"> - out of {{plaqueData.Questions.length}} </span>
+                  <span class="thin-text">
+                    {{plaqueData.Questions.length > 1 ? 'questions' : 'questions'}}
+                  </span>
+                </p>
                 <div class="qta">
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
                   <div v-if="showAnswer">

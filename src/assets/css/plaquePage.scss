@@ -176,6 +176,11 @@
 .dash {
   padding: .8rem !important;
 }
+.thin-text{
+  font-size: .8rem !important;
+  color: grey;
+  font-weight: 500 !important;
+}
 @keyframes slideIn{
   from { right: -999px }
   to { right: 0px }
