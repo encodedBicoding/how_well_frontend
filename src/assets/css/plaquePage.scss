@@ -176,6 +176,16 @@
 .dash {
   padding: .8rem !important;
 }
+.lgn{
+  padding: .6rem;
+  font-style: .9rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  outline: none;
+  background-color: rgba(174, 247, 2, 0.651);
+}
 @keyframes slideIn{
   from { right: -999px }
   to { right: 0px }

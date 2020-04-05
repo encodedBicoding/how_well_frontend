@@ -181,6 +181,10 @@
                       click <a :href="frontendUrl"
                       class="bold-text here">HERE</a> to create an account!
                     </p>
+                    <br />
+                    <p>Already have an account?
+                      <button v-on:click="() => login()" class="lgn">Login</button>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -220,6 +224,9 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
+    login() {
+      return this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
+    },
     isResponseCorrect(friendR, quesA) {
       let friendResponse = friendR.toLowerCase().trim();
       const questionAnswer = quesA.toLowerCase();
