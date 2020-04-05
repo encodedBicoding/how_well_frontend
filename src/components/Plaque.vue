@@ -156,6 +156,7 @@ export default {
         const range = document.createRange();
         range.selectNodeContents(ta);
         const selection = window.getSelection();
+        selection.removeAllRanges();
         selection.addRange(range);
         ta.setSelectionRange(0, 999999);
         document.execCommand('copy');
