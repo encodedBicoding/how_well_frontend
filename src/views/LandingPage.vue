@@ -164,6 +164,9 @@ export default {
       showLogError: false,
     };
   },
+  mounted() {
+    this.haveAccount = this.$route.params.haveAccountAlready || false;
+  },
   beforeMount() {
     document.title = 'Welcome - HWDYKM || Anonymous responses to your desired questions';
   },
