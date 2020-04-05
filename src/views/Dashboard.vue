@@ -142,7 +142,23 @@
                 </span> to create a plaque, so you can create
               your first set of questions.
             </p>
+              <!-- hwdykm -->
+              <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-6604666533289792"
+                data-ad-slot="5781116894"
+                data-ad-format="auto"
+                data-full-width-responsive="true">
+              </ins>
             <div v-if="hasPlaque">
+                <!-- hwdykm -->
+                <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-6604666533289792"
+                  data-ad-slot="5781116894"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true">
+                </ins>
                 <div v-for="(plaque, idx) in reversedPlaqueData" v-bind:key="idx">
                   <plaque
                   :plaqueName="plaque.name"
@@ -161,6 +177,14 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
                   ></plaque>
                 </div>
+                <!-- hwdykm -->
+                <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-6604666533289792"
+                  data-ad-slot="5781116894"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true">
+                </ins>
             </div>
           </div>
         </div>
@@ -177,6 +201,10 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
 @import url('../assets/css/global.scss');
 @import url('../assets/css/dashboard.scss');
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <script>
 import $ from 'jquery';
 import plaque from '../components/Plaque.vue';
