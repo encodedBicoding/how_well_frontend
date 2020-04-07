@@ -90,15 +90,15 @@
         </div>
         </div>
       </div>
-    <div class="container page-flex">
-        <div class="page-content">
+    <div class="container">
+        <div class="page-content head">
           <div class="header flex-row justify-space-between">
             <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white share-ic" size="lg"/>
               </div>
               <div class="shareC">
                 <div class="share_container">
@@ -123,25 +123,22 @@
             </div>
           </div>
         </div>
-        <div class="page-body body-flex">
-            <div class="add" v-on:click="() => toggleModal()">
-              <div>
-                <font-awesome-icon :icon="['fas', 'plus-circle']" class="white add" size="xs"/>
-              </div>
-            </div>
-        </div>
+        <div class="body">
         <div class="page-body-remix" v-if="!fetchingPlaqueData">
           <div :class="!hasPlaque ? 'flex-center' : 'no-flex'">
-            <p v-if="!hasPlaque" class="noPlaque">
-              You currently do not have any plaque ( question board ), click
-              <span class="plus">
-                <font-awesome-icon
-                 :icon="['fas', 'plus-circle']"
-                  class="white" size="xs"
-                  />
-                </span> to create a plaque, so you can create
-              your first set of questions.
-            </p>
+            <div v-if="!hasPlaque" class="noPlaqueC">
+              <p class="noPlaque">
+                You currently do not have any plaque.
+                Create a new plaque, click the button below
+              </p>
+              <div class="plus-container" v-on:click="() => toggleModal()">
+                  <font-awesome-icon
+                  :icon="['fas', 'plus']"
+                    class="black" size="lg"
+                    />
+              </div>
+            </div>
+
               <!-- hwdykm -->
               <ins class="adsbygoogle"
                 style="display:block"
@@ -166,8 +163,9 @@
                   :plaqueId="plaque.id"
                   :username="plaqueOwnerName"
                   :plaqueUrl="`
-Hi friend 😊, I have some questions for you to answer in my ${plaque.name.toUpperCase()} Plaque
-created on HWDYKM (How Well Do You Know Me).
+Hi friend 😊.
+I have some questions for you to answer in my
+${plaque.name.toUpperCase()} Plaque created on HWDYKM (How Well Do You Know Me).
 PS: Be free to give your best answers, you are Anonymous! 😏.
 
 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
@@ -193,8 +191,18 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
             <p>Loading plaque data...</p>
           </div>
         </div>
+        <div class="add-plaque-body">
+            <div class="add" v-on:click="() => toggleModal()">
+              <div class="bg-icon">
+                <font-awesome-icon :icon="['fas', 'plus']" class="white add" size="lg"/>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer">
+            <Footer/>
+        </div>
     </div>
-      <Footer/>
   </div>
 </template>
 <style lang="scss">

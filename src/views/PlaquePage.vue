@@ -2,14 +2,14 @@
   <div class="plaquePage">
     <div class='overlay'></div>
     <div class="container">
-        <div class="page-content">
+        <div class="page-content head">
           <div class="header flex-row justify-space-between">
            <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white share-ic" size="lg"/>
               </div>
                 <div class="shareC">
                 <div class="share_container">
@@ -38,6 +38,7 @@
          v-if="this.$route.params.username === currentUsername">
           VIEW DASHBOARD
         </a>
+      <div class="body">
        <div v-if="this.$route.params.username === currentUsername"
         class="page-body-remix">
           <div v-if="plaqueData.hasOwnProperty('name')">
@@ -135,13 +136,13 @@
           </div>
        </div>
         <div v-if="this.$route.params.username !== currentUsername"
-        class="page-body-remix border-black">
+        class="page-body-remix">
         <div v-if="plaqueData.hasOwnProperty('name') && hasQuestions">
           <div class="annoymous-intro">
            <p>
-             Hello friend of
-             <span class="white">{{this.$route.params.username.toUpperCase()}}</span>,
-             Please feel free to express yourself on your answers, because you are
+             Please feel free to express yourself on your answers, while answering
+             <span class="white">{{this.$route.params.username.toUpperCase()}}'S</span> questions,
+              because you are
              <span class="white shadow-white">Anonymous!.</span>
            </p>
          </div>
@@ -244,8 +245,11 @@
           </div>
         </div>
        </div>
+       </div>
+        <div class="footer">
+            <Footer/>
+        </div>
     </div>
-    <Footer/>
   </div>
 </template>
 <style lang="scss">
