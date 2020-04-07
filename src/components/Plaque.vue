@@ -126,7 +126,7 @@ export default {
   },
   data() {
     return {
-      showQuestion: 0,
+      showQuestion: this.plaqueId,
       showResponse: 0,
       copy: false,
       singlePlaqueLink: '',

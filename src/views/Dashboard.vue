@@ -90,15 +90,15 @@
         </div>
         </div>
       </div>
-    <div class="container page-flex">
-        <div class="page-content">
+    <div class="container">
+        <div class="page-content head">
           <div class="header flex-row justify-space-between">
             <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white share-ic" size="lg"/>
               </div>
               <div class="shareC">
                 <div class="share_container">
@@ -123,13 +123,7 @@
             </div>
           </div>
         </div>
-        <div class="page-body body-flex">
-            <div class="add" v-on:click="() => toggleModal()">
-              <div>
-                <font-awesome-icon :icon="['fas', 'plus-circle']" class="white add" size="xs"/>
-              </div>
-            </div>
-        </div>
+        <div class="body">
         <div class="page-body-remix" v-if="!fetchingPlaqueData">
           <div :class="!hasPlaque ? 'flex-center' : 'no-flex'">
             <p v-if="!hasPlaque" class="noPlaque">
@@ -166,8 +160,9 @@
                   :plaqueId="plaque.id"
                   :username="plaqueOwnerName"
                   :plaqueUrl="`
-Hi friend 😊, I have some questions for you to answer in my ${plaque.name.toUpperCase()} Plaque
-created on HWDYKM (How Well Do You Know Me).
+Hi friend 😊.
+I have some questions for you to answer in my
+${plaque.name.toUpperCase()} Plaque created on HWDYKM (How Well Do You Know Me).
 PS: Be free to give your best answers, you are Anonymous! 😏.
 
 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
@@ -193,8 +188,18 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
             <p>Loading plaque data...</p>
           </div>
         </div>
+        <div class="add-plaque-body">
+            <div class="add" v-on:click="() => toggleModal()">
+              <div class="end">
+                <font-awesome-icon :icon="['fas', 'plus-circle']" class="white add" size="xs"/>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer">
+            <Footer/>
+        </div>
     </div>
-      <Footer/>
   </div>
 </template>
 <style lang="scss">

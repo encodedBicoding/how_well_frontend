@@ -9,7 +9,7 @@
             </div>
             <div class="share">
               <div>
-                <font-awesome-icon :icon="['fas', 'share-alt']" class="white" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'share-alt']" class="white share-ic" size="lg"/>
               </div>
                 <div class="shareC">
                 <div class="share_container">
@@ -39,7 +39,7 @@
           VIEW DASHBOARD
         </a>
        <div v-if="this.$route.params.username === currentUsername"
-        class="page-body-remix">
+        class="page-body-remix2">
           <div v-if="plaqueData.hasOwnProperty('name')">
             <div class="plaque-header flex-row justify-space-between">
               <div class="flex-row justify-space-between pph">
@@ -135,13 +135,15 @@
           </div>
        </div>
         <div v-if="this.$route.params.username !== currentUsername"
-        class="page-body-remix border-black">
+        class="page-body-remix2 border-black">
         <div v-if="plaqueData.hasOwnProperty('name') && hasQuestions">
           <div class="annoymous-intro">
            <p>
              Hello friend of
              <span class="white">{{this.$route.params.username.toUpperCase()}}</span>,
-             Please feel free to express yourself on your answers, because you are
+             Please feel free to express yourself on your answers, while answering
+             <span class="white">{{this.$route.params.username.toUpperCase()}}'S</span> questions,
+              because you are
              <span class="white shadow-white">Anonymous!.</span>
            </p>
          </div>
