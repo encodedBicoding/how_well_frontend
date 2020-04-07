@@ -459,3 +459,54 @@
       margin-bottom: 1.5rem;
     }
   }
+  @media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2){
+    .start{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 100;
+      padding: .4rem;
+      width: 100%;
+      margin: 0;
+      height: 100%;
+    }
+    .rw-text{
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .intro-flex{
+      width: 60% !important;
+    }
+    .logo{
+      width: 70%;
+    }
+    .logo span{
+      font-size: 6rem !important;
+    }
+    .intro{
+      width: 70%;
+    }
+    .form-input input,
+    .form-submit button{
+      padding: 2rem;
+      font-size: 1.5rem;
+    }
+    .password-icon{
+      position: relative;
+      top: -60px;
+    }
+    .turbo{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .turbo p,
+    .turbo a{
+      font-size: 1.7rem;
+    }
+  }

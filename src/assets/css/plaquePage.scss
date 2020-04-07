@@ -16,7 +16,6 @@
   width: 60%;
   padding: 1rem;
   overflow: scroll;
-  height: 490px;
 }
 .overlay{
   background-color: #000;
@@ -31,9 +30,6 @@
 }
 .border-black{
   border-top: 51px solid #000
-}
-.pp-body-rm{
-  border: 1px solid red;
 }
 .ppqueContainer{
   overflow: scroll;
@@ -58,7 +54,7 @@
   background-color: #fff;
   margin-top: 2.4rem;
   border-radius: 2px;
-  height: 280px;
+  height: inherit;
 }
 .pph{
   width: 100% !important;
@@ -232,21 +228,7 @@
     margin: 0;
     padding: 0;
   }
-  .page-content,
-  .page-body,
-  .page-body-remix2{
-    width: 100% !important;
-  }
-}
-@media(max-width: 500px) {
-  .page-content,
-  .page-body,
-  .page-body-remix2{
-    width: 100% !important;
-  }
-  .page-body-remix2{
-    height: 357px;
-  }
+
 }
 @media(max-width: 800px) {
   .page-content,
@@ -263,12 +245,12 @@
   and (max-device-width: 1366px) 
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 2) {
-    .page-body-remix2{
+    .page-body-remix{
       height: 1000px !important;
     }
     .page-content,
     .page-body,
-    .page-body-remix2{
+    .page-body-remix{
       width: 100% !important;
     }
     *{
@@ -287,18 +269,15 @@
     .ppqueContainer{
       height: 900px;
     }
+    .queToAnswer{
+      height: inherit;
+    }
   }
   @media only screen 
   and (min-device-width: 768px) 
   and (max-device-width: 560px) 
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 2) {
-    .page-content,
-    .page-body,
-    .page-body-remix2{
-      width: 80% !important;
-      border: 1px solid red;
-    }
     *{
       font-size: 1.3rem !important;
     }
@@ -321,14 +300,10 @@
   and (max-device-width: 1024px) 
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 2) {
-    .page-body-remix2{
+    .page-body-remix{
       height: 690px;
     }
-    .page-content,
-    .page-body,
-    .page-body-remix2{
-      width: 85% !important;
-    }
+
     *{
       font-size: 1.2rem;
     }
@@ -344,9 +319,32 @@
     margin: 0;
     padding: 0;
   }
-  .page-content,
-  .page-body,
-  .page-body-remix2{
+}
+@media(max-width: 500px) {
+  .head{
+    width: 100% !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+  .body, .page-body{
+    width: 100% !important;
+  }
+}
+@media(max-width: 800px) {
+  .head{
+    width: 80% !important;
+  }
+  .body{
+    width: 80% !important;
+  }
+}
+@media(max-width: 560px) {
+  .head{
+    width: 100% !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+  .body{
     width: 100% !important;
   }
 }

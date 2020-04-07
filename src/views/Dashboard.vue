@@ -126,16 +126,19 @@
         <div class="body">
         <div class="page-body-remix" v-if="!fetchingPlaqueData">
           <div :class="!hasPlaque ? 'flex-center' : 'no-flex'">
-            <p v-if="!hasPlaque" class="noPlaque">
-              You currently do not have any plaque ( question board ), click
-              <span class="plus">
-                <font-awesome-icon
-                 :icon="['fas', 'plus-circle']"
-                  class="white" size="xs"
-                  />
-                </span> to create a plaque, so you can create
-              your first set of questions.
-            </p>
+            <div v-if="!hasPlaque" class="noPlaqueC">
+              <p class="noPlaque">
+                You currently do not have any plaque.
+                Create a new plaque, click the button below
+              </p>
+              <div class="plus-container" v-on:click="() => toggleModal()">
+                  <font-awesome-icon
+                  :icon="['fas', 'plus']"
+                    class="black" size="lg"
+                    />
+              </div>
+            </div>
+
               <!-- hwdykm -->
               <ins class="adsbygoogle"
                 style="display:block"
@@ -190,8 +193,8 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
         </div>
         <div class="add-plaque-body">
             <div class="add" v-on:click="() => toggleModal()">
-              <div class="end">
-                <font-awesome-icon :icon="['fas', 'plus-circle']" class="white add" size="xs"/>
+              <div class="bg-icon">
+                <font-awesome-icon :icon="['fas', 'plus']" class="white add" size="lg"/>
               </div>
             </div>
         </div>

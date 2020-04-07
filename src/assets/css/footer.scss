@@ -44,6 +44,22 @@
     font-size: .7rem;
   }
 }
+@media(max-width: 500px) {
+  .footer{
+    padding: 4px;
+  }
+  .copyrights p{
+    color: rgba(255, 255, 255, 0.575);
+    font-size: .6rem;
+  }
+  .fnl-item{
+    padding: .3rem;
+  }
+  .fnl-item a{
+    color: rgba(255, 255, 255, 0.575);
+    font-size: .6rem;
+  }
+}
 @media(max-width: 375px) {
   .copyrights p{
     text-align: center;
