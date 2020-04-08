@@ -160,7 +160,7 @@
                 <p class="bold-text">Question {{currentQuestion + 1}}
                   <span class="thin-text"> - out of {{plaqueData.Questions.length}} </span>
                   <span class="thin-text">
-                    {{plaqueData.Questions.length > 1 ? 'questions' : 'questions'}}
+                    {{plaqueData.Questions.length > 1 ? 'questions' : 'question'}}
                   </span>
                 </p>
                 <div class="qta">
@@ -257,8 +257,9 @@
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
 <script>
 import $ from 'jquery';
 import Footer from '../components/Footer.vue';
@@ -307,7 +308,7 @@ export default {
         },
         contentType: 'application/json',
         error() {
-          window.location.href = `http://localhost:8080/user/${userParam}/NotFound`;
+          window.location.href = `${BASE_URL}/user/${userParam}/NotFound`;
         },
       }).then();
     },

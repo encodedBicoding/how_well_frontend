@@ -190,6 +190,7 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
           <div class="ft-text">
             <p>Loading plaque data...</p>
           </div>
+
         </div>
         <div class="add-plaque-body">
             <div class="add" v-on:click="() => toggleModal()">
@@ -205,7 +206,7 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
     </div>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 @import url('../assets/css/global.scss');
 @import url('../assets/css/dashboard.scss');
 </style>

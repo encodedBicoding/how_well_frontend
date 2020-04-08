@@ -12,6 +12,8 @@ import {
   faCaretDown,
   faCaretUp,
   faShareAlt,
+  faAngleDoubleDown,
+  faHouseUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
@@ -45,6 +47,8 @@ library.add(
   faTwitter,
   faLinkedinIn,
   faShareAlt,
+  faAngleDoubleDown,
+  faHouseUser,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;

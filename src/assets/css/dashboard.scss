@@ -44,6 +44,9 @@
   overflow: scroll;
   flex-grow: 2;
 }
+.page-body-remix{
+  height: inherit;
+}
 .add-plaque-body{
   position: sticky !important;
   padding: 3px;
@@ -67,7 +70,6 @@
   height: 3.1rem;
   width: 3.1rem;
   background-color: rgb(174, 247, 2) !important;
-  box-shadow: 0 2px 5px 0 rgba(255, 255, 255, 0.829);
 }
 
 .add:hover .bg-icon{
@@ -112,7 +114,7 @@
 }
 .add{
   font-weight: 700;
-  font-size: 2.3rem;
+  font-size: 1.2rem;
   color: #fff;
   cursor: pointer;
   outline: none;
@@ -300,6 +302,9 @@
   position: absolute;
   display: none;
   z-index: 100;
+}
+.fetching{
+  margin-bottom: 100%;
 }
 @media only screen 
 and (max-device-width: 1024px)

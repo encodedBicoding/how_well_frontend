@@ -123,7 +123,7 @@
               </div>
             </div>
              <div class="form-submit">
-              <button>LOGIN</button>
+              <button>{{isRequesting ? 'LOADING...' : 'LOGIN'}}</button>
             </div>
         </form>
         </div>
