@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Ads from 'vue-google-adsense';
+import VueSweetalert2 from 'vue-sweetalert2';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faEye,
@@ -25,6 +26,13 @@ import store from './store';
 
 
 Vue.use(require('vue-script2'));
+
+const options = {
+  confirmButtonColor: '#41b882',
+  cancelButtonColor: '#ff7674',
+};
+
+Vue.use(VueSweetalert2, options);
 
 Vue.use(Ads.Adsense);
 Vue.use(Ads.InArticleAdsense);

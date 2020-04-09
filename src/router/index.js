@@ -7,6 +7,7 @@ import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import Terms from '../views/Terms.vue';
 import Privacy from '../views/Privacy.vue';
+import ResetPassword from '../views/ResetPassword.vue';
 import PageNotFound from '../views/PageNotFound.vue';
 
 Vue.use(VueRouter);
@@ -60,6 +61,11 @@ const routes = [
     path: '/privacy',
     name: 'Privacy',
     component: Privacy,
+  },
+  {
+    path: '/rp/:token/:email',
+    name: 'ResetPassword',
+    component: ResetPassword,
   },
   {
     path: '*',
