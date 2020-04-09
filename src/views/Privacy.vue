@@ -2,7 +2,7 @@
   <div class="privacy">
     <div class='overlay'></div>
     <div class="container page-flex">
-      <div class="page-content">
+      <div class="page-content head">
         <div class="header flex-row justify-space-between">
           <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
@@ -14,7 +14,8 @@
           </div>
         </div>
       </div>
-      <div class="content-body">
+      <div class="body">
+               <div class="content-body">
         <div class="content-paragraph">
           <h2 style="text-align: center;"><b>PRIVACY POLICY</b></h2>
             <br/>
@@ -371,8 +372,11 @@
                by email: <b>hwdykm2me@gmail.com</b>.</p>
         </div>
       </div>
+      </div>
+      <div class="footer">
+            <Footer/>
+      </div>
     </div>
-    <Footer/>
   </div>
 </template>
 <style lang="scss">
