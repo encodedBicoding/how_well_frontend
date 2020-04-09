@@ -117,7 +117,6 @@ export default {
         acc[curr.name] = curr.value;
         return acc;
       }, {});
-      console.log(formData);
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/password/reset/${this.$route.params.token}/${this.$route.params.email}`,
@@ -125,7 +124,6 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
         error: (res) => {
-          console.log(res);
           const errorResponse = JSON.parse(res.responseText);
           this.isRequesting = false;
           this.$swal({
