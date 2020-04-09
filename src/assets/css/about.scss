@@ -4,8 +4,9 @@
   font-size: 1.6rem;
 }
 .content-body{
+  position: relative;
   background-color: #000;
-  width: 60%;
+  width: 100%;
   padding: 1rem 1.5rem 3.4rem 1.5rem;
   overflow: scroll;
   height: 500px;
@@ -38,7 +39,7 @@
 }
 @media(max-width: 768px) {
   .content-body{
-    width: 80%;
+    width: 100%;
     height: 400px;
   }
   .modal-form {
@@ -69,7 +70,7 @@
 @media(width: 1024px) {
   .content-body{
     height: 940px;
-    width: 60%;
+    width: 100%;
     height: 390px;
   }
   .content-paragraph p {

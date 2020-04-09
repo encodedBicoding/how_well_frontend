@@ -13,6 +13,14 @@ import {
   faCaretDown,
   faCaretUp,
   faShareAlt,
+  faAngleDoubleDown,
+  faHouseUser,
+  faStar,
+  faTheaterMasks,
+  faSmileWink,
+  faBolt,
+  faBars,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
@@ -53,6 +61,14 @@ library.add(
   faTwitter,
   faLinkedinIn,
   faShareAlt,
+  faAngleDoubleDown,
+  faHouseUser,
+  faStar,
+  faTheaterMasks,
+  faSmileWink,
+  faBolt,
+  faBars,
+  faTimes,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;

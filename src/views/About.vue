@@ -2,7 +2,7 @@
   <div class="about-us">
     <div class='overlay'></div>
     <div class="container page-flex">
-      <div class="page-content">
+      <div class="page-content head">
         <div class="header flex-row justify-space-between">
             <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
@@ -14,7 +14,8 @@
           </div>
         </div>
       </div>
-      <div class="content-body">
+      <div class="body">
+        <div class="content-body">
         <div class="content-paragraph">
           <p>
             How Well Do You Know Me (HWDYKM) is an anonymous messaging platform, but unlike
@@ -60,8 +61,11 @@
           </ol>
         </div>
       </div>
+        <div class="footer">
+        <Footer/>
+      </div>
+      </div>
     </div>
-    <Footer/>
   </div>
 </template>
 <style lang="scss">

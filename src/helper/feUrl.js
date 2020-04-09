@@ -1,3 +1,3 @@
-const FE_URL = 'http://localhost:8080';
+const FE_URL = 'https://hwdykm.xyz';
 export default FE_URL;
 // 'https://hwdykm.xyz'

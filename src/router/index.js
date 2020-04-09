@@ -9,12 +9,18 @@ import Terms from '../views/Terms.vue';
 import Privacy from '../views/Privacy.vue';
 import ResetPassword from '../views/ResetPassword.vue';
 import PageNotFound from '../views/PageNotFound.vue';
+import Start from '../views/Start.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
+    name: 'StartPage',
+    component: Start,
+  },
+  {
+    path: '/begin',
     name: 'LandingPage',
     component: LandingPage,
     beforeEnter: (to, from, next) => {
