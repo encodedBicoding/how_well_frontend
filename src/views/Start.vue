@@ -1,4 +1,5 @@
 <template>
+<div class="begin_start">
   <div class="starts" id='starts'>
     <div class="main">
       <div class="headers" id='home'>
@@ -60,26 +61,118 @@
           </div>
         </div>
       </div>
-      <div class="bodds">
-        <div class="alt_bodds">
-          <div class="wuC">
-            <h3 class="wuT">Why use HWDYKM?</h3>
+    </div>
+  </div>
+    <div class="bodds container">
+      <div class="alt_bodds">
+        <div class="wuC title">
+          <h2>Why use HWDYKM?</h2>
+          <p class="clip">Our Anonymous Messaging App comes along with many great features.
+            Here we are going to list some of them. Have a look below.</p>
+        </div>
+        <!-- Cards one-->
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4>Anonymity</h4>
+              <p>Our Platform ensures your privacy so that you stay anonymous everytime
+                you send someone a secret message. You are anonymous until you ever choose
+                to reveal your identity.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+                <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4>Anonymity</h4>
+              <p>Our Platform ensures your privacy so that you stay anonymous everytime
+                you send someone a secret message. You are anonymous until you ever choose
+                to reveal your identity.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4>Anonymity</h4>
+              <p>Our Platform ensures your privacy so that you stay anonymous everytime
+                you send someone a secret message. You are anonymous until you ever choose
+                to reveal your identity.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4>Anonymity</h4>
+              <p>Our Platform ensures your privacy so that you stay anonymous everytime
+                you send someone a secret message. You are anonymous until you ever choose
+                to reveal your identity.</p>
+            </div>
           </div>
         </div>
+        <!-- End of card 1 -->
+          <div class="wuC title content">
+          <h2>App Screenshot</h2>
+          <p class="clip">Out of all other Anonymous Messaging and Anonymous Feedback apps
+            our User Interface is much easier to use. Have a quick look.</p>
+        </div>
+        <!-- Card 2 -->
+          <div class="row">
+            <div id='image' class="col-md-6 col-lg-3">
+              <img src='../assets/images/phone4.png'
+                alt='anonymous messages received by user'
+                width='100%' height="auto"/>
+            </div>
+            <div id='image' class="col-md-6 col-lg-3">
+              <img src='../assets/images/phone3.png'
+                alt='anonymous messages received by user'
+                width='100%' height="auto"/>
+            </div>
+            <div id='image' class="col-md-6 col-lg-3">
+              <img src='../assets/images/phone6.png'
+                alt='anonymous messages received by user'
+                width='100%' height="auto"/>
+            </div>
+            <div id='image' class="col-md-6 col-lg-3">
+              <img src='../assets/images/phone5.png'
+                alt='anonymous messages received by user'
+                width='100%' height="auto"/>
+            </div>
+        </div>
+        <!-- End of card 2 -->
       </div>
     </div>
-      <a class="goBack" href="#starts">
+    <a class="goBack" href="#starts">
         <div>
           <font-awesome-icon :icon="['fas', 'house-user']"  class='white' size="lg"/>
         </div>
     </a>
-  </div>
+
+  <footer class="footer">
+<Footer/>
+  </footer>
+</div>
 </template>
+
+<script>
+import Footer from '../components/Footer.vue';
+
+export default {
+  name: 'Start',
+  components: { Footer },
+};
+</script>
+
 <style lang="scss">
 @import url('../assets/css/start.scss');
 </style>
-<script>
-export default {
-  name: 'Start',
-};
-</script>

@@ -14,6 +14,7 @@ import {
   faShareAlt,
   faAngleDoubleDown,
   faHouseUser,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
@@ -49,6 +50,8 @@ library.add(
   faShareAlt,
   faAngleDoubleDown,
   faHouseUser,
+  faStar,
+
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
