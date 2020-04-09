@@ -134,6 +134,9 @@
           <p v-if="haveAccount">Don't have an account?
             <a v-on:click="() => this.turbo('register')">Register</a>
           </p>
+          <p v-if="haveAccount" class="resetpas"> Forgot your password?
+            <a href='https://hwdykm.xyz/rp/reset/HN_jkdjw_322'>Reset Password</a>
+          </p>
         </div>
         <div class="licence">
           <p>By creating an account,

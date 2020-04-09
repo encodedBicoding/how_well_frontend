@@ -372,10 +372,11 @@
                by email: <b>hwdykm2me@gmail.com</b>.</p>
         </div>
       </div>
+         <div class="footer">
+            <Footer/>
+         </div>
       </div>
-      <div class="footer">
-         <Footer/>
-      </div>
+
     </div>
   </div>
 </template>

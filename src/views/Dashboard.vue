@@ -199,9 +199,9 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
               </div>
             </div>
         </div>
-        </div>
         <div class="footer">
-            <Footer/>
+         <Footer/>
+      </div>
         </div>
     </div>
   </div>
@@ -279,7 +279,8 @@ export default {
         },
         contentType: 'application/json',
         error: () => {
-          this.$router.push({ name: 'LandingPage' });
+          this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
+          this.fetchingPlaqueData = true;
         },
       }).then((res) => {
         this.fetchingPlaqueData = false;
@@ -426,7 +427,7 @@ export default {
       await this.setUserName();
       await this.setPlaqueData();
     } else {
-      this.$router.push({ name: 'LandingPage' });
+      this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
     }
   },
   data() {

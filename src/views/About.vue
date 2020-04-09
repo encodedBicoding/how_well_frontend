@@ -61,9 +61,9 @@
           </ol>
         </div>
       </div>
-      </div>
-      <div class="footer">
+        <div class="footer">
         <Footer/>
+      </div>
       </div>
     </div>
   </div>

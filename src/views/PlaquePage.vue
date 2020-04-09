@@ -245,10 +245,10 @@
           </div>
         </div>
        </div>
-       </div>
-        <div class="footer">
+          <div class="footer">
             <Footer/>
-        </div>
+         </div>
+       </div>
     </div>
   </div>
 </template>
@@ -323,6 +323,9 @@ export default {
           Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
         },
         contentType: 'application/json',
+        error() {
+          this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
+        },
       }).then((res) => {
         this.currentUsername = res.data.userName;
       });
@@ -335,6 +338,8 @@ export default {
         contentType: 'application/json',
         error: () => {
           this.loadingSinglePlaque = false;
+          this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true }  });
+          this.loadingSinglePlaque = true;
         },
         success: () => {
           this.loadingSinglePlaque = false;

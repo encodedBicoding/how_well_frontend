@@ -167,6 +167,13 @@
 .error-none{
   display: none;
 }
+.resetpas a{
+  text-decoration: none;
+}
+.resetpas{
+  font-size: .6rem !important;
+  margin: 12px 0 0 0;
+}
 @media(width: 2560px) {
   .form-input input, 
   .form-submit button{

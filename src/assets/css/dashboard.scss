@@ -349,6 +349,9 @@ and (min-device-width: 561px) {
     *{
       font-size: 1.5rem;
     }
+    .add-plaque-body{
+      position: sticky !important;
+    }
     .noPlaqueC{
       display: flex;
       flex-direction: column;

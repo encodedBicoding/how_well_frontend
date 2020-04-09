@@ -8,24 +8,84 @@
             <div class="grow1 hLogo">
               <p>HWDYKM</p>
             </div>
-            <div class="flex_row width5">
+            <nav class="mobile">
+              <div class="barss">
+                <div v-if="!showMobilenav">
+                  <font-awesome-icon :icon="['fas', 'bars']"
+                    class='white'
+                    v-on:click="() => toggleMobileNav()"
+                    id='barrs'
+                    size="2x"/>
+                </div>
+                <div v-if="showMobilenav">
+                  <font-awesome-icon :icon="['fas', 'times']"
+                    class='white'
+                    id='barrs'
+                    v-on:click="() => toggleMobileNav()"
+                    size="2x"/>
+                </div>
+                <div :class="!showMobilenav ? 'dsnone' : 'nav-toggle-cont'">
+                  <div class="nav-toggle-disp">
+                    <div class="mobile-nav-item">
+                      <a href='/'>HOME</a>
+                    </div>
+                    <div class="mobile-nav-item"
+                    v-on:click="() => this.$router.push({name: 'About'})"
+                    >
+                      <p>ABOUT</p>
+                    </div>
+                    <div class="mobile-nav-item"
+                    v-on:click="() => this.$router.push({name: 'Contact'})"
+                    >
+                      <p>CONTACT</p>
+                    </div>
+                    <div class="mobile-nav-item"
+                       v-on:click="() => this.$router.push({name: 'LandingPage'})">
+                      <p>REGISTER</p>
+                    </div>
+                    <div class="mobile-nav-item"
+                      v-on:click="() => this.$router.push({
+                        name: 'LandingPage',
+                        params: {haveAccountAlready: true}})">
+                      <p>LOGIN</p>
+                    </div>
+                    <div class="mobile-nav-item"
+                      v-on:click="() => this.$router.push({name: 'Terms'})"
+                    >
+                      <p>TERMS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+            <div class="flex_row width5 comp">
                <div class="stb">
                  <a href='#home'>HOME</a>
               </div>
-              <div class="stb">
-                 <a href='https://hwdykm.xyz/about' target="_blank">ABOUT</a>
+              <div class="stb"
+                v-on:click="() => this.$router.push({name: 'About'})"
+              >
+                 <p>ABOUT</p>
               </div>
-              <div class="stb">
-                 <a href='https://hwdykm.xyz/contact' target='_blank'>CONTACT</a>
+              <div class="stb"
+                v-on:click="() => this.$router.push({name: 'Contact'})"
+              >
+                 <p>CONTACT</p>
               </div>
-              <a class="stb" href='https://hwdykm.xyz/begin'>
+              <div class="stb"
+                  v-on:click="() => this.$router.push({name: 'LandingPage'})">
                 <p>REGISTER</p>
-              </a>
-              <a class="stb" href='https://hwdykm.xyz/begin'>
-                 <p>LOG IN</p>
-              </a>
-              <div class="stb">
-                 <a href='https://hwdykm.xyz/terms' target="_blank">TERMS</a>
+              </div>
+              <div class="stb"
+                v-on:click="() => this.$router.push({
+                  name: 'LandingPage',
+                  params: {haveAccountAlready: true}})">
+                <p>LOGIN</p>
+              </div>
+              <div class="stb"
+              v-on:click="() => this.$router.push({name: 'Terms'})"
+              >
+                 <p>TERMS</p>
               </div>
             </div>
           </nav>
@@ -33,10 +93,12 @@
             <div class='flex-no-center'>
               <div id='text'>
               <div class="text-data">
-                <p>HOW WELL DOES YOUR FAMILY, FRIENDS AND COLLEAGUES KNOW YOU?</p>
-                <a class="create_btn" href='https://hwdykm.xyz/begin'>
+                <p id='tdH'>HOW WELL DOES YOUR FAMILY, FRIENDS AND COLLEAGUES KNOW YOU?</p>
+                <div class="create_btn"
+                  v-on:click="() => this.$router.push({name: 'LandingPage'})"
+                  >
                   <p>CREATE AN ACCOUNT TO FIND OUT</p>
-                </a>
+                </div>
               </div>
               <div class="btf">
                 <p id='btfH'>Built for:</p>
@@ -63,78 +125,89 @@
       </div>
     </div>
   </div>
-    <div class="bodds container">
+    <div class="bodds containers">
       <div class="alt_bodds">
         <div class="wuC title">
           <h2>Why use HWDYKM?</h2>
-          <p class="clip">Our Anonymous Messaging App comes along with many great features.
-            Here we are going to list some of them. Have a look below.</p>
+          <p class="clip">Our App is not just An Anonymous Messaging App,
+            it gives you just as much pleasure as a social media platform.
+            Checkout our exciting features below
+          </p>
         </div>
         <!-- Cards one-->
-        <div class="row">
-          <div class="col-md-6 col-lg-3">
-            <div class="item">
-              <div class="font">
-              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
-              </div>
-              <h4>Anonymity</h4>
-              <p>Our Platform ensures your privacy so that you stay anonymous everytime
-                you send someone a secret message. You are anonymous until you ever choose
-                to reveal your identity.</p>
-            </div>
-          </div>
-
+        <div class="row cards-row">
           <div class="col-md-6 col-lg-3">
             <div class="item">
               <div class="font">
                 <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
               </div>
-              <h4>Anonymity</h4>
-              <p>Our Platform ensures your privacy so that you stay anonymous everytime
-                you send someone a secret message. You are anonymous until you ever choose
-                to reveal your identity.</p>
+              <h4 class="item-end">Channel Your Responses</h4>
+              <p class="itt">We understand that you have
+                some questions you would like to ask that loved one
+                to know if they know you well or not. You have the ability to
+                channel the kind of response and feedback you get.
+              </p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3">
             <div class="item">
               <div class="font">
-              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+                <font-awesome-icon :icon="['fas', 'theater-masks']"
+                class='white' id="align" size="lg"/>
               </div>
-              <h4>Anonymity</h4>
-              <p>Our Platform ensures your privacy so that you stay anonymous everytime
-                you send someone a secret message. You are anonymous until you ever choose
-                to reveal your identity.</p>
+              <h4 class="item-end">Anonymity</h4>
+              <p class="itt">Why did we decide to make the responses anonymous?
+                Well, we do not want you angry if your spouse doesn't know your
+                birth day. When you respond to questions by a friend, colleague, or
+                family, you are Anonymous!.
+              </p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3">
             <div class="item">
               <div class="font">
-              <font-awesome-icon :icon="['fas', 'star']"  class='white' id="align" size="lg"/>
+              <font-awesome-icon :icon="['fas', 'smile-wink']"  class='white' id="align" size="lg"/>
               </div>
-              <h4>Anonymity</h4>
-              <p>Our Platform ensures your privacy so that you stay anonymous everytime
-                you send someone a secret message. You are anonymous until you ever choose
-                to reveal your identity.</p>
+              <h4 class="item-end">Easy To Use</h4>
+              <p class="itt">Our core focus has and always will be the ease of use.
+                This has lead to the aquiring of technology experts in user inface and design
+                to be a part of our team. Let us simply put...
+                Our App is Easy To Use
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+              <font-awesome-icon :icon="['fas', 'bolt']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4 class="item-end">Super Fast Answer Feedback</h4>
+              <p class="itt">While your spouse may have forgotten your birthday,
+                Our app provides an instant feedback of the correct answers to them.
+                This way, even if your spouse forgets your birth day on our app,
+                they would know it in real-life.
+              </p>
             </div>
           </div>
         </div>
         <!-- End of card 1 -->
           <div class="wuC title content">
           <h2>App Screenshot</h2>
-          <p class="clip">Out of all other Anonymous Messaging and Anonymous Feedback apps
-            our User Interface is much easier to use. Have a quick look.</p>
+          <p class="clip">Out of all other Anonymous Messaging and Anonymous Feedback apps,
+            our app provides a clean User Interface. Check out these screenshots</p>
         </div>
         <!-- Card 2 -->
           <div class="row">
             <div id='image' class="col-md-6 col-lg-3">
-              <img src='../assets/images/phone4.png'
+              <img src='../assets/images/pg1.png'
                 alt='anonymous messages received by user'
                 width='100%' height="auto"/>
             </div>
             <div id='image' class="col-md-6 col-lg-3">
-              <img src='../assets/images/phone3.png'
+              <img src='../assets/images/phone4.png'
                 alt='anonymous messages received by user'
                 width='100%' height="auto"/>
             </div>
@@ -144,7 +217,7 @@
                 width='100%' height="auto"/>
             </div>
             <div id='image' class="col-md-6 col-lg-3">
-              <img src='../assets/images/phone5.png'
+              <img src='../assets/images/pg2.png'
                 alt='anonymous messages received by user'
                 width='100%' height="auto"/>
             </div>
@@ -158,11 +231,12 @@
         </div>
     </a>
 
-  <footer class="footer">
-<Footer/>
+  <footer class="footerr">
+      <Footer/>
   </footer>
 </div>
 </template>
+
 
 <script>
 import Footer from '../components/Footer.vue';
@@ -170,6 +244,16 @@ import Footer from '../components/Footer.vue';
 export default {
   name: 'Start',
   components: { Footer },
+  methods: {
+    toggleMobileNav() {
+      this.showMobilenav = !this.showMobilenav;
+    },
+  },
+  data() {
+    return {
+      showMobilenav: false,
+    };
+  },
 };
 </script>
 

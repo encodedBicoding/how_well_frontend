@@ -2,7 +2,7 @@
   <div class="not-founc">
     <div class='overlay'></div>
     <div class="container page-flex">
-      <div class="page-content">
+      <div class="page-content head">
         <div class="header flex-row justify-space-between">
           <div class="page-logo">
               <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
@@ -14,7 +14,8 @@
           </div>
         </div>
       </div>
-      <div class="content-body">
+      <div class="body">
+        <div class="content-body">
         <div class="content-paragraph content-flex-center">
           <div class="oops">
             <p>404</p>
@@ -26,8 +27,11 @@
           </div>
         </div>
       </div>
+      <div class="footer">
+        <Footer/>
+      </div>
+      </div>
     </div>
-    <Footer/>
   </div>
 </template>
 <style lang="scss">
