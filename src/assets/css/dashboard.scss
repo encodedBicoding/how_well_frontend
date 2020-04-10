@@ -306,6 +306,27 @@
 .fetching{
   margin-bottom: 100%;
 }
+.suggestions{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000 !important;
+}
+.suggestions p{
+  flex-grow: 1;
+  font-size: .8rem;
+  font-weight: 700;
+  color: #fff !important;
+}
+.selectSugs{
+  width: 100% !important;
+  outline: none;
+  border: 1px solid #fff;
+  color: #000 !important;
+  padding: .5rem;
+}
 @media only screen 
 and (max-device-width: 1024px)
 and (min-device-width: 561px) {

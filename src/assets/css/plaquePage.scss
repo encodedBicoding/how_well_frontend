@@ -331,10 +331,7 @@
   }
 }
 @media(max-width: 800px) {
-  .head{
-    width: 80% !important;
-  }
-  .body{
+  .page-body, .body, .head{
     width: 80% !important;
   }
 }
