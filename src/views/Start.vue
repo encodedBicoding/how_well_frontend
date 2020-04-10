@@ -144,8 +144,9 @@
               <h4 class="item-end">Channel Your Responses</h4>
               <p class="itt">We understand that you have
                 some questions you would like to ask that loved one
-                to know if they know you well or not. You have the ability to
-                channel the kind of response and feedback you get.
+                to know if they know you well or not. With our
+                <b>Plaque</b> system, you have the ability to
+                channel the kind of response and feedback you get per plaque.
               </p>
             </div>
           </div>
@@ -172,7 +173,7 @@
               </div>
               <h4 class="item-end">Easy To Use</h4>
               <p class="itt">Our core focus has and always will be the ease of use.
-                This has lead to the aquiring of technology experts in user inface and design
+                This has lead to the aquiring of technology experts in user interface and design
                 to be a part of our team. Let us simply put...
                 Our App is Easy To Use
               </p>
