@@ -24,30 +24,6 @@
           <span>K</span>
           <span>M</span>
         </div>
-        <div :class="showRegError && formPage === 'register' ? 'error-container' : 'error-none'">
-          <div class="bg-white">
-            <div v-if="typeof errorData === 'string'">
-                <p class="error-list">{{errorData}}</p>
-            </div>
-            <div v-if="typeof errorData !== 'string'">
-              <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
-                <li>{{error.msg}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div :class="showLogError && formPage === 'login' ? 'error-container' : 'error-none'">
-          <div class="bg-white">
-            <div v-if="typeof errorData === 'string'">
-                <p class="error-list">{{errorData}}</p>
-            </div>
-            <div v-if="typeof errorData !== 'string'">
-              <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
-                <li>{{error.msg}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
         <div class="intro">
           <form
             v-if="!haveAccount"
@@ -166,8 +142,6 @@ export default {
       LogUsernameData: '',
       LogPasswordData: '',
       errorData: '',
-      showRegError: false,
-      showLogError: false,
     };
   },
   mounted() {
@@ -211,8 +185,22 @@ export default {
           this.showRegError = true;
           if (JSON.parse(errorResponse).error) {
             this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
           } else {
             this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
           }
           setTimeout(() => {
             this.showRegError = false;
@@ -261,14 +249,27 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
-        error: (req) => {
-          const errorResponse = req.responseText;
+        error: (res) => {
+          const errorResponse = res.responseText;
           this.isRequesting = false;
-          this.showLogError = true;
           if (JSON.parse(errorResponse).error) {
             this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
           } else {
             this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
           }
 
           setTimeout(() => {

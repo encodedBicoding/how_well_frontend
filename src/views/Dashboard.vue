@@ -4,16 +4,6 @@
     <div :class="showModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => toggleModal()">X</div>
       <div class="modal-content">
-       <div class="bg-white" style="display: none">
-          <div v-if="typeof errorData === 'string'">
-              <p class="error-list">{{errorData}}</p>
-          </div>
-          <div v-if="typeof errorData !== 'string'">
-            <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
-              <li>{{error.msg}}</li>
-            </ul>
-          </div>
-        </div>
         <form
           class="modal-form"
           method="POST"
@@ -324,12 +314,27 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
         error: (res) => {
+          const errorResponse = res.responseText;
           this.isRequesting = false;
-          this.errorData = JSON.parse(res.responseText).error;
-          $('.bg-white').css('display', 'block');
-          setTimeout(() => {
-            $('.bg-white').css('display', 'none');
-          }, 2000);
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
+          }
           this.plaqueNameData = '';
           return false;
         },
@@ -390,12 +395,27 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
         error: (res) => {
+          const errorResponse = res.responseText;
           this.isRequesting = false;
-          this.errorData = JSON.parse(res.responseText).error;
-          $('.bg-white').css('display', 'block');
-          setTimeout(() => {
-            $('.bg-white').css('display', 'none');
-          }, 2000);
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
+          }
           this.questionData = '';
           this.answerData = '';
           return false;
