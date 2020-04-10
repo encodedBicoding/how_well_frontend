@@ -58,7 +58,18 @@
           >
           <div class="form-item">
              <input type="text" name='question'
-             placeholder="What is my nickname?" v-model="questionData"/>
+             placeholder="Your Question?" v-model="questionData"/>
+          </div>
+          <div class="suggestions">
+            <p>Don't know what to ask?</p>
+            <select v-model="questionData" class="selectSugs">
+              <option disabled selected value='' class="black">See Suggestions..</option>
+              <optgroup v-for="(sugs, idx) in suggestionData"
+                v-bind:key="idx"
+              >
+                <option>{{sugs}}</option>
+              </optgroup>
+            </select>
           </div>
           <div class="form-item">
              <input type="text" name='answer' placeholder="Your answer" v-model="answerData"/>
@@ -220,6 +231,7 @@ import plaque from '../components/Plaque.vue';
 import Footer from '../components/Footer.vue';
 import BASE_URL from '../helper/ajax';
 import FE_URL from '../helper/feUrl';
+import suggestions from '../helper/suggestions';
 
 export default {
   name: 'Dashboard',
@@ -447,6 +459,7 @@ export default {
       fetchingPlaqueData: false,
       plaqueNameData: '',
       errorData: null,
+      suggestionData: suggestions,
     };
   },
 };
