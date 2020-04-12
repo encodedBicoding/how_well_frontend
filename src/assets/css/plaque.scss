@@ -74,7 +74,7 @@
   color: silver !important;
 }
 .qr{
-  width: 70%
+  width: 89%
 }
 .qr #questionT{
   font-weight: 800;
@@ -155,6 +155,29 @@
 }
 .display-none{
   display: none;
+}
+.quesActionsC{
+  position: relative;
+  bottom: -17px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .8rem;
+  margin: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.26);
+}
+.quesActionB {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+.col-md-2{
+  padding-left: 1.3rem;
+}
+.col-md-2 p{
+  font-size: .7rem;
 }
 @media(width: 1024px) {
   .ph{

@@ -6,7 +6,6 @@ const suggestions = [
   'Do I know how to cook?',
   'What is my favorite meal of the day?',
   'What is my favorite time of the day?',
-  'What is my favorite part about you?',
   'How old was I when I had my first relationship?',
   'Am I shy or outgoing?',
   'Do I like to laugh?',

@@ -71,6 +71,52 @@
         </form>
         </div>
       </div>
+      <div :class="showEditQuestionModal ? 'modal' : 'hideModal'">
+      <div class="f-right" v-on:click="() => hidePlaque()">X</div>
+      <div class="modal-content">
+        <div class="bg-white" style="display: none">
+          <div v-if="typeof errorData === 'string'">
+              <p class="error-list">{{errorData}}</p>
+          </div>
+          <div v-if="typeof errorData !== 'string'">
+            <ul v-for="(error, idx) in errorData" v-bind:key='idx' class="error-list">
+              <li>{{error.msg}}</li>
+            </ul>
+          </div>
+        </div>
+        <form
+          class="modal-form"
+          method="POST"
+          name='edit_question'
+          id='edit_question'
+          v-on:submit="(e) => editQuestionInPlaque(e)"
+          >
+          <div class="form-item">
+             <input type="text" name='question'
+             placeholder="Your Question?" v-model="questionToEditQuestion"/>
+          </div>
+          <div class="suggestions">
+            <p>Don't know what to ask?</p>
+            <select v-model="questionToEditQuestion" class="selectSugs">
+              <option disabled selected value='' class="black">See Suggestions..</option>
+              <optgroup v-for="(sugs, idx) in suggestionData"
+                v-bind:key="idx"
+              >
+                <option>{{sugs}}</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-item">
+             <input type="text" name='answer'
+              placeholder="Your answer" v-model="questionToEditAnswer"/>
+          </div>
+          <div class="form-item">
+            <p class="text-center" v-if="isRequesting">LOADING...</p>
+             <button v-if="!isRequesting">EDIT QUESTION</button>
+          </div>
+        </form>
+        </div>
+      </div>
       <div :class="deletePlaqueModal ? 'modal' : 'hideModal'">
       <div class="f-right" v-on:click="() => hidePlaque()">X</div>
       <div class="modal-content">
@@ -78,13 +124,33 @@
           class="modal-form"
           >
           <div class="ays">
-             <p>Are you sure you?</p>
+             <p>Delete Plaque?</p>
           </div>
           <div class="flex-ays flex-row">
             <div class="bg-lime" v-on:click="() => hidePlaque()">
               <p>NO</p>
             </div>
             <div class="bg-red" v-on:click="() => deletePlaqueById(deletePlaqueid)">
+              <p>YES</p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div :class="deleteQuestionModal ? 'modal' : 'hideModal'">
+      <div class="f-right" v-on:click="() => hidePlaque()">X</div>
+      <div class="modal-content">
+        <div
+          class="modal-form"
+          >
+          <div class="ays">
+             <p>Delete Question?</p>
+          </div>
+          <div class="flex-ays flex-row">
+            <div class="bg-lime" v-on:click="() => hidePlaque()">
+              <p>NO</p>
+            </div>
+            <div class="bg-red" v-on:click="() => deleteQuestionById()">
               <p>YES</p>
             </div>
           </div>
@@ -174,6 +240,11 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   `"
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
                   :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
+                  :showEditPlaqueQuestionModal="
+                  (questionId, question, answer) =>
+                  showEditPlaqueQuestionModal(questionId, question, answer)"
+                  :showDeletePlaqueQuestion="
+                  (questionId, plaqueId) => showDeletePlaqueQuestion(questionId, plaqueId)"
                   ></plaque>
                 </div>
                 <!-- hwdykm -->
@@ -230,6 +301,133 @@ export default {
     document.title = 'HWDYKM - Dashboard';
   },
   methods: {
+    showEditPlaqueQuestionModal(questionId, question, answer) {
+      this.questionToEditId = questionId;
+      this.questionToEditQuestion = question;
+      this.questionToEditAnswer = answer;
+      this.showEditQuestionModal = true;
+    },
+    showDeletePlaqueQuestion(questionId, plaqueId) {
+      this.deleteQuestionModal = true;
+      this.quesToDeleteId = questionId;
+      this.plaqueIdOfDeletedQuestion = plaqueId;
+    },
+    deleteQuestionById() {
+      $.ajax({
+        type: 'DELETE',
+        url: `${BASE_URL}/delete/question/${this.quesToDeleteId}/${this.plaqueIdOfDeletedQuestion}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        contentType: 'application/json',
+        error: (res) => {
+          const errorResponse = res.responseText;
+          this.deleteQuestionModal = false;
+          this.questionToDeleteId = '';
+          this.plaqueIdOfDeletedQuestion = '';
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
+          }
+        },
+      }).then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          this.plaqueData = res.data;
+          this.deleteQuestionModal = false;
+          this.questionToDeleteId = '';
+           this.plaqueIdOfDeletedQuestion = '';
+          return true;
+        }
+         this.deleteQuestionModal = false;
+         this.questionToDeleteId = '';
+         this.plaqueIdOfDeletedQuestion = '';
+        return false;
+      });
+    },
+    editQuestionInPlaque(event) {
+      event.preventDefault();
+      if (!this.questionToEditQuestion || !this.questionToEditAnswer) {
+        return;
+      }
+      this.isRequesting = true;
+      let formData = $('#edit_question').serializeArray();
+      formData = formData.reduce((acc, curr) => {
+        acc[curr.name] = curr.value.trim();
+        return acc;
+      }, {});
+      $.ajax({
+        type: 'PATCH',
+        url: `${BASE_URL}/edit/question/${this.questionToEditId}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('__token__HWDYKM__user__')}`,
+        },
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        contentType: 'application/json',
+        error: (res) => {
+          const errorResponse = res.responseText;
+          this.isRequesting = false;
+          if (JSON.parse(errorResponse).error) {
+            this.errorData = JSON.parse(errorResponse).error;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `<h4>${this.errorData}</h4>`,
+            });
+          } else {
+            this.errorData = JSON.parse(errorResponse).errors;
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              html: `
+                <ul>
+                  ${this.errorData.map((error) => `<li>${error.msg}</li>`)}
+                </ul>
+              `,
+            });
+          }
+          this.questionToEditId = '';
+          this.questionToEditQuestion = '';
+          this.questionToEditAnswer = '';
+          this.showEditQuestionModal = false;
+          return false;
+        },
+        success: () => {
+          this.isRequesting = false;
+        },
+      }).then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          this.plaqueData = res.data;
+          this.isRequesting = false;
+          this.questionToEditId = '';
+          this.questionToEditQuestion = '';
+          this.questionToEditAnswer = '';
+          this.showEditQuestionModal = false;
+          return true;
+        }
+        this.isRequesting = false;
+        this.questionToEditId = '';
+        this.questionToEditQuestion = '';
+        this.questionToEditAnswer = '';
+        this.showEditQuestionModal = false;
+        return false;
+      });
+    },
     toggleModal() {
       this.showModal = !this.showModal;
     },
@@ -247,8 +445,13 @@ export default {
     },
     hidePlaque() {
       this.deletePlaqueid = '';
+      this.questionToEditId = '';
+      this.questionToEditQuestion = '';
+      this.questionToEditAnswer = '';
       this.deletePlaqueModal = false;
       this.showPlaqueModal = false;
+      this.showEditQuestionModal = false;
+      this.deleteQuestionModal=false;
       this.addQuestionId = null;
     },
     setUserName() {
@@ -480,6 +683,13 @@ export default {
       plaqueNameData: '',
       errorData: null,
       suggestionData: suggestions,
+      showEditQuestionModal: false,
+      questionToEditAnswer: '',
+      questionToEditQuestion: '',
+      questionToEditId: '',
+      quesToDeleteId:'',
+      deleteQuestionModal: false,
+      plaqueIdOfDeletedQuestion: '',
     };
   },
 };
