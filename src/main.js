@@ -21,6 +21,7 @@ import {
   faBolt,
   faBars,
   faTimes,
+  faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
@@ -69,6 +70,7 @@ library.add(
   faBolt,
   faBars,
   faTimes,
+  faEdit,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;

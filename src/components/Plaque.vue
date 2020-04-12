@@ -26,7 +26,7 @@
       <div class="delQ">
         <div>
           <font-awesome-icon :icon="['fas', 'trash']"
-          class="red link-hover" size="xs" v-on:click="() => showDeletePlaqueModal()"/>
+          class="red link-hover" size="1x" v-on:click="() => showDeletePlaqueModal()"/>
         </div>
       </div>
       <div class="linkQ">
@@ -62,14 +62,40 @@
         >
         <div v-if="questions.length > 0">
           <div class="queListing" v-for="question in questions" v-bind:key="question.id">
+            <div class="quesActionsC">
+              <div class="quesActionB">
+                <div class="col-md-2">
+                  <div class="quesActionB"
+                   v-on:click="() =>
+                    showEditPlaqueQuestionModal(
+                      question.id,
+                      question.question,
+                      question.answer)">
+                    <font-awesome-icon
+                    :icon="['fas', 'edit']" class="black" size="xs"/>
+                    <p>Edit</p>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                   <div class="quesActionB"
+                   v-on:click="() =>
+                   showDeletePlaqueQuestion(question.id, question.plaqueId)"
+                   >
+                    <font-awesome-icon
+                    :icon="['fas', 'trash']" class="red" size="xs"/>
+                    <p>Delete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="queTitle flex-row justify-space-between">
               <div class="flex-row justify-space-between qr">
-              <p id='questionT'>{{question.question}}</p>
-              <p class="resCount">{{question.Responses.length}}
-                <span class="resCount">
-                  {{question.Responses.length > 1 ? 'responses' : 'response'}}
-                </span>
-              </p>
+                <p id='questionT'>{{question.question}}</p>
+                <p class="resCount">{{question.Responses.length}}
+                  <span class="resCount">
+                    {{question.Responses.length > 1 ? 'responses' : 'response'}}
+                  </span>
+                </p>
               </div>
               <div  class="showQ" v-on:click="() => toggleResponse(question.id)">
                 <div>
@@ -123,6 +149,8 @@ export default {
     showPlaque: Function,
     showDeletePlaqueModal: Function,
     username: String,
+    showEditPlaqueQuestionModal: Function,
+    showDeletePlaqueQuestion: Function,
   },
   data() {
     return {
