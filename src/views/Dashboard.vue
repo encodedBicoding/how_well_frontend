@@ -453,6 +453,8 @@ export default {
       this.showEditQuestionModal = false;
       this.deleteQuestionModal=false;
       this.addQuestionId = null;
+      this.quesToDeleteId = '';
+      this.plaqueIdOfDeletedQuestion = '';
     },
     setUserName() {
       $.ajax({
