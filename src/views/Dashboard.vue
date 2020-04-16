@@ -192,7 +192,7 @@
         <div class="page-content head">
           <div class="header flex-row justify-space-between">
             <div class="page-logo">
-              <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
+              <a  href="/dashboard">HWDYKM <span class="beta">QUIZ</span></a>
             </div>
             <div class="share">
               <div>
