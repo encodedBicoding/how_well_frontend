@@ -461,7 +461,6 @@ export default {
         dataType: 'json',
         contentType: 'application/json',
         error: (res) => {
-          console.log(res);
           this.responseAnswer = '';
         },
       }).then(() => {
