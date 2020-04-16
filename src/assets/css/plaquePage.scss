@@ -102,6 +102,9 @@
   align-items: center;
   justify-content: center;
 }
+.resLabel{
+  margin-left: 5px;
+}
 .yreplybtn button,
 .yreplybtn p{
   cursor: pointer;
@@ -207,6 +210,62 @@
   outline: none;
   background-color: rgba(174, 247, 2, 0.651);
 }
+.resFormContainer{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.resForm{
+  width: 70%;
+  padding: 1.2rem;
+  box-shadow: 0 0 10px 4px rgba(0,0,0,.5);
+  border-radius: 5px;
+}
+.resFormData label{
+  color: #fff;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+.resFormData input{
+  width: 100%;
+  padding: 1.3rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+.resFormAction{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.formContinue{
+  padding: 1rem;
+  background-color: rgba(174, 247, 2, 0.651) !important;
+  border-radius: 6px;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px 2px rgba(0,0,0,.8);
+}
+.formCAction,
+.formSAction{
+  cursor: pointer;
+}
+.formSkip{
+  padding: 1rem;
+  background-color: rgba(247, 80, 2, 0.651) !important;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 0 30px 2px rgba(0,0,0,.8);
+}
 @keyframes slideIn{
   from { right: -999px }
   to { right: 0px }
@@ -227,6 +286,12 @@
   .container{
     margin: 0;
     padding: 0;
+  }
+  .resForm{
+    width: 100%;
+    padding: 1.2rem;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.5);
+    border-radius: 5px;
   }
 
 }

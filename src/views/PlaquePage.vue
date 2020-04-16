@@ -5,7 +5,7 @@
         <div class="page-content head">
           <div class="header flex-row justify-space-between">
            <div class="page-logo">
-              <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
+              <a  href="/dashboard">HWDYKM <span class="beta">QUIZ</span></a>
             </div>
             <div class="share">
               <div>
@@ -137,7 +137,52 @@
        </div>
         <div v-if="this.$route.params.username !== currentUsername"
         class="page-body-remix">
-        <div v-if="plaqueData.hasOwnProperty('name') && hasQuestions">
+        <div v-if="plaqueData.hasOwnProperty('name')
+          && hasQuestions
+          && !skippedDataSharing"
+        >
+        <div class="annoymous-intro">
+           <p>
+             You don't want to be anonymous, or you are answering this quiz for an organisation,
+             Please fill the form below, otherwise click <b class="white">SKIP</b>
+           </p>
+           <p>
+             <span class="red"><b>Note</b></span>:
+              Only your name is needed, except your organisation requests other information.
+           </p>
+         </div>
+            <div class='resFormContainer'>
+              <form class='resForm'>
+                <div class="resFormData">
+                    <label for='name'>Name: <span class="red">*</span></label>
+                    <input type='text' v-model='resName'/>
+                </div>
+                <div class="resFormData">
+                    <label for='name'>School:</label>
+                    <input type='text' v-model='resSchool'/>
+                </div>
+                <div class="resFormData">
+                    <label for='name'>Class:</label>
+                    <input type='text' v-model='resClass'/>
+                </div>
+                <div class='resFormAction'>
+                  <div class='formCAction' v-on:click="(e) => continueForm(e)">
+                    <div class='formContinue'>
+                      <p>CONTINUE</p>
+                    </div>
+                  </div>
+                  <div class='formSAction' v-on:click="(e) => skipForm(e)">
+                    <div class='formSkip'>
+                      <p>SKIP</p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+        <div v-if="plaqueData.hasOwnProperty('name')
+          && hasQuestions
+          && skippedDataSharing">
           <div class="annoymous-intro">
            <p>
              Please feel free to express yourself on your answers, while answering
@@ -183,12 +228,34 @@
                       v-on:submit="(e) =>
                         submitResponse(e, plaqueData.Questions[currentQuestion].id)"
                       >
-                       <input
-                       type='text'
-                       name='response'
-                       placeholder="Your answer?"
-                       v-model='responseAnswer'
-                       class="txtarea"/>
+                      <div v-if="plaqueData.Questions[currentQuestion].options[0] === ''">
+                          <input
+
+                          type='text'
+                          name='response'
+                          placeholder="Your answer?"
+                          v-model='responseAnswer'
+                          class="txtarea"
+                          />
+                      </div>
+                        <div v-if="plaqueData.Questions[currentQuestion].options.length > 0
+                          && plaqueData.Questions[currentQuestion].options[0] !== ''">
+                          <div
+                            v-for="(opt, idx) in plaqueData.Questions[currentQuestion].options"
+                            v-bind:key="idx"
+                            >
+                            <input
+                            name='response'
+                            type="radio"
+                            v-model='responseAnswer'
+                            :value="opt"
+                            :id="opt"
+                            :placeholder="opt"
+                          />
+                          <label :for="opt" class="resLabel">{{opt.toUpperCase()}}</label>
+                          </div>
+
+                        </div>
                        <div class="yreplybtn">
                          <p class="text-center" v-if="submittingResponse">RESPONDING...</p>
                          <button v-if="!submittingResponse">SUBMIT</button>
@@ -270,6 +337,22 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
+    skipForm(e){
+      e.preventDefault()
+      this.skippedDataSharing = true;
+    },
+    continueForm(e) {
+      e.preventDefault();
+      if(!this.resName) {
+        return;
+      }
+      const author = {};
+      author.name = this.resName;
+      author.school = this.resSchool || null;
+      author.class = this.resClass || null;
+      sessionStorage.setItem('__author__', JSON.stringify(author));
+      this.skippedDataSharing = true;
+    },
     login() {
       return this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
     },
@@ -363,6 +446,12 @@ export default {
         acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
+      if (sessionStorage.getItem('__author__')) {
+        const respondingUser = JSON.parse(sessionStorage.getItem('__author__'));
+        formData.name = respondingUser.name;
+        formData.school = respondingUser.school;
+        formData.classInSchool = respondingUser.class;
+      }
       let prevCount = '';
       this.showAnswer = true;
       $.ajax({
@@ -371,7 +460,8 @@ export default {
         data: JSON.stringify(formData),
         dataType: 'json',
         contentType: 'application/json',
-        error: () => {
+        error: (res) => {
+          console.log(res);
           this.responseAnswer = '';
         },
       }).then(() => {
@@ -409,6 +499,7 @@ export default {
   },
   data() {
     return {
+      skippedDataSharing: false,
       currentUsername: '',
       showResponse: 0,
       frontendUrl: FE_URL,
@@ -420,6 +511,9 @@ export default {
       responseAnswer: '',
       submittingResponse: false,
       loadingSinglePlaque: false,
+      resName: '',
+      resSchool: '',
+      resClass: '',
     };
   },
   beforeMount() {
