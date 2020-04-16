@@ -184,12 +184,6 @@
           && hasQuestions
           && skippedDataSharing">
           <div class="annoymous-intro">
-           <p>
-             Please feel free to express yourself on your answers, while answering
-             <span class="white">{{this.$route.params.username.toUpperCase()}}'S</span> questions,
-              because you are
-             <span class="white shadow-white">Anonymous!.</span>
-           </p>
          </div>
           <!-- hwdykm -->
           <ins class="adsbygoogle"
@@ -228,9 +222,9 @@
                       v-on:submit="(e) =>
                         submitResponse(e, plaqueData.Questions[currentQuestion].id)"
                       >
-                      <div v-if="plaqueData.Questions[currentQuestion].options[0] === ''">
+                      <div v-if="plaqueData.Questions[currentQuestion].options.length <= 0
+                      || plaqueData.Questions[currentQuestion].options[0] === ''">
                           <input
-
                           type='text'
                           name='response'
                           placeholder="Your answer?"
@@ -239,7 +233,7 @@
                           />
                       </div>
                         <div v-if="plaqueData.Questions[currentQuestion].options.length > 0
-                          && plaqueData.Questions[currentQuestion].options[0] !== ''">
+                          || plaqueData.Questions[currentQuestion].options[0] !== ''">
                           <div
                             v-for="(opt, idx) in plaqueData.Questions[currentQuestion].options"
                             v-bind:key="idx"
