@@ -12,6 +12,10 @@
           v-on:submit="(e) => createPlaque(e)"
           >
           <div class="form-item">
+            <label for='name'
+              style="color: #fff">
+              <b>Plaque Name: <span class="red">*</span></b>
+              </label>
              <input
               type="text"
               name='name'
@@ -47,8 +51,12 @@
           v-on:submit="(e) => addQuestionToPlaque(e, plaqueModalId)"
           >
           <div class="form-item">
+            <label for='question'
+               style="color: #fff">
+               <b>Your Question?: <span class="red">*</span></b>
+            </label>
              <input type="text" name='question'
-             placeholder="Your Question?" v-model="questionData"/>
+             placeholder="2 + 2?" v-model="questionData"/>
           </div>
           <div class="suggestions">
             <p>Don't know what to ask?</p>
@@ -62,7 +70,16 @@
             </select>
           </div>
           <div class="form-item">
-             <input type="text" name='answer' placeholder="Your answer" v-model="answerData"/>
+             <label for='answer'
+              style="color: #fff">
+              <b>Your Answer: <span class="red">*</span></b>
+              </label>
+             <input type="text" name='answer' placeholder="4" v-model="answerData"/>
+          </div>
+          <div class="form-item">
+            <label for='options'
+             style="color: #fff"><b>Add options, separate by comma</b></label>
+             <input type="text" name='options' placeholder="4, 5, 6, 10" v-model="optionData"/>
           </div>
           <div class="form-item">
             <p class="text-center" v-if="isRequesting">LOADING...</p>
@@ -92,8 +109,12 @@
           v-on:submit="(e) => editQuestionInPlaque(e)"
           >
           <div class="form-item">
+              <label for='question'
+               style="color: #fff">
+               <b>Your Question?: <span class="red">*</span></b>
+            </label>
              <input type="text" name='question'
-             placeholder="Your Question?" v-model="questionToEditQuestion"/>
+             placeholder="2 + 2?" v-model="questionToEditQuestion"/>
           </div>
           <div class="suggestions">
             <p>Don't know what to ask?</p>
@@ -107,8 +128,18 @@
             </select>
           </div>
           <div class="form-item">
+            <label for='answer'
+              style="color: #fff">
+              <b>Your Answer: <span class="red">*</span></b>
+              </label>
              <input type="text" name='answer'
-              placeholder="Your answer" v-model="questionToEditAnswer"/>
+              placeholder="4" v-model="questionToEditAnswer"/>
+          </div>
+          <div class="form-item">
+            <label for='options'
+             style="color: #fff"><b>Add options, separate by comma</b></label>
+             <input type="text" name='options'
+              placeholder="4, 5, 6, 10" v-model="questionToEditOptions"/>
           </div>
           <div class="form-item">
             <p class="text-center" v-if="isRequesting">LOADING...</p>
@@ -161,7 +192,7 @@
         <div class="page-content head">
           <div class="header flex-row justify-space-between">
             <div class="page-logo">
-              <a  href="/dashboard">HWDYKM <span class="beta">BETA</span></a>
+              <a  href="/dashboard">HWDYKM <span class="beta">QUIZ</span></a>
             </div>
             <div class="share">
               <div>
@@ -230,10 +261,9 @@
                   :plaqueId="plaque.id"
                   :username="plaqueOwnerName"
                   :plaqueUrl="`
-Hi friend 😊.
-I have some questions for you to answer in my
-${plaque.name.toUpperCase()} Plaque created on HWDYKM (How Well Do You Know Me).
-PS: Be free to give your best answers, you are Anonymous! 😏.
+I have a Quiz for you.
+
+This should be fun 😊
 
 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
@@ -241,8 +271,8 @@ ${frontendURL}/plaque/${plaqueOwnerName}/${plaque.id}/hwdykm
                   :showPlaque="() => showPlaque(plaque.id, plaque.Questions.length)"
                   :showDeletePlaqueModal="() => showDeletePlaque(plaque.id)"
                   :showEditPlaqueQuestionModal="
-                  (questionId, question, answer) =>
-                  showEditPlaqueQuestionModal(questionId, question, answer)"
+                  (questionId, question, answer, options) =>
+                  showEditPlaqueQuestionModal(questionId, question, answer, options)"
                   :showDeletePlaqueQuestion="
                   (questionId, plaqueId) => showDeletePlaqueQuestion(questionId, plaqueId)"
                   ></plaque>
@@ -301,11 +331,12 @@ export default {
     document.title = 'HWDYKM - Dashboard';
   },
   methods: {
-    showEditPlaqueQuestionModal(questionId, question, answer) {
+    showEditPlaqueQuestionModal(questionId, question, answer, options) {
       this.questionToEditId = questionId;
       this.questionToEditQuestion = question;
       this.questionToEditAnswer = answer;
       this.showEditQuestionModal = true;
+      this.questionToEditOptions = options.join(',');
     },
     showDeletePlaqueQuestion(questionId, plaqueId) {
       this.deleteQuestionModal = true;
@@ -364,12 +395,21 @@ export default {
       if (!this.questionToEditQuestion || !this.questionToEditAnswer) {
         return;
       }
+      this.questionToEditOptions = this.questionToEditOptions.split(',');
+      if (this.questionToEditOptions.length >= 0
+        && this.questionToEditOptions[0] !== '') {
+        if (!this.questionToEditOptions.includes(this.questionToEditAnswer)) {
+          this.questionToEditOptions.push(this.questionToEditAnswer);
+        }
+      }
+
       this.isRequesting = true;
       let formData = $('#edit_question').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
+      formData.options = this.questionToEditOptions;
       $.ajax({
         type: 'PATCH',
         url: `${BASE_URL}/edit/question/${this.questionToEditId}`,
@@ -584,12 +624,20 @@ export default {
       if (!this.questionData || !this.answerData) {
         return;
       }
+      this.optionData = this.optionData.split(',');
+      if (this.optionData.length >= 0 && this.optionData[0] !== '') {
+        if (!this.optionData.includes(this.answerData)) {
+          this.optionData.push(this.answerData);
+        }
+      }
+
       this.isRequesting = true;
       let formData = $('#new_question').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
+      formData.options = this.optionData;
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/new/question/${plaqueId}`,
@@ -675,6 +723,7 @@ export default {
       deletePlaqueid: '',
       questionData: '',
       answerData: '',
+      optionData: '',
       isRequesting: false,
       showPlaqueModal: false,
       plaqueModalId: null,
@@ -689,6 +738,7 @@ export default {
       questionToEditAnswer: '',
       questionToEditQuestion: '',
       questionToEditId: '',
+      questionToEditOptions: '',
       quesToDeleteId:'',
       deleteQuestionModal: false,
       plaqueIdOfDeletedQuestion: '',

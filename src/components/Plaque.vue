@@ -70,7 +70,9 @@
                     showEditPlaqueQuestionModal(
                       question.id,
                       question.question,
-                      question.answer)">
+                      question.answer,
+                      question.options,
+                      )">
                     <font-awesome-icon
                     :icon="['fas', 'edit']" class="black" size="xs"/>
                     <p>Edit</p>
@@ -113,10 +115,12 @@
               v-for="response in question.Responses" v-bind:key="response.id"
             >
               <div class="resAuthor" >
-                <p>{{response.author}}</p>
+                <div v-html="response.author">
+                </div>
               </div>
               <div class="resComment">
-                <p>{{response.response}}</p>
+                <span><b>Response</b>: </span>
+                <span>{{response.response}}</span>
               </div>
             </div>
           </div>
