@@ -208,7 +208,9 @@
                     <p
                       :class="isResponseCorrect(
                         responseAnswer,
-                        plaqueData.Questions[currentQuestion].answer)
+                        plaqueData.Questions[currentQuestion].answer,
+                        plaqueData.Questions[currentQuestion].options.length
+                        )
                         ? 'correct answer' : 'fail answer'">
                       {{ plaqueData.Questions[currentQuestion].answer }}
                     </p>
@@ -350,30 +352,37 @@ export default {
     login() {
       return this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
     },
-    isResponseCorrect(friendR, quesA) {
+    isResponseCorrect(friendR, quesA, optLen) {
       let friendResponse = friendR.toLowerCase().trim();
       const questionAnswer = quesA.toLowerCase();
-      for (let i = 0; i <= friendResponse.length; i += 1) {
-        if (friendResponse[i] === ' ') {
-          friendResponse = friendResponse.split(' ');
-          break;
-        }
-      }
       let correct = false;
-      if (typeof friendResponse === 'string') {
-        if (questionAnswer.match(friendResponse) !== null) {
-          correct = true;
+      if (optLen <= 0 ) {
+        for (let i = 0; i <= friendResponse.length; i += 1) {
+          if (friendResponse[i] === ' ') {
+            friendResponse = friendResponse.split(' ');
+            break;
+          }
+        }
+        if (typeof friendResponse === 'string') {
+          if (questionAnswer.match(friendResponse) !== null) {
+            correct = true;
+            return correct;
+          }
           return correct;
+        }
+        for (let i = 0; i < friendResponse.length; i += 1) {
+          if (questionAnswer.match(friendResponse[i]) !== null) {
+            correct = true;
+            break;
+          }
+        }
+        return correct;
+      } else {
+        if (questionAnswer === friendResponse) {
+          correct = true;
         }
         return correct;
       }
-      for (let i = 0; i < friendResponse.length; i += 1) {
-        if (questionAnswer.match(friendResponse[i]) !== null) {
-          correct = true;
-          break;
-        }
-      }
-      return correct;
     },
     validateUserRoute() {
       const userParam = this.$route.params.username;
