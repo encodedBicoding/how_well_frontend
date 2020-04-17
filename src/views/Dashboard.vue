@@ -409,6 +409,15 @@ export default {
         acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
+      this.questionToEditOptions = new Set(this.questionToEditOptions);
+
+      const distinctData = [];
+
+      for(let data of this.questionToEditOptions) {
+        distinctData.push(data);
+      }
+
+      this.questionToEditOptions = distinctData;
       formData.options = this.questionToEditOptions;
       $.ajax({
         type: 'PATCH',
@@ -630,6 +639,15 @@ export default {
           this.optionData.push(this.answerData);
         }
       }
+      this.optionData = new Set(this.optionData);
+
+      const distinctData = [];
+
+      for(let data of this.optionData) {
+        distinctData.push(data);
+      }
+
+      this.optionData = distinctData;
 
       this.isRequesting = true;
       let formData = $('#new_question').serializeArray();
