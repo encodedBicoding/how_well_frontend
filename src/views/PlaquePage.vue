@@ -239,6 +239,7 @@
                           <div
                             v-for="(opt, idx) in plaqueData.Questions[currentQuestion].options"
                             v-bind:key="idx"
+                            class='resIC'
                             >
                             <input
                             name='response'
@@ -248,7 +249,7 @@
                             :id="opt"
                             :placeholder="opt"
                           />
-                          <label :for="opt" class="resLabel">{{opt.toUpperCase()}}</label>
+                          <label :for="opt" class="resLabel">{{opt}}</label>
                           </div>
 
                         </div>
@@ -471,24 +472,24 @@ export default {
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 1300);
+          }, 3000);
           setTimeout(() => {
             this.currentQuestion = 'finished';
             this.submittingResponse = false;
-          }, 1500);
+          }, 3500);
         } else {
           prevCount = this.currentQuestion;
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 1200);
+          }, 3200);
         }
         setTimeout(() => {
           this.showAnswer = false;
           this.responseAnswer = '';
           this.currentQuestion = prevCount + 1;
           this.submittingResponse = false;
-        }, 1500);
+        }, 3500);
       });
     },
   },

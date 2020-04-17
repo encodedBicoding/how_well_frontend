@@ -467,6 +467,7 @@ export default {
           this.questionToEditQuestion = '';
           this.questionToEditAnswer = '';
           this.showEditQuestionModal = false;
+          this.questionToEditOptions = ''
           return true;
         }
         this.isRequesting = false;
@@ -474,6 +475,7 @@ export default {
         this.questionToEditQuestion = '';
         this.questionToEditAnswer = '';
         this.showEditQuestionModal = false;
+        this.questionToEditOptions = ''
         return false;
       });
     },
@@ -689,6 +691,7 @@ export default {
           }
           this.questionData = '';
           this.answerData = '';
+          this.optionData = ''
           return false;
         },
         success: () => {
