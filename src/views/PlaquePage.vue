@@ -113,10 +113,11 @@
                     v-for="response in question.Responses" v-bind:key="response.id"
                   >
                     <div class="resAuthor" >
-                      <p>{{response.author}}</p>
+                      <div v-html="response.author"></div>
                     </div>
                     <div class="resComment">
-                      <p>{{response.response}}</p>
+                      <span><b>Response</b>: </span>
+                      <span>{{response.response}}</span>
                     </div>
                   </div>
                 </div>
