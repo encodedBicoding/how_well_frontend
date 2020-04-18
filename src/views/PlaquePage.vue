@@ -49,7 +49,7 @@
                     <span class="queCount">
                       {{plaqueData.Questions.length > 1 ? 'questions' : 'question'}}
                       <span>
-                        {{plaqueData.Questions.length >= 5 ? '(completed)' : ''}}
+                        {{plaqueData.Questions.length >= 15 ? '(completed)' : ''}}
                       </span>
                     </span>
                   </p>
