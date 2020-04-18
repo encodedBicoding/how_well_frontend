@@ -5,14 +5,10 @@
         <div class="intro-text">
           <div class="intro-flex">
             <p class="rw-text" v-if="!haveAccount">
-              Hi there, I'm sure you are as curious as
-              I am to find out how well people know about you
-              and what exactly they know.
-              Well, here is your chance to find out!
+              Create a FREE account!
             </p>
             <p class="rw-text" v-if="haveAccount">
               Welcome, Back! <br />
-              Ready to view what people think about you and how well they know you?
             </p>
           </div>
         </div>

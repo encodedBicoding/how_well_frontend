@@ -103,10 +103,10 @@
                 <div>
                   <div v-if="showResponse !== question.id">
                     <font-awesome-icon
-                    :icon="['fas', 'caret-up']" class="black" size="lg"/>
+                    :icon="['fas', 'caret-down']" class="black" size="lg"/>
                   </div>
                   <div v-if="showResponse === question.id">
-                    <font-awesome-icon :icon="['fas', 'caret-down']" class="black" size="lg"/>
+                    <font-awesome-icon :icon="['fas', 'caret-up']" class="black" size="lg"/>
                   </div>
                 </div>
               </div>

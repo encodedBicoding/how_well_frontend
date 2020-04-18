@@ -93,17 +93,17 @@
             <div class='flex-no-center'>
               <div id='text'>
               <div class="text-data">
-                <p id='tdH'>HOW WELL DOES YOUR FAMILY, FRIENDS AND COLLEAGUES KNOW YOU?</p>
+                <p id='tdH'>ONE PLATFORM, FOR YOUR QUIZ, AND ANONYMOUS MESSAGING</p>
                 <div class="create_btn"
                   v-on:click="() => this.$router.push({name: 'LandingPage'})"
                   >
-                  <p>CREATE AN ACCOUNT TO FIND OUT</p>
+                  <p>GET STARTED</p>
                 </div>
               </div>
               <div class="btf">
                 <p id='btfH'>Built for:</p>
                 <p class="btf_d">
-                   Home, Family, Offices, Colleagues,
+                   Home, Family, Offices, Colleagues, Tutors
                    Classmates, Friends,
                    Husbands, Wives, Spouse,
                    Neighbours and <b class="evr">Everyone.</b>
@@ -130,8 +130,7 @@
         <div class="wuC title">
           <h2>Why use HWDYKM?</h2>
           <p class="clip">Our App is not just An Anonymous Messaging App,
-            it gives you just as much pleasure as a social media platform.
-            Checkout our exciting features below
+            you can also use this platform to teach people in a Q & A answer session, for FREE
           </p>
         </div>
         <!-- Cards one-->
@@ -158,10 +157,9 @@
                 class='white' id="align" size="lg"/>
               </div>
               <h4 class="item-end">Anonymity</h4>
-              <p class="itt">Why did we decide to make the responses anonymous?
-                Well, we do not want you angry if your spouse doesn't know your
-                birth day. When you respond to questions by a friend, colleague, or
-                family, you are Anonymous!.
+              <p class="itt">You can choose to be anonymous while responding to questions
+                from a friend or family, or choose not to. The platform gives you the ability to
+                express free will over your identity.
               </p>
             </div>
           </div>
