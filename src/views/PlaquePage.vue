@@ -144,37 +144,41 @@
         >
         <div class="annoymous-intro">
            <p>
-             You don't want to be anonymous, or you are answering this quiz for an organisation,
-             Please fill the form below, otherwise click <b class="white">SKIP</b>
-           </p>
-           <p>
-             <span class="red"><b>Note</b></span>:
-              Only your name is needed, except your organisation requests other information.
+             Please fill the form below to take this Quiz
            </p>
          </div>
             <div class='resFormContainer'>
               <form class='resForm'>
                 <div class="resFormData">
-                    <label for='name'>Name: <span class="red">*</span></label>
-                    <input type='text' v-model='resName'/>
+                    <label for='name'>Full name: <span class="red">*</span></label>
+                    <input type='text' v-model='resName' name="name"/>
                 </div>
                 <div class="resFormData">
-                    <label for='name'>School:</label>
-                    <input type='text' v-model='resSchool'/>
+                    <label for='school'>School:<span class="red">*</span></label>
+                    <input type='text' v-model='resSchool' name="school"/>
                 </div>
                 <div class="resFormData">
-                    <label for='name'>Class:</label>
-                    <input type='text' v-model='resClass'/>
+                    <label for='class'>Class:<span class="red">*</span></label>
+                    <input type='text' v-model='resClass' name="class"/>
+                </div>
+                <div class="resFormData">
+                    <label for='tn'>Teacher's Name:<span class="red">*</span></label>
+                    <input type='text' v-model='resTeacherName' name="tn"/>
+                </div>
+                <div class="resFormData">
+                    <label for='country'>Select Country:<span class="red">*</span></label>
+                    <select v-model="resCountry" name="country" class="resCountry">
+                      <option disabled selected>Choose country</option>
+                      <option value="america">America</option>
+                      <option value="ghana">Ghana</option>
+                      <option value="kenya">Kenya</option>
+                      <option value="nigeria">Nigeria</option>
+                    </select>
                 </div>
                 <div class='resFormAction'>
                   <div class='formCAction' v-on:click="(e) => continueForm(e)">
                     <div class='formContinue'>
                       <p>CONTINUE</p>
-                    </div>
-                  </div>
-                  <div class='formSAction' v-on:click="(e) => skipForm(e)">
-                    <div class='formSkip'>
-                      <p>SKIP</p>
                     </div>
                   </div>
                 </div>
@@ -206,15 +210,6 @@
                 <div class="qta">
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
                   <div v-if="showAnswer">
-                    <p
-                      :class="isResponseCorrect(
-                        responseAnswer,
-                        plaqueData.Questions[currentQuestion].answer,
-                        plaqueData.Questions[currentQuestion].options.length
-                        )
-                        ? 'correct answer' : 'fail answer'">
-                      {{ plaqueData.Questions[currentQuestion].answer }}
-                    </p>
                   </div>
                   <div class="yreply-container">
                     <form
@@ -274,7 +269,7 @@
                         {{ this.$route.params.username.toUpperCase()}},
                       </span>
                       click <a :href="frontendUrl"
-                      class="bold-text here">HERE</a> to create an account!
+                      class="bold-text here">HERE</a> to create your unique quiz account!
                     </p>
                       <!-- hwdykm -->
                     <ins class="adsbygoogle"
@@ -335,56 +330,27 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
-    skipForm(e){
-      e.preventDefault()
-      this.skippedDataSharing = true;
-    },
     continueForm(e) {
       e.preventDefault();
-      if(!this.resName) {
+      if(!this.resName
+      || !this.resSchool
+      || !this.resClass
+      || !this.resTeacherName
+      || !this.resCountry
+      ) {
         return;
       }
       const author = {};
       author.name = this.resName;
-      author.school = this.resSchool || null;
-      author.class = this.resClass || null;
+      author.school = this.resSchool;
+      author.class = this.resClass;
+      author.country = this.resCountry.toLowerCase();
+      author.teacherName = this.resTeacherName;
       sessionStorage.setItem('__author__', JSON.stringify(author));
       this.skippedDataSharing = true;
     },
     login() {
       return this.$router.push({ name: 'LandingPage', params: { haveAccountAlready: true } });
-    },
-    isResponseCorrect(friendR, quesA, optLen) {
-      let friendResponse = friendR.toLowerCase().trim();
-      const questionAnswer = quesA.toLowerCase();
-      let correct = false;
-      if (optLen <= 0 ) {
-        for (let i = 0; i <= friendResponse.length; i += 1) {
-          if (friendResponse[i] === ' ') {
-            friendResponse = friendResponse.split(' ');
-            break;
-          }
-        }
-        if (typeof friendResponse === 'string') {
-          if (questionAnswer.match(friendResponse) !== null) {
-            correct = true;
-            return correct;
-          }
-          return correct;
-        }
-        for (let i = 0; i < friendResponse.length; i += 1) {
-          if (questionAnswer.match(friendResponse[i]) !== null) {
-            correct = true;
-            break;
-          }
-        }
-        return correct;
-      } else {
-        if (questionAnswer === friendResponse) {
-          correct = true;
-        }
-        return correct;
-      }
     },
     validateUserRoute() {
       const userParam = this.$route.params.username;
@@ -456,6 +422,8 @@ export default {
         formData.name = respondingUser.name;
         formData.school = respondingUser.school;
         formData.classInSchool = respondingUser.class;
+        formData.country = respondingUser.country;
+        formData.teacherName = respondingUser.teacherName;
       }
       let prevCount = '';
       this.showAnswer = true;
@@ -473,24 +441,24 @@ export default {
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 3000);
+          }, 300);
           setTimeout(() => {
             this.currentQuestion = 'finished';
             this.submittingResponse = false;
-          }, 3500);
+          }, 1500);
         } else {
           prevCount = this.currentQuestion;
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 3200);
+          }, 1200);
         }
         setTimeout(() => {
           this.showAnswer = false;
           this.responseAnswer = '';
           this.currentQuestion = prevCount + 1;
           this.submittingResponse = false;
-        }, 3500);
+        }, 1500);
       });
     },
   },
@@ -518,6 +486,8 @@ export default {
       resName: '',
       resSchool: '',
       resClass: '',
+      resTeacherName: '',
+      resCountry: '',
     };
   },
   beforeMount() {
