@@ -93,7 +93,9 @@
             <div class='flex-no-center'>
               <div id='text'>
               <div class="text-data">
-                <p id='tdH'>ONE PLATFORM, FOR YOUR QUIZ, AND ANONYMOUS MESSAGING</p>
+                <p id='tdH'>DO YOU TEACH?</p>
+                <p id='tdH'>DO YOU NEED FEEDBACK?</p>
+                <p id='tdH'>WE GOT YOU COVERED!</p>
                 <div class="create_btn"
                   v-on:click="() => this.$router.push({name: 'LandingPage'})"
                   >
@@ -103,7 +105,7 @@
               <div class="btf">
                 <p id='btfH'>Built for:</p>
                 <p class="btf_d">
-                   Home, Family, Offices, Colleagues, Tutors
+                   Schools, Home, Family, Offices, Colleagues, Tutors
                    Classmates, Friends,
                    Husbands, Wives, Spouse,
                    Neighbours and <b class="evr">Everyone.</b>
@@ -177,20 +179,6 @@
               </p>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="item">
-              <div class="font">
-              <font-awesome-icon :icon="['fas', 'bolt']"  class='white' id="align" size="lg"/>
-              </div>
-              <h4 class="item-end">Super Fast Answer Feedback</h4>
-              <p class="itt">While your spouse may have forgotten your birthday,
-                Our app provides an instant feedback of the correct answers to them.
-                This way, even if your spouse forgets your birth day on our app,
-                they would know it in real-life.
-              </p>
-            </div>
-          </div>
         </div>
         <!-- End of card 1 -->
           <div class="wuC title content">
@@ -200,11 +188,6 @@
         </div>
         <!-- Card 2 -->
           <div class="row">
-            <div id='image' class="col-md-6 col-lg-3">
-              <img src='../assets/images/pg1.png'
-                alt='anonymous messages received by user'
-                width='100%' height="auto"/>
-            </div>
             <div id='image' class="col-md-6 col-lg-3">
               <img src='../assets/images/phone4.png'
                 alt='anonymous messages received by user'
