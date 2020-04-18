@@ -10,11 +10,11 @@
           </p>
       </div>
       <p class="completed queCount">
-        {{questions.length >= 5 ? 'completed' : ''}}
+        {{questions.length >= 15 ? 'completed' : ''}}
       </p>
       <div class="addQue" v-on:click="() => this.showPlaque(plaqueId, questions.length)">
         <font-awesome-icon :icon="['fas', 'plus']"
-        :class="questions.length >= 5 ? 'greyDisabled':'white'" size="lg"/>
+        :class="questions.length >= 15 ? 'greyDisabled':'white'" size="lg"/>
       </div>
     </div>
     <a class="plaque-flex directPlaque borderBTM" :href="singlePlaqueLink">

@@ -453,6 +453,7 @@ export default {
           this.questionToEditId = '';
           this.questionToEditQuestion = '';
           this.questionToEditAnswer = '';
+          this.questionToEditOptions = '';
           this.showEditQuestionModal = false;
           return false;
         },
@@ -483,7 +484,7 @@ export default {
       this.showModal = !this.showModal;
     },
     showPlaque(id, length) {
-      if (length >= 5) {
+      if (length >= 15) {
         return;
       }
       this.showPlaqueModal = true;
@@ -635,12 +636,13 @@ export default {
       if (!this.questionData || !this.answerData) {
         return;
       }
+
       this.optionData = this.optionData.split(',');
-      if (this.optionData.length >= 0 && this.optionData[0] !== '') {
+    if (this.optionData.length >= 0 && this.optionData[0] !== '') {
         if (!this.optionData.includes(this.answerData)) {
           this.optionData.push(this.answerData);
         }
-      }
+    }
       this.optionData = new Set(this.optionData);
 
       const distinctData = [];
@@ -650,14 +652,13 @@ export default {
       }
 
       this.optionData = distinctData;
-
       this.isRequesting = true;
       let formData = $('#new_question').serializeArray();
       formData = formData.reduce((acc, curr) => {
         acc[curr.name] = curr.value.trim();
         return acc;
       }, {});
-      formData.options = this.optionData;
+      formData.options = this.optionData || [];
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/new/question/${plaqueId}`,
@@ -696,6 +697,7 @@ export default {
         },
         success: () => {
           this.isRequesting = false;
+           this.optionData = '';
         },
       }).then((res) => {
         if (res.status === 200 || res.status === 201) {
@@ -703,6 +705,7 @@ export default {
           this.showPlaqueModal = false;
           this.questionData = '';
           this.answerData = '';
+          this.optionData = '';
           // find plaque and update question list;
           const plaqueIndex = this.plaqueData.findIndex((pl) => pl.id === plaqueId);
           this.plaqueData[plaqueIndex].Questions.push(res.data);
@@ -712,6 +715,7 @@ export default {
         this.showPlaqueModal = false;
         this.questionData = '';
         this.answerData = '';
+         this.optionData = '';
         return false;
       });
     },
