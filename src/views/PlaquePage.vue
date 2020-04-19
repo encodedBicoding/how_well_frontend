@@ -146,6 +146,9 @@
            <p>
              Please fill the form below to take this Quiz
            </p>
+           <p>
+             or <b class="white">SKIP</b> to remain anonymous
+           </p>
          </div>
             <div class='resFormContainer'>
               <form class='resForm'>

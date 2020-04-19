@@ -95,6 +95,7 @@
               <div class="text-data">
                 <p id='tdH'>DO YOU TEACH?</p>
                 <p id='tdH'>DO YOU NEED FEEDBACK?</p>
+                <p id='tdH'>DO YOU NEED ANONYMOUS RESPONSES TO YOUR QUESTIONS?</p>
                 <p id='tdH'>WE GOT YOU COVERED!</p>
                 <div class="create_btn"
                   v-on:click="() => this.$router.push({name: 'LandingPage'})"
