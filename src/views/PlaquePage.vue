@@ -371,7 +371,7 @@ export default {
         },
         contentType: 'application/json',
         error() {
-          window.location.href = `${BASE_URL}/user/${userParam}/NotFound`;
+          window.location.href = `${FE_URL}/user/${userParam}/NotFound`;
         },
       }).then();
     },
