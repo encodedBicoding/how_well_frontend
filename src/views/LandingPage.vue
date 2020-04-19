@@ -8,7 +8,7 @@
               Create a FREE account!
             </p>
             <p class="rw-text" v-if="haveAccount">
-              Welcome, Back! <br />
+              Welcome Back! <br />
             </p>
           </div>
         </div>

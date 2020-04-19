@@ -133,7 +133,7 @@
         <div class="wuC title">
           <h2>Why use HWDYKM?</h2>
           <p class="clip">Our App is not just An Anonymous Messaging App,
-            you can also use this platform to teach people in a Q & A answer session, for FREE
+            you can also use this platform to teach people in a Q & A answer session, quiz, for FREE
           </p>
         </div>
         <!-- Cards one-->
@@ -180,15 +180,34 @@
               </p>
             </div>
           </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <div class="font">
+              <font-awesome-icon :icon="['fas', 'bolt']"  class='white' id="align" size="lg"/>
+              </div>
+              <h4 class="item-end">Super Fast Answer Feedback</h4>
+              <p class="itt">While your spouse may have forgotten your birthday,
+                Our app provides an instant feedback of the correct answers to them.
+                This way, even if your spouse forgets your birth day on our app,
+                they would know it in real-life.
+              </p>
+            </div>
+          </div>
         </div>
         <!-- End of card 1 -->
           <div class="wuC title content">
           <h2>App Screenshot</h2>
           <p class="clip">Out of all other Anonymous Messaging and Anonymous Feedback apps,
-            our app provides a clean User Interface. Check out these screenshots</p>
+            our app provides a clean User Interface,
+            provides great usage flexibility. Check out these screenshots</p>
         </div>
         <!-- Card 2 -->
           <div class="row">
+            <div id='image' class="col-md-6 col-lg-3">
+              <img src='../assets/images/pg1.png'
+                alt='anonymous messages received by user'
+                width='100%' height="auto"/>
+            </div>
             <div id='image' class="col-md-6 col-lg-3">
               <img src='../assets/images/phone4.png'
                 alt='anonymous messages received by user'

@@ -182,7 +182,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  padding: .4rem;
+  padding: .3rem;
   background-color: #000;
 }
 .form-item{
@@ -191,20 +191,114 @@
 }
 .form-item input,
 .form-item button{
-  padding: 1.1rem;
+  padding: .9rem;
   width: 100%;
   outline: none;
   border-radius: 4px;
   border: none;
 }
+.r-a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem;
+  color: #000 !important;
+}
+.flex-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.b-dotted{
+  color: #fff;
+  border: 2px dotted rgb(174, 247, 2);
+  width: 80%;
+  margin: 1rem;
+  padding: .6rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.b-dotted #norm{
+  font-size: .97rem;
+  font-weight: 800;
+}
+.b-dotted #small{
+  font-size: .8rem;
+}
+.d-text{
+  width: 80%;
+}
+.switch {
+  position: relative;
+  width: 30px;
+  top: -10px;
+}
+.switch input {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.slider {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  height: 7px;
+}
+
+.slider:before {
+  position: relative;
+  content: "";
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,.4);
+  z-index: 100;
+}
+input:checked + .slider {
+  background-color: rgba(174, 247, 2, 0.445) !important;
+}
+
+input:focus + .slider {
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,.4);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 .f-right{
   float: right;
-  padding: 1.4rem;
+  padding: 2.7rem;
   color: rgba(174, 247, 2, 0.651);
   cursor: pointer;
   font-weight: 700;
   font-size: 1.1rem;
-  z-index: 100;
+  z-index: 200;
 }
 .f-right:hover{
   color: red;
@@ -327,8 +421,7 @@
   border: 1px solid #fff;
   color: #000 !important;
   border-radius: 4px;
-  padding: .8rem !important;
-  height: 50px;
+  height: 30px;
 }
 @media only screen 
 and (max-device-width: 1024px)
