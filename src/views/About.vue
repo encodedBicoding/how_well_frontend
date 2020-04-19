@@ -49,7 +49,7 @@
               </p>
               <h4 style="margin-top: .6rem;">More details about a plaque</h4>
               <ul>
-                <li>A plaque can contain only 5 questions</li>
+                <li>A plaque can contain only 15 questions</li>
                 <li>Every plaque has a shareable link, you are to share this link
                   with your friends</li>
               </ul>
