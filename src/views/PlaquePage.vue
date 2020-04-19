@@ -181,6 +181,11 @@
                       <p>CONTINUE</p>
                     </div>
                   </div>
+                  <div class='formCAction' v-on:click="(e) => skipForm(e)">
+                    <div class='formSkip'>
+                      <p>SKIP</p>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -330,6 +335,10 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
+    skipForm(e) {
+      e.preventDefault();
+      this.skippedDataSharing = true;
+    },
     continueForm(e) {
       e.preventDefault();
       if(!this.resName
