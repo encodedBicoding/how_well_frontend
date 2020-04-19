@@ -179,14 +179,14 @@
                     </select>
                 </div>
                 <div class='resFormAction'>
-                  <div class='formCAction' v-on:click="(e) => continueForm(e)">
-                    <div class='formContinue'>
-                      <p>CONTINUE</p>
-                    </div>
-                  </div>
                   <div class='formCAction' v-on:click="(e) => skipForm(e)">
                     <div class='formSkip'>
                       <p>SKIP</p>
+                    </div>
+                  </div>
+                  <div class='formCAction' v-on:click="(e) => continueForm(e)">
+                    <div class='formContinue'>
+                      <p>CONTINUE</p>
                     </div>
                   </div>
                 </div>
@@ -217,7 +217,16 @@
                 </p>
                 <div class="qta">
                   <p class="plaqueQ">{{ plaqueData.Questions[currentQuestion].question}}</p>
-                  <div v-if="showAnswer">
+                  <div v-if="showAnswer && plaqueData.Questions[currentQuestion].showAnswer">
+                    <p
+                      :class="isResponseCorrect(
+                        responseAnswer,
+                        plaqueData.Questions[currentQuestion].answer,
+                        plaqueData.Questions[currentQuestion].options.length
+                        )
+                        ? 'correct answer' : 'fail answer'">
+                      {{ plaqueData.Questions[currentQuestion].answer }}
+                    </p>
                   </div>
                   <div class="yreply-container">
                     <form
@@ -239,7 +248,7 @@
                           />
                       </div>
                         <div v-if="plaqueData.Questions[currentQuestion].options.length > 0
-                          || plaqueData.Questions[currentQuestion].options[0] !== ''">
+                          && plaqueData.Questions[currentQuestion].options[0] !== ''">
                           <div
                             v-for="(opt, idx) in plaqueData.Questions[currentQuestion].options"
                             v-bind:key="idx"
@@ -277,7 +286,7 @@
                         {{ this.$route.params.username.toUpperCase()}},
                       </span>
                       click <a :href="frontendUrl"
-                      class="bold-text here">HERE</a> to create your unique quiz account!
+                      class="bold-text here">HERE</a> to create your account!
                     </p>
                       <!-- hwdykm -->
                     <ins class="adsbygoogle"
@@ -338,6 +347,38 @@ export default {
   name: 'Plaque',
   components: { Footer },
   methods: {
+    isResponseCorrect(friendR, quesA, optLen) {
+      let friendResponse = friendR.toLowerCase().trim();
+      const questionAnswer = quesA.toLowerCase();
+      let correct = false;
+      if (optLen <= 0 ) {
+        for (let i = 0; i <= friendResponse.length; i += 1) {
+          if (friendResponse[i] === ' ') {
+            friendResponse = friendResponse.split(' ');
+            break;
+          }
+        }
+        if (typeof friendResponse === 'string') {
+          if (questionAnswer.match(friendResponse) !== null) {
+            correct = true;
+            return correct;
+          }
+          return correct;
+        }
+        for (let i = 0; i < friendResponse.length; i += 1) {
+          if (questionAnswer.match(friendResponse[i]) !== null) {
+            correct = true;
+            break;
+          }
+        }
+        return correct;
+      } else {
+        if (questionAnswer === friendResponse) {
+          correct = true;
+        }
+        return correct;
+      }
+    },
     skipForm(e) {
       e.preventDefault();
       this.skippedDataSharing = true;
@@ -453,24 +494,24 @@ export default {
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 300);
+          }, 1300);
           setTimeout(() => {
             this.currentQuestion = 'finished';
             this.submittingResponse = false;
-          }, 1500);
+          },2500);
         } else {
           prevCount = this.currentQuestion;
           setTimeout(() => {
             this.currentQuestion = null;
             this.submittingResponse = false;
-          }, 1200);
+          }, 2200);
         }
         setTimeout(() => {
           this.showAnswer = false;
           this.responseAnswer = '';
           this.currentQuestion = prevCount + 1;
           this.submittingResponse = false;
-        }, 1500);
+        }, 2500);
       });
     },
   },

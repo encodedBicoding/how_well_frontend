@@ -69,12 +69,26 @@
               </optgroup>
             </select>
           </div>
-          <div class="form-item">
-             <label for='answer'
-              style="color: #fff">
-              <b>Your Answer: <span class="red">*</span></b>
-              </label>
-             <input type="text" name='answer' placeholder="4" v-model="answerData"/>
+          <div class="b-dotted">
+            <div class="flex-item">
+              <div class="d-text">
+                <p id='norm'>Requires answer?</p>
+                <p id='small'> Turn this off if this question doesn't require an answer</p>
+              </div>
+              <div class="switch">
+                <input type="checkbox" name='showAnswer' :checked="showQueAnswer"/>
+                <div class="slider round" v-on:click="() => activateAnswer()"></div>
+              </div>
+            </div>
+            <div v-if="showQueAnswer" class="form-item">
+              <div class="r-a">
+                <label for='answer'
+                  style="color: #fff;">
+                  <b>Your Answer: <span class="red">*</span></b>
+                  </label>
+                <input type="text" name='answer' placeholder="4" v-model="answerData"/>
+              </div>
+            </div>
           </div>
           <div class="form-item">
             <label for='options'
@@ -331,6 +345,9 @@ export default {
     document.title = 'HWDYKM - Dashboard';
   },
   methods: {
+    activateAnswer() {
+      this.showQueAnswer = !this.showQueAnswer;
+    },
     showEditPlaqueQuestionModal(questionId, question, answer, options) {
       this.questionToEditId = questionId;
       this.questionToEditQuestion = question;
@@ -633,17 +650,27 @@ export default {
     },
     addQuestionToPlaque(event, plaqueId) {
       event.preventDefault();
-      if (!this.questionData || !this.answerData) {
+      if (!this.questionData) {
+        return;
+      }
+      if (this.showQueAnswer && !this.answerData) {
         return;
       }
 
-      this.optionData = this.optionData.split(',');
-    if (this.optionData.length >= 0 && this.optionData[0] !== '') {
+      if(!this.answerData) {
+        this.answerData = 'N/A';
+      }
+
+      this.optionData = this.optionData.split(',').map((od) => od.trim().toLowerCase());
+      this.answerData = this.answerData.trim().toLowerCase();
+    if (this.optionData.length >= 0
+        && this.optionData[0] !== ''
+        && this.showQueAnswer) {
         if (!this.optionData.includes(this.answerData)) {
           this.optionData.push(this.answerData);
         }
     }
-      this.optionData = new Set(this.optionData);
+    this.optionData = new Set(this.optionData);
 
       const distinctData = [];
 
@@ -659,6 +686,8 @@ export default {
         return acc;
       }, {});
       formData.options = this.optionData || [];
+      formData.showAnswer = this.showQueAnswer;
+      formData.answer = this.answerData;
       $.ajax({
         type: 'POST',
         url: `${BASE_URL}/new/question/${plaqueId}`,
@@ -749,6 +778,7 @@ export default {
       questionData: '',
       answerData: '',
       optionData: '',
+      showQueAnswer: true,
       isRequesting: false,
       showPlaqueModal: false,
       plaqueModalId: null,
