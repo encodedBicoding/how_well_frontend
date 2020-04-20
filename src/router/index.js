@@ -18,6 +18,39 @@ const routes = [
     path: '/',
     name: 'StartPage',
     component: Start,
+    meta: {
+      title: 'HWDYKM - Best Anonymous Messaging and Online Quiz website',
+      metaTags: [
+        {
+          name: 'msvalidate.01',
+          content: '335A9D8B1A0B02A600D3FE3AC6D4021C',
+        },
+        {
+          name: 'description',
+          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform, that allows you find out how well your friends and family know about you. in this platform, you can channel the kind of response you get, as you can set up questions for your friends and families.',
+        },
+        {
+          property: 'og:description',
+          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform, that allows you find out how well your friends and family know about you. in this platform, you can channel the kind of response you get, as you can set up questions for your friends and families.',
+        },
+        {
+          name: 'robots',
+          content: 'index, follow',
+        },
+        {
+          name: 'keywords',
+          content: 'anonymous, online quiz, fun and games, anonymous messaging, social platform, friends, connection, fun, text messaging, messaging, quiz',
+        },
+        {
+          name: 'twitter:site',
+          content: '@encodedbicoding',
+        },
+        {
+          name: 'twitter:domain',
+          content: 'hwdykm.xyz',
+        },
+      ],
+    },
   },
   {
     path: '/begin',

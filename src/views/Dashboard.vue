@@ -700,6 +700,7 @@ export default {
         error: (res) => {
           const errorResponse = res.responseText;
           this.isRequesting = false;
+          this.showQueAnswer = true;
           if (JSON.parse(errorResponse).error) {
             this.errorData = JSON.parse(errorResponse).error;
             this.$swal({
@@ -727,6 +728,7 @@ export default {
         success: () => {
           this.isRequesting = false;
            this.optionData = '';
+           this.showQueAnswer = true;
         },
       }).then((res) => {
         if (res.status === 200 || res.status === 201) {
