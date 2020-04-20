@@ -27,11 +27,11 @@ const routes = [
         },
         {
           name: 'description',
-          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform, that allows you find out how well your friends and family know about you. in this platform, you can channel the kind of response you get, as you can set up questions for your friends and families.',
+          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform.',
         },
         {
           property: 'og:description',
-          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform, that allows you find out how well your friends and family know about you. in this platform, you can channel the kind of response you get, as you can set up questions for your friends and families.',
+          content: 'How well do you know me, is the best FREE anonymous messaging and online quiz platform.',
         },
         {
           name: 'robots',
